@@ -106,6 +106,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\map.txt" />
     <Content Include="Content\mspacman.png" />
     <Content Include="Content\sprites.png" />
     <Content Include="Content\sprites2.png" />

@@ -12,7 +12,7 @@ namespace MsPacMan
     {
         #region Variables
 
-        public const int outputTileSize = 35;
+        public const int outputTileSize = 32;
 
         GraphicsDeviceManager graphics;
         
@@ -154,7 +154,9 @@ namespace MsPacMan
                     switch (Board.board[x, y])
                     {
                         case 'T':
-                            spriteBatch.Draw(spriteSheetMap,outRect,new Rectangle(2 * 32, 0 * 32, 32, 32),Color.White);
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 32, 32, 32), color: Color.White);
+                            break;
+                        default: spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(0, 2 * 32, 32, 32), Color.White);
                             break;
                     }
 
@@ -171,7 +173,7 @@ namespace MsPacMan
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/map.txt");
 
-            int i, j;
+            int y, x;
 
             boardWidth = file[0].Length;
             
@@ -180,7 +182,14 @@ namespace MsPacMan
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             Components.Add(board);
-
+            
+            for (y = 0; y < boardHeight; y++)
+            {
+                for (x = 0; x < boardWidth; x++)
+                {
+                        Board.board[x, y] = file[y][x];
+                }
+            }
 
             //Set Preferred Window Size
             graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;

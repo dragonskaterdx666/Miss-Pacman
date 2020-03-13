@@ -1,6 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace MsPacMan
 {
@@ -9,8 +13,10 @@ namespace MsPacMan
         #region Variables
 
         GraphicsDeviceManager graphics;
-
+        
         SpriteBatch spriteBatch;
+        
+        Texture2D spriteSheet;
 
         #endregion
 
@@ -25,10 +31,26 @@ namespace MsPacMan
         #endregion
 
         #region Properties
+        public Texture2D SpriteSheet
+        {
+            get
+            {
+                return spriteSheet;
+            }
+        }
+        public SpriteBatch SpriteBatch 
+        { 
+            get 
+            { 
+                return spriteBatch; 
+            } 
+        }
+
         #endregion
 
-        #region Methods
+        #region Methods 
 
+        #region Methods within the Class
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic related content.  
@@ -47,6 +69,14 @@ namespace MsPacMan
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //creating the spritesheets that are going to be used
+            spriteSheet = Content.Load<Texture2D>("mspacman");
+
+            spriteSheet = Content.Load<Texture2D>("sprites");
+
+            spriteSheet = Content.Load<Texture2D>("sprites2");
+
+           
         }
 
         /// <summary>
@@ -79,6 +109,13 @@ namespace MsPacMan
 
 
             base.Draw(gameTime);
+        }
+        #endregion
+
+        public void LoadLevel()
+        {
+            //this reads the file from content
+            string[] file = File.ReadAllLines(Content.RootDirectory + "/map.txt");
         }
         #endregion
 

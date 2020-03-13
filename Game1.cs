@@ -12,12 +12,18 @@ namespace MsPacMan
     {
         #region Variables
 
+        public const int outputTileSize = 35;
+
         GraphicsDeviceManager graphics;
         
         SpriteBatch spriteBatch;
-        
-        Texture2D spriteSheet;
 
+        Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
+        
+        Board board;
+
+        int boardWidth, boardHeight;
+       
         #endregion
 
         #region Constuctor
@@ -31,6 +37,8 @@ namespace MsPacMan
         #endregion
 
         #region Properties
+        
+        //Properties referring to the assets used on the game
         public Texture2D SpriteSheet
         {
             get
@@ -38,11 +46,34 @@ namespace MsPacMan
                 return spriteSheet;
             }
         }
+        public Texture2D SpriteSheetPlayer
+        {
+            get
+            {
+                return spriteSheetPlayer;
+            }
+        }
+        public Texture2D SpriteSheetMap
+        {
+            get
+            {
+                return spriteSheetMap;
+            }
+        }
+
+        //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch 
         { 
             get 
             { 
                 return spriteBatch; 
+            } 
+        }
+        public Board Board 
+        { 
+            get 
+            { 
+                return board; 
             } 
         }
 
@@ -70,13 +101,16 @@ namespace MsPacMan
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //creating the spritesheets that are going to be used
-            spriteSheet = Content.Load<Texture2D>("mspacman");
-
             spriteSheet = Content.Load<Texture2D>("sprites");
 
-            spriteSheet = Content.Load<Texture2D>("sprites2");
+            spriteSheetPlayer = Content.Load<Texture2D>("mspacman");
 
-           
+            spriteSheetAssets = Content.Load<Texture2D>("sprites2");
+
+            spriteSheetMap = Content.Load<Texture2D>("mappa");
+
+            //calls the function responsible for initializing the level
+            LoadLevel();           
         }
 
         /// <summary>
@@ -105,8 +139,35 @@ namespace MsPacMan
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            int x, y;
 
+            GraphicsDevice.Clear(Color.TransparentBlack);
+
+            spriteBatch.Begin();
+
+            for (x = 0; x < boardWidth; x++)
+            {
+                for (y = 0; y < boardHeight; y++)
+                {
+                    Rectangle outRect = new Rectangle(x * outputTileSize, y * outputTileSize, outputTileSize, outputTileSize);
+
+                    switch (Board.board[x, y])
+                    {
+                        case 'T':
+                            spriteBatch.Draw(spriteSheetMap,outRect,new Rectangle(2 * 10, 2 * 10, 10, 10),Color.White);
+                            break;
+                        case 'B':
+                            spriteBatch.Draw(spriteSheet,
+                               outRect,
+                        //new Vector2(x, y) * outputTileSize,
+                        new Rectangle(5 * 16, 3 * 16, 16, 16),
+                        Color.White);
+                            break;
+                    }
+
+                }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -116,6 +177,47 @@ namespace MsPacMan
         {
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/map.txt");
+
+            int i, j;
+
+            boardWidth = file[0].Length;
+            
+            boardHeight = file.Length;
+
+            board = new Board(this, boardWidth, boardHeight);
+            Components.Add(board);
+
+
+            for (i = 0; i < boardHeight; i++)
+            {
+                for (j = 0; j < boardWidth; j++)
+                {
+                    /*
+                    if (file[i][j] == 'I')
+                    {
+                        //Enemy
+                        Enemy enemy = new Enemy(this, j, i);
+                        enemies.Add(enemy);
+                        Components.Add(enemy);
+                        Board.board[j, i] = ' '; //Remove Enemy, put space
+                    }
+                    else if (file[i][j] == 'S')
+                    {
+                        //Player
+                        player = new Player(this, j, i);
+                        Components.Add(player);
+                        Board.board[j, i] = ' ';//Remove Player, put space
+                    }*/
+
+                        Board.board[j, i] = file[i][j];
+
+                }
+            }
+
+            //Set Preferred Window Size
+            graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;
+            graphics.PreferredBackBufferHeight = (boardHeight + 1) * outputTileSize;
+            graphics.ApplyChanges();
         }
         #endregion
 

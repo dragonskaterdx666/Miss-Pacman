@@ -30,6 +30,3 @@ CCC
 C
 T
 T
-T
-P
-PP

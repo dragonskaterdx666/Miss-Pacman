@@ -108,7 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bap.png" />
-    <Content Include="Content\map.txt" />
+    <Content Include="Content\map.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\mappa.png" />
     <Content Include="Content\mspacman.png" />
     <Content Include="Content\sprites.png" />

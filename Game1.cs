@@ -154,14 +154,7 @@ namespace MsPacMan
                     switch (Board.board[x, y])
                     {
                         case 'T':
-                            spriteBatch.Draw(spriteSheetMap,outRect,new Rectangle(2 * 10, 2 * 10, 10, 10),Color.White);
-                            break;
-                        case 'B':
-                            spriteBatch.Draw(spriteSheet,
-                               outRect,
-                        //new Vector2(x, y) * outputTileSize,
-                        new Rectangle(5 * 16, 3 * 16, 16, 16),
-                        Color.White);
+                            spriteBatch.Draw(spriteSheetMap,outRect,new Rectangle(2 * 32, 0 * 32, 32, 32),Color.White);
                             break;
                     }
 
@@ -184,35 +177,10 @@ namespace MsPacMan
             
             boardHeight = file.Length;
 
+            //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             Components.Add(board);
 
-
-            for (i = 0; i < boardHeight; i++)
-            {
-                for (j = 0; j < boardWidth; j++)
-                {
-                    /*
-                    if (file[i][j] == 'I')
-                    {
-                        //Enemy
-                        Enemy enemy = new Enemy(this, j, i);
-                        enemies.Add(enemy);
-                        Components.Add(enemy);
-                        Board.board[j, i] = ' '; //Remove Enemy, put space
-                    }
-                    else if (file[i][j] == 'S')
-                    {
-                        //Player
-                        player = new Player(this, j, i);
-                        Components.Add(player);
-                        Board.board[j, i] = ' ';//Remove Player, put space
-                    }*/
-
-                        Board.board[j, i] = file[i][j];
-
-                }
-            }
 
             //Set Preferred Window Size
             graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;

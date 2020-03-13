@@ -1,32 +1,32 @@
-﻿PPP
-P
-P
-T
-T
-T
-T
-T
-T
-T
-T
-
-
-
-T
-
-
-T
-
-
-
-T
-T
-T
-T
-T
-T
-C
-CCC
-C
-T
-T
+﻿PPPTTTTTTTTTTTTTTTTTTTTTTTTTTT
+P							 P
+P							 P
+T                            T
+T			                 T
+T                            T
+T                            T
+T                            T
+T                            T
+T                            T
+T                            T
+.                            .
+.                            .
+.                            .
+T              P             T
+.                            .
+.                            .
+T                            T
+.                            .
+.                            .
+.                            .
+T                            T
+T                            T
+T                            T
+T                            T
+T                            T
+T                            T
+C                            C
+CCC                          C
+C                            C
+T                            T
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT                       

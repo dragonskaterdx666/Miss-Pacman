@@ -25,7 +25,7 @@ namespace MsPacMan
 
         Board board;
 
-        List<Ghosts> ghosts;
+        List<Ghosts> ghostList;
 
         public int boardWidth, boardHeight;
 
@@ -267,6 +267,8 @@ namespace MsPacMan
 
             int y, x, i, j;
 
+            char filePosition;
+
             boardWidth = file[0].Length;
 
             boardHeight = file.Length;
@@ -282,17 +284,19 @@ namespace MsPacMan
                     Board.board[x, y] = file[y][x];
                 }
             }
-            ghosts = new List<Ghosts>();
+            ghostList = new List<Ghosts>();
 
             for (i = 0; i < boardHeight; i++)
             {
                 for (j = 0; j < boardWidth; j++)
                 {
-                    if (file[i][j] == 'G' || file[i][j] == '1' || file[i][j] == '2' || file[i][j] == '3' || file[i][j] == 'E' || file[i][j] == 'C' )
-                    {
-                        Ghosts ghost = new Ghosts(this, j, i, file[i][j]);
+                    filePosition = file[i][j];
 
-                        ghosts.Add(ghost);
+                    if (filePosition == 'G' || filePosition == '1' || filePosition == '2' || filePosition == '3' || filePosition == 'E' || filePosition == 'C' )
+                    {
+                        Ghosts ghost = new Ghosts(this, j, i, filePosition);
+
+                        ghostList.Add(ghost);
                         
                         Components.Add(ghost);
 
@@ -308,7 +312,9 @@ namespace MsPacMan
 
             //Set Preferred Window Size
             graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;
+            
             graphics.PreferredBackBufferHeight = (boardHeight + 1) * outputTileSize;
+            
             graphics.ApplyChanges();
         }
         #endregion

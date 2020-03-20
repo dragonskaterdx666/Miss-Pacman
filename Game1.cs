@@ -162,6 +162,7 @@ namespace MsPacMan
                         case 'A':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 35, 35, 35), color: Color.White);
                             break;
+
                             //CORNERS 
                             /*top right corner*/
                         case 'B':
@@ -170,54 +171,69 @@ namespace MsPacMan
                            /*bottom right corner*/
                         case 'D':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;
-                       
-                            //bottom left corner
+                            break;                       
+                            /*bottom left corner*/
                         case 'Q':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break; 
+                            break;
+                            /*top left corner*/
                         case 'P':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
+
                             //VERTICAL LINES
+                            /*left side vertical lines*/
                         case 'R':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(3 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                       
+                            /*right side vertical lines*/
+                       case 'V':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+
                             //pacman
                         case 'S':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
+                            spriteBatch.Draw(texture: spriteSheetPlayer, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
+                            //special corners for more rounded places
+                            /*left side*/
                         case 'X':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(22 * 35, 0, 35, 35), color: Color.White);
                             break;
+                            /*right side*/
                         case 'Y':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(23 * 35, 0, 35, 35), color: Color.White);
                             break;
-                        case 'V':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;
+                        //GHOST SPAWN
+                        /*middle top left corner*/
                         case '4':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(29 * 35, 0, 35, 35), color: Color.White);
                             break;
+                        /*middle top right corner*/
                         case '5':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 0, 35, 35), color: Color.White);
                             break;
+                        /*middle bottom left corner*/
                         case '6':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(31 * 35, 0, 35, 35), color: Color.White);
                             break;
+                        /*middle bottom right corner*/
                         case '7':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(30 * 35, 0, 35, 35), color: Color.White);
                             break;
+                        /*middle left vertical lines*/
                         case '8':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
+                        /*middle right vertical lines*/
                         case '9':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(19 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
+                        /*middle bottom horizontal lines*/
                         case 'K':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(27 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
+                        /*middle top horizontal lines*/
                         case 'W':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;

@@ -15,15 +15,15 @@ namespace MsPacMan
         public const int outputTileSize = 32;
 
         GraphicsDeviceManager graphics;
-        
+
         SpriteBatch spriteBatch;
 
         Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
-        
+
         Board board;
 
         int boardWidth, boardHeight;
-       
+
         #endregion
 
         #region Constuctor
@@ -37,7 +37,7 @@ namespace MsPacMan
         #endregion
 
         #region Properties
-        
+
         //Properties referring to the assets used on the game
         public Texture2D SpriteSheet
         {
@@ -62,19 +62,19 @@ namespace MsPacMan
         }
 
         //property refering to the textures to create the assets
-        public SpriteBatch SpriteBatch 
-        { 
-            get 
-            { 
-                return spriteBatch; 
-            } 
+        public SpriteBatch SpriteBatch
+        {
+            get
+            {
+                return spriteBatch;
+            }
         }
-        public Board Board 
-        { 
-            get 
-            { 
-                return board; 
-            } 
+        public Board Board
+        {
+            get
+            {
+                return board;
+            }
         }
 
         #endregion
@@ -110,7 +110,7 @@ namespace MsPacMan
             spriteSheetMap = Content.Load<Texture2D>("mappa");
 
             //calls the function responsible for initializing the level
-            LoadLevel();           
+            LoadLevel();
         }
 
         /// <summary>
@@ -153,10 +153,71 @@ namespace MsPacMan
 
                     switch (Board.board[x, y])
                     {
+                        //T represents the horizontal lines of the board on top
                         case 'T':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 32, 32, 32), color: Color.White);
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 5 * 35, 35, 35), color: Color.White);
                             break;
-                        default: spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(0, 2 * 32, 32, 32), Color.White);
+                        //T represents the horizontal lines of the board on the bottom
+                        case 'A':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'D':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'B':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(11 * 35, 5 * 35, 35, 35), color: Color.White);
+                            break;
+                            //bottom left corner
+                        case 'Q':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'R':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(3 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'P':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
+                            break;
+                            //pacman
+                        case 'S':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'X':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(22 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case 'Y':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(23 * 35, 0, 35, 35), color: Color.White);
+                            break; 
+                        case '2':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '1':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(24 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case '3':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(25 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case '4':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(29 * 35, 3 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '5':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(30 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case '6':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(31 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case '7':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(30 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case '8':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 1 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '9':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 1 * 35, 35, 35), color: Color.White);
+                            break;
+
+                        //this represents the non specified letters or numbers on the switch case and by default adds the color of the background
+                        default:
+                            spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(0, 2 * 35, 35, 35), Color.White);
                             break;
                     }
 
@@ -176,18 +237,18 @@ namespace MsPacMan
             int y, x;
 
             boardWidth = file[0].Length;
-            
+
             boardHeight = file.Length;
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             Components.Add(board);
-            
+
             for (y = 0; y < boardHeight; y++)
             {
                 for (x = 0; x < boardWidth; x++)
                 {
-                        Board.board[x, y] = file[y][x];
+                    Board.board[x, y] = file[y][x];
                 }
             }
 

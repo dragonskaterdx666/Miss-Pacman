@@ -1,32 +1,33 @@
-﻿PPPTTTTTTTTTTTTTTTTTTTTTTTTTTT
-P                            P
-P                            P
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
-.                            .
-.                            .
-.                            .
-T                            T
-.                            .
-.                            .
-T                            T
-.                            .
-.                            .
-.                            .
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
-T                            T
+﻿PTTTTTTTTTTTTTXYTTTTTTTTTTTTTB
+R            213             R
+R            213             R
+R            213             R
+R            2QD             R
+R                            R
+R                            R
+R                            R
+R                            R
+R                            R
+QTTB                      PTTR
+.  R                      R  .
+.  R                      R  .
+.  R      4TTT  TTT5      R  .
+TTTD      8        9      QTTR
+.         8        9         .
+.         8        9         .
+TTTB      6TTTTTTTT7      PTTR
+.  R                      R  .
+.  R                      R  .
+.  R                      R  R
+PTTD                      DTTR
+R                            R
+R                            R
+R                            R
+R                            R
+R                            R
+R                            R
 C                            C
 CCC                          C
 C                            C
-T                            T
-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+R                            R
+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAD

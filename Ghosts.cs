@@ -55,9 +55,7 @@ namespace MsPacMan
                 return board;
             }
         }
-
-        
-
+    
         #endregion
 
         #region Methods
@@ -71,6 +69,7 @@ namespace MsPacMan
 
             switch (ghostType)
             {
+                //allows for different types of ghosts
                 case 'G':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0, 0, 16, 16), Color.White);
                     break;

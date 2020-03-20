@@ -17,6 +17,10 @@ namespace MsPacMan
         
         GraphicsDeviceManager graphics;
 
+        public const int outputTileSize = 20;
+
+        public GraphicsDeviceManager graphics;
+
         SpriteBatch spriteBatch;
 
         Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;

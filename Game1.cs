@@ -292,8 +292,8 @@ namespace MsPacMan
                     {
                         Ghosts ghost = new Ghosts(this, j, i, file[i][j]);
 
-                        //using =>this< means it's passing down the whole Game class through the arguments
                         ghosts.Add(ghost);
+                        
                         Components.Add(ghost);
 
                         //this removes the enemy and adds a space

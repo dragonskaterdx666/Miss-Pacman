@@ -12,9 +12,9 @@ QTTB  VQTTTB  VR  PTTTDR  PTTD
 .  R  VPAAAD  QD  QAAABR  V  .
 .  R  VR              VR  V  .
 .  R  VR  4WWWTTWWW5  VR  V  .
-AAAD  QD  8        9  QD  QAAA
-.         8        9         .
-.         8        9         .
+AAAD  QD  8   G  C 9  QD  QAAA
+.         8 E   1  9         .
+.         8  23    9         .
 TTTB  PB  6KKKKKKKK7  PB  PTTT
 .  R  VR              VR  V  .
 .  R  VR   PTTTTTTB   VR  V  .
@@ -23,9 +23,9 @@ PAAD          VR          QAAB
 R     PTTTTB  VR  PTTTTB     R
 R     QAAAAD  QD  QAAAAD     R
 R                            R
-R   PTTB              PTTB   R
-R   QABR              RPAD   R
-R     QD              QD     R
+R   PTTB  PTTTTTTTTB  PTTB   R
+R   QABR  V        R  RPAD   R
+R     QD  QAAAAAAAAD  QD     R
 R                            R
 QTB   PB  PTTTTTTTTB  PB   PTD
 PAD   VR  QAAABPAAAD  VR   QAB

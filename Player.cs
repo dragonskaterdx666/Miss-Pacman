@@ -43,13 +43,14 @@ namespace MsPacMan
             targetPosition = position;
             origin = targetPosition = position;
 
-            texture = game.SpriteSheet;
+            texture = game.SpriteSheetPlayer;
             spriteBatch = game.SpriteBatch;
             board = game.Board;
             this.game = game;
 
             //Change of sprite according to the direction the player is moving
             //spritePositions = new Dictionary<Direction, Vector2>();
+
             //spritePositions[Direction.Right] = new Vector2(1, 1);
             //spritePositions[Direction.Left] = new Vector2(1, 0);
             //spritePositions[Direction.Up] = new Vector2(4, 1);

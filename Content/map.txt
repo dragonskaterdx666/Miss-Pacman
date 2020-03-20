@@ -1,33 +1,36 @@
 ﻿PTTTTTTTTTTTTTXYTTTTTTTTTTTTTB
-R            213             R
-R            213             R
-R            213             R
-R            2QD             R
+R             VR             R
+R PTB  PTTTB  VR  PTTTB  PTB R
+R V R  V   R  VR  V   R  V R R
+R QAD  QAAAD  QD  QAAAD  QAD R
 R                            R
 R                            R
-R                            R
-R                            R
-R                            R
-QTTB                      PTTR
-.  R                      R  .
-.  R                      R  .
-.  R      4TTT  TTT5      R  .
-TTTD      8        9      QTTR
+R PTB PB   PTTTTTTB   PB PTB R
+R QAD VR   QAAXYAAD   VR QAD R
+R     VR      VR      VR     R
+QTTB  VQTTTB  VR  PTTTDR  PTTD
+.  R  VPAAAD  QD  QAAABR  V  .
+.  R  VR              VR  V  .
+.  R  VR  4WWWTTWWW5  VR  V  .
+AAAD  QD  8        9  QD  QAAA
 .         8        9         .
 .         8        9         .
-TTTB      6TTTTTTTT7      PTTR
-.  R                      R  .
-.  R                      R  .
-.  R                      R  R
-PTTD                      DTTR
+TTTB  PB  6KKKKKKKK7  PB  PTTT
+.  R  VR              VR  V  .
+.  R  VR   PTTTTTTB   VR  V  .
+.  R  QD   QAAXYAAD   QD  V  .
+PAAD          VR          QAAB
+R     PTTTTB  VR  PTTTTB     R
+R     QAAAAD  QD  QAAAAD     R
 R                            R
+R   PTTB              PTTB   R
+R   QABR              RPAD   R
+R     QD              QD     R
 R                            R
-R                            R
-R                            R
-R                            R
-R                            R
-C                            C
-CCC                          C
-C                            C
+QTB   PB  PTTTTTTTTB  PB   PTD
+PAD   VR  QAAABPAAAD  VR   QAB
+R     VR      VR      VR     R
+R PTTTDQTTTB  VR  PTTTDQTTTB R
+R QAAAAAAAAD  QD  QAAAAAAAAD R
 R                            R
 QAAAAAAAAAAAAAAAAAAAAAAAAAAAAD

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 
 namespace MsPacMan
 {
@@ -15,11 +15,7 @@ namespace MsPacMan
     {
         #region Variables
         
-        public const int outputTileSize = 25;
-        
-        GraphicsDeviceManager graphics;
-
-        public const int outputTileSize = 20;
+        public const int outputTileSize = 25;       
 
         public GraphicsDeviceManager graphics;
 

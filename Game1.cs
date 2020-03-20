@@ -14,7 +14,7 @@ namespace MsPacMan
 
         public const int outputTileSize = 20;
 
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
 
         SpriteBatch spriteBatch;
 

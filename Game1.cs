@@ -8,9 +8,14 @@ using System.Linq;
 
 namespace MsPacMan
 {
+    
     public class Game1 : Game
     {
         #region Variables
+        
+        public const int outputTileSize = 25;
+        
+        GraphicsDeviceManager graphics;
 
         public const int outputTileSize = 20;
 
@@ -22,7 +27,9 @@ namespace MsPacMan
 
         Board board;
 
-        int boardWidth, boardHeight;
+        List<Ghosts> ghosts;
+
+        public int boardWidth, boardHeight;
 
         #endregion
 
@@ -60,6 +67,14 @@ namespace MsPacMan
                 return spriteSheetMap;
             }
         }
+        public Texture2D SpriteSheetAssets
+        {
+            get
+            {
+                return spriteSheetAssets;
+            }
+        }
+
 
         //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch
@@ -145,6 +160,7 @@ namespace MsPacMan
 
             spriteBatch.Begin();
 
+            //drawing the map
             for (x = 0; x < boardWidth; x++)
             {
                 for (y = 0; y < boardHeight; y++)
@@ -189,11 +205,6 @@ namespace MsPacMan
                             /*right side vertical lines*/
                        case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;
-
-                            //pacman
-                        case 'S':
-                            spriteBatch.Draw(texture: spriteSheetPlayer, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
                             //special corners for more rounded places
                             /*left side*/
@@ -256,7 +267,7 @@ namespace MsPacMan
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/map.txt");
 
-            int y, x;
+            int y, x, i, j;
 
             boardWidth = file[0].Length;
 
@@ -271,6 +282,29 @@ namespace MsPacMan
                 for (x = 0; x < boardWidth; x++)
                 {
                     Board.board[x, y] = file[y][x];
+                }
+            }
+            ghosts = new List<Ghosts>();
+
+            for (i = 0; i < boardHeight; i++)
+            {
+                for (j = 0; j < boardWidth; j++)
+                {
+                    if (file[i][j] == 'G' || file[i][j] == '1' || file[i][j] == '2' || file[i][j] == '3' || file[i][j] == 'E' || file[i][j] == 'C' )
+                    {
+                        Ghosts ghost = new Ghosts(this, j, i, file[i][j]);
+
+                        //using =>this< means it's passing down the whole Game class through the arguments
+                        ghosts.Add(ghost);
+                        Components.Add(ghost);
+
+                        //this removes the enemy and adds a space
+                        Board.board[j, i] = ' ';
+                    }
+                    else
+                    {
+                        Board.board[j, i] = file[i][j];
+                    }
                 }
             }
 

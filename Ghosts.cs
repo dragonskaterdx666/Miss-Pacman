@@ -59,7 +59,10 @@ namespace MsPacMan
         #endregion
 
         #region Methods
-        //rewritting this method in a different class
+
+
+
+        //Draws the different types of ghosts
         public override void Draw(GameTime gameTime)
         {
             

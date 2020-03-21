@@ -29,6 +29,8 @@ namespace MsPacMan
 
         public int boardWidth, boardHeight;
 
+        public static Random rnd = new Random();
+
         #endregion
 
         #region Constuctor
@@ -72,7 +74,6 @@ namespace MsPacMan
                 return spriteSheetAssets;
             }
         }
-
 
         //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch
@@ -182,21 +183,36 @@ namespace MsPacMan
                         case 'B':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(11 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
-                           /*bottom right corner*/
+
+                        case 'X':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(10 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        /*bottom right corner*/
                         case 'D':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;                       
-                            /*bottom left corner*/
-                        case 'Q':
+                            break;
+
+                        case 'Y':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(6 * 35, 5 * 35, 35, 35), color: Color.White);
+                            break;
+                        /*bottom left cornerS*/
+                        case 'H':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+
+                        case 'Q':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(5 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
                             /*top left corner*/
                         case 'P':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(9 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '0':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
 
-                            //VERTICAL LINES
-                            /*left side vertical lines*/
+                        //VERTICAL LINES
+                        /*left side vertical lines*/
                         case 'R':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(3 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
@@ -204,17 +220,10 @@ namespace MsPacMan
                        case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                            //special corners for more rounded places
-                            /*left side*/
-                        case 'X':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(22 * 35, 0, 35, 35), color: Color.White);
-                            break;
                             /*right side*/
-                        case 'Y':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(23 * 35, 0, 35, 35), color: Color.White);
-                            break;
                         //GHOST SPAWN
                         /*middle top left corner*/
+
                         case '4':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(29 * 35, 0, 35, 35), color: Color.White);
                             break;
@@ -246,9 +255,12 @@ namespace MsPacMan
                         case 'W':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
+                        case '.':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
+                            break;
                         //this represents the non specified letters or numbers on the switch case and by default adds the color of the background
                         default:
-                            spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(0, 2 * 35, 35, 35), Color.White);
+                            spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(16 * 35, 4 * 35, 35, 35), Color.White);
                             break;
                     }
 

@@ -1,36 +1,36 @@
-﻿PTTTTTTTTTTTTTXYTTTTTTTTTTTTTB
-R             VR             R
-R PTB  PTTTB  VR  PTTTB  PTB R
-R V R  V   R  VR  V   R  V R R
-R QAD  QAAAD  QD  QAAAD  QAD R
-R                            R
-R                            R
-R PTB PB   PTTTTTTB   PB PTB R
-R QAD VR   QAAXYAAD   VR QAD R
-R     VR      VR      VR     R
-QTTB  VQTTTB  VR  PTTTDR  PTTD
-.  R  VPAAAD  QD  QAAABR  V  .
-.  R  VR              VR  V  .
-.  R  VR  4WWWTTWWW5  VR  V  .
-AAAD  QD  8   G  C 9  QD  QAAA
-.         8 E   1  9         .
-.         8  23    9         .
-TTTB  PB  6KKKKKKKK7  PB  PTTT
-.  R  VR              VR  V  .
-.  R  VR   PTTTTTTB   VR  V  .
-.  R  QD   QAAXYAAD   QD  V  .
-PAAD          VR          QAAB
-R     PTTTTB  VR  PTTTTB     R
-R     QAAAAD  QD  QAAAAD     R
-R                            R
-R   PTTB  PTTTTTTTTB  PTTB   R
-R   QABR  V        R  RPAD   R
-R     QD  QAAAAAAAAD  QD     R
-R                            R
-QTB   PB  PTTTTTTTTB  PB   PTD
-PAD   VR  QAAABPAAAD  VR   QAB
-R     VR      VR      VR     R
-R PTTTDQTTTB  VR  PTTTDQTTTB R
-R QAAAAAAAAD  QD  QAAAAAAAAD R
-R                            R
-QAAAAAAAAAAAAAAAAAAAAAAAAAAAAD
+﻿PAAAAAAAAAAAAAXPAAAAAAAAAAAAAX
+R             VR             V
+R 0TB  0TTTB  VR  0TTTB  0TB V
+R V.R  V...R  VR  V...R  V.R V
+R HAD  HAAAD  HD  HAAAD  HAD V
+R                            V
+R                            V
+R 0TB 0B   0TTTTTTB   0B 0TB V
+R HAD VR   HAAXPAAD   VR HAD V
+R     VR      VR      VR     V
+QTTB  VQTTTB  VR  0TTTYR  0TTY
+...R  VPAAAD  HD  HAAAXR  V...
+...R  VR              VR  V...
+...R  VR  4WWWTTWWW5  VR  V...
+AAAD  HD  8...G..C.9  HD  HAAA
+.         8.E...1..9         .
+.         8..23....9         .
+TTTB  0B  6KKKKKKKK7  0B  0TTT
+...R  VR              VR  V...
+...R  VR   0TTTTTTB   VR  V...
+...R  HD   HAAXPAAD   HD  V...
+PAAD          VR          HAAX
+R     0TTTTB  VR  0TTTTB     V
+R     HAAAAD  HD  HAAAAD     V
+R                            V
+R   0TTB  0TTTTTTTTB  0TTB   V
+R   HAXR  V........R  VPAD   V
+R     HD  HAAAAAAAAD  HD     V
+R                            V
+QTB   0B  0TTTTTTTTB  0B   0TY
+PAD   VR  HAAAXPAAAD  VR   HAX
+R     VR      VR      VR     V
+R 0TTTYQTTTB  VR  0TTTYQTTTB V
+R HAAAAAAAAD  HD  HAAAAAAAAD V
+R                            V
+QTTTTTTTTTTTTTTTTTTTTTTTTTTTTY

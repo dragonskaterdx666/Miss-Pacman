@@ -10,43 +10,57 @@ namespace MsPacMan
 {
     public class Player : DrawableGameComponent
     {
-
-        #region Variables
         enum Direction
         {
             Up, Down, Right, Left
         }
 
+        #region Variables
+        
+        public Point position, targetPosition, origin;
+       
+        public int lives = 3;
+        
         Dictionary<Direction, Vector2> spritePositions;
 
         Direction direction = Direction.Down;
 
-        public int lives = 3;
-
         int frame = 0;
-
-        public Point position, targetPosition, origin;
+        
         Texture2D texture;
+        
         SpriteFont arial;
+        
         SpriteBatch spriteBatch;
+        
         Board board;
-        Game1 game;
+        
+        Game1 game1;
+        
         #endregion
 
         #region Constructors
         public Player(Game1 game, int x, int y) : base (game)
         {
-            DrawOrder = 100; //Player should be the last object to draw
-
+            //Player should be the last object to draw
+            DrawOrder = 100; 
+            
+            this.game1 = game;
+            
             position.Y = y * Game1.outputTileSize;
+            
             position.X = x * Game1.outputTileSize;
+            
             targetPosition = position;
+            
             origin = targetPosition = position;
 
-            texture = game.SpriteSheetPlayer;
-            spriteBatch = game.SpriteBatch;
-            board = game.Board;
-            this.game = game;
+            texture = game1.SpriteSheetPlayer;
+            
+            spriteBatch = game1.SpriteBatch;
+            
+            board = game1.Board;
+            
 
             //Change of sprite according to the direction the player is moving
             //spritePositions = new Dictionary<Direction, Vector2>();
@@ -68,6 +82,7 @@ namespace MsPacMan
                 frame = 0;
 
                 targetPosition = position;
+                
                 KeyboardState state = Keyboard.GetState();
 
                 #region Player Movement Controls
@@ -130,13 +145,15 @@ namespace MsPacMan
                 }
                 #endregion
             }
-
-            else //position is not the same 
+            // if the position is not the same
+            else  
             {
-
                 Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+               
                 vec.Normalize();
+                
                 position = (position.ToVector2() + vec).ToPoint();
+                
                 if ((position.X + position.Y) % 5 == 0) frame++;
 
 
@@ -144,47 +161,42 @@ namespace MsPacMan
             }
         }
 
+        //Draws the pacman on the different positions
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture,
-
-                new Rectangle(position, new Point(Game1.outputTileSize)),
-                new Rectangle(
-
-                    ((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),
-                    new Point(16, 16)
-
-                    ),
-                Color.White
-
-                );
+            spriteBatch.Draw(texture, new Rectangle(position, new Point(Game1.outputTileSize)), new Rectangle(((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),new Point(16, 16)),Color.White);
+            
             if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";
+                
                 Vector2 stringSize = arial.MeasureString(gameOverText);
-                Vector2 screenSize = new Vector2(game.graphics.PreferredBackBufferWidth, game.graphics.PreferredBackBufferHeight);
+                
+                Vector2 screenSize = new Vector2(game1.graphics.PreferredBackBufferWidth, game1.graphics.PreferredBackBufferHeight);
+                
                 Vector2 textPos = (screenSize - stringSize) / 2.0f;
 
                 spriteBatch.DrawString(arial, gameOverText, textPos, Color.White);
             }
-
-
+            
             spriteBatch.End();
         }
 
         public void Die()
         {
             lives--;
+
             position = targetPosition = origin;
+            
             if (lives <= 0)
             {
-                //R.I.P.
+                //TODO this
 
-                foreach (DrawableGameComponent comp in game.Components)
+                foreach (DrawableGameComponent gameComponent in game1.Components)
                 {
-                    comp.Enabled = false;
+                    gameComponent.Enabled = false;
                 }
             }
         }

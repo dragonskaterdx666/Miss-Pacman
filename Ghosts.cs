@@ -73,12 +73,6 @@ namespace MsPacMan
             switch (ghostType)
             {
                 //allows for different types of ghosts
-                case 'G':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0, 0, 16, 16), Color.White);
-                    break;
-                case 'C':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0,1 * 16, 16, 16), Color.White);
-                    break;
                 case '1':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0,2 * 16, 16, 16), Color.White);
                     break;
@@ -87,9 +81,6 @@ namespace MsPacMan
                     break;
                 case '3':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0,4 * 16, 16, 16), Color.White);
-                    break;
-                case 'E':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0,5 * 16, 16, 16), Color.White);
                     break;
             }
 

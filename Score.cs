@@ -23,7 +23,7 @@ namespace MsPacMan
 
         Point position;
 
-        public char pointsType;
+        char pointsType;
 
         #endregion
 
@@ -67,13 +67,13 @@ namespace MsPacMan
             switch (pointsType)
             {
                 case '.':
-                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
                 case '?':
                     spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(15 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
-                default:
-                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
+                case ' ':
+                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(0,1 * 35, 35, 35), color: Color.White);
                     break;
             }
 

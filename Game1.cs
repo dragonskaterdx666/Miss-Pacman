@@ -315,7 +315,7 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?' || filePosition == '.' || filePosition == ' ')
+                    else if(filePosition == '?' || filePosition == '.' || filePosition == ' ' || filePosition == 'L' || filePosition == 'M')
                     {
                         Score score = new Score(this, j, i, filePosition);
 

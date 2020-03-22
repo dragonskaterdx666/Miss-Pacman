@@ -257,7 +257,7 @@ namespace MsPacMan
                         case 'W':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
-                        //this represents the non specified letters or numbers on the switch case and by default adds the color of the background
+
                     }
 
                 }

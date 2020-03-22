@@ -77,6 +77,12 @@ namespace MsPacMan
                 case ' ':
                     spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
+                case 'L':
+                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 16, 2 * 16, 16, 16), color: Color.White);
+                    break;
+                case 'M':
+                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 2 * 16, 16, 16), color: Color.White);
+                    break;
             }
 
             spriteBatch.End();

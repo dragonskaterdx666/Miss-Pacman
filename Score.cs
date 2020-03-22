@@ -63,16 +63,17 @@ namespace MsPacMan
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();
+
             switch (pointsType)
             {
                 case '.':
-                    spriteBatch.Draw(texture: game1.SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
                     break;
                 case '?':
-                    spriteBatch.Draw(texture: game1.SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(15 * 35, 4 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(15 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
                 default:
-                    spriteBatch.Draw(texture: game1.SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
             }
 

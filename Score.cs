@@ -23,7 +23,9 @@ namespace MsPacMan
 
         Point position;
 
-        public char pointsType;
+        char pointsType;
+
+        public int numberOfPoints;
 
         #endregion
 
@@ -72,7 +74,7 @@ namespace MsPacMan
                 case '?':
                     spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(15 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
-                default:
+                case ' ':
                     spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
                     break;
             }

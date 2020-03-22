@@ -256,9 +256,6 @@ namespace MsPacMan
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
                         //this represents the non specified letters or numbers on the switch case and by default adds the color of the background
-                        default:
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
-                            break;
                     }
 
                 }
@@ -281,9 +278,14 @@ namespace MsPacMan
             boardWidth = file[0].Length;
 
             boardHeight = file.Length;
+            
+            ghostList = new List<Ghosts>();
+
+            scoreList = new List<Score>();
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
+            
             Components.Add(board);
 
             for (y = 0; y < boardHeight; y++)
@@ -293,15 +295,14 @@ namespace MsPacMan
                     Board.board[x, y] = file[y][x];
                 }
             }
-            ghostList = new List<Ghosts>();
-
+           
             for (i = 0; i < boardHeight; i++)
             {
                 for (j = 0; j < boardWidth; j++)
                 {
                     filePosition = file[i][j];
 
-                    if (filePosition == 'G' || filePosition == '1' || filePosition == '2' || filePosition == '3' || filePosition == 'E' || filePosition == 'C' )
+                    if (filePosition == '1' || filePosition == '2' || filePosition == '3')
                     {
                         Ghosts ghost = new Ghosts(this, j, i, filePosition);
 
@@ -312,13 +313,20 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?' || filePosition == '.')
+                    else if(filePosition == '?' || filePosition == '.' || filePosition == ' ')
                     {
                         Score score = new Score(this, j, i, filePosition);
 
+                        if(filePosition == ' ')
+                        {
+                            score.numberOfPoints++;
+
+                        }
+                 
                         scoreList.Add(score);
 
                         Components.Add(score);
+
                     }
                     else
                     {

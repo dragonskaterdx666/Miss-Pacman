@@ -1,7 +1,7 @@
 ﻿PAAAAAAAAAAAAAXPAAAAAAAAAAAAAX
-R?            VR            ?V
+R?            VR             V
 R 0TB  0TTTB  VR  0TTTB  0TB V
-R V.R  V...R  VR  V...R  V.R V
+R V.R  V...R  VR  V...R? V.R V
 R HAD  HAAAD  HD  HAAAD  HAD V
 R                            V
 R                            V
@@ -10,25 +10,25 @@ R HAD VR   HAAXPAAD   VR HAD V
 R     VR      VR      VR     V
 QTTB  VQTTTB  VR  0TTTYR  0TTY
 ...R  VPAAAD  HD  HAAAXR  V...
-...R  VR              VR  V...
-...R  VR  4WWWTTWWW5  VR  V...
-AAAD  HD  8...G..C.9  HD  HAAA
-.         8.E...1..9         .
-.         8..23....9         .
-TTTB  0B  6KKKKKKKK7  0B  0TTT
-...R  VR              VR  V...
+...R  VR--------------VR  V...
+...R  VR--4WWWTTWWW5--VR  V...
+AAAD  HD--8...3....9--HD  HAAA
+.       --8.....1..9--       .
+.       --8..2.....9--       .
+TTTB  0B--6KKKKKKKK7--0B  0TTT
+...R  VR--------------VR  V...
 ...R  VR   0TTTTTTB   VR  V...
 ...R  HD   HAAXPAAD   HD  V...
-PAAD          VR          HAAX
-R     0TTTTB  VR  0TTTTB     V
+...R          VR          V...
+PAAD  0TTTTB  VR  0TTTTB  HAAX
 R     HAAAAD  HD  HAAAAD     V
-R                            V
-R   0TTB  0TTTTTTTTB  0TTB   V
-R   HAXR  V........R  VPAD   V
+R              S             V
+R  0TTTB  0TTTTTTTTB  0TTTB  V
+R  HAAXR  V........R  VPAAD  V
 R     HD  HAAAAAAAAD  HD     V
 R                            V
-QTB   0B  0TTTTTTTTB  0B   0TY
-PAD   VR  HAAAXPAAAD  VR   HAX
+QTTB  0B  0TTTTTTTTB  0B  0TTY
+PAAD  VR  HAAAXPAAAD  VR  HAAX
 R     VR      VR      VR     V
 R 0TTTYQTTTB  VR  0TTTYQTTTB V
 R HAAAAAAAAD  HD  HAAAAAAAAD V

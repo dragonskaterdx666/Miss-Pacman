@@ -192,7 +192,6 @@ namespace MsPacMan
             
             if (lives <= 0)
             {
-                //TODO this
 
                 foreach (DrawableGameComponent gameComponent in game1.Components)
                 {

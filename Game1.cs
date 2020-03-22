@@ -31,6 +31,8 @@ namespace MsPacMan
 
         public int boardWidth, boardHeight;
 
+        Player player;
+
         #endregion
 
         #region Constuctor
@@ -327,6 +329,13 @@ namespace MsPacMan
 
                         Components.Add(score);
 
+                    }
+                    else if (file[i][j] == 'S')
+                    {
+                        //Player
+                        player = new Player(this, j, i);
+                        Components.Add(player);
+                        Board.board[j, i] = ' '; //remove player, add space
                     }
                     else
                     {

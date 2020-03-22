@@ -161,12 +161,12 @@ namespace MsPacMan
             }
         }
 
-        //Draws the pacman on the different positions
+        //Draws pacman on the different positions
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture, new Rectangle(position, new Point(Game1.outputTileSize)), new Rectangle(((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),new Point(16, 16)),Color.White);
+            //spriteBatch.Draw(texture, new Rectangle(position, new Point(Game1.outputTileSize)), new Rectangle(((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),new Point(16, 16)),Color.White);
             
             if (lives <= 0)
             {

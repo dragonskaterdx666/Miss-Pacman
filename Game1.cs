@@ -27,6 +27,8 @@ namespace MsPacMan
 
         List<Ghosts> ghostList;
 
+        List<Score> scoreList;
+
         public int boardWidth, boardHeight;
 
         public static Random rnd = new Random();
@@ -255,13 +257,8 @@ namespace MsPacMan
                         case 'W':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
-                        case '.':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
-                            break;
                         //this represents the non specified letters or numbers on the switch case and by default adds the color of the background
-                        default:
-                            spriteBatch.Draw(spriteSheetMap, outRect, new Rectangle(16 * 35, 4 * 35, 35, 35), Color.White);
-                            break;
+
                     }
 
                 }
@@ -315,6 +312,14 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
+                    /*else if(filePosition == '?' || filePosition == '.')
+                    {
+                        Score score = new Score(this, j, i, filePosition);
+
+                        scoreList.Add(score);
+
+                        Components.Add(score);
+                    }*/
                     else
                     {
                         Board.board[j, i] = file[i][j];

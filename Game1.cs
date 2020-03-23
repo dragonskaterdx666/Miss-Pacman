@@ -257,6 +257,9 @@ namespace MsPacMan
                         case 'W':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
                             break;
+                        case 'Ç':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 0, 35, 35), color: Color.White);
+                            break;
 
                     }
 
@@ -330,12 +333,13 @@ namespace MsPacMan
                         Components.Add(score);
 
                     }
-                    else if (file[i][j] == 'S')
+                    else if (filePosition == 'S')
                     {
-                        //Player
                         player = new Player(this, j, i);
+                        
                         Components.Add(player);
-                        Board.board[j, i] = ' '; //remove player, add space
+                        
+                        Board.board[j, i] = ' '; 
                     }
                     else
                     {

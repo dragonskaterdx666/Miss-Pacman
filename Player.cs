@@ -173,7 +173,7 @@ namespace MsPacMan
                 new Rectangle(
 
                     ((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),
-                    new Point(1,1)
+                    new Point(0,0)
 
                     ),
                 Color.White

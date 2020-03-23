@@ -62,13 +62,13 @@ namespace MsPacMan
             board = game1.Board;
             
 
-            //Change of sprite according to the direction the player is moving
-            //spritePositions = new Dictionary<Direction, Vector2>();
+            
+            spritePositions = new Dictionary<Direction, Vector2>();
 
-            //spritePositions[Direction.Right] = new Vector2(1, 1);
-            //spritePositions[Direction.Left] = new Vector2(1, 0);
-            //spritePositions[Direction.Up] = new Vector2(4, 1);
-            //spritePositions[Direction.Down] = new Vector2(4, 0);
+            spritePositions[Direction.Right] = new Vector2(1, 1);
+            spritePositions[Direction.Left] = new Vector2(1, 0);
+            spritePositions[Direction.Up] = new Vector2(4, 1);
+            spritePositions[Direction.Down] = new Vector2(4, 0);
         }
         #endregion
 
@@ -137,8 +137,9 @@ namespace MsPacMan
                         default:
                             break;
                     }
-                    if (board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] != ' ')
+                    if ((board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] != ' ') && (board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] != '-'))
                     {
                         targetPosition = position;
                     }
@@ -166,8 +167,19 @@ namespace MsPacMan
         {
             spriteBatch.Begin();
 
-            //spriteBatch.Draw(texture, new Rectangle(position, new Point(Game1.outputTileSize)), new Rectangle(((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),new Point(16, 16)),Color.White);
-            
+            spriteBatch.Draw(texture,
+
+                new Rectangle(position, new Point(Game1.outputTileSize)),
+                new Rectangle(
+
+                    ((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),
+                    new Point(1,1)
+
+                    ),
+                Color.White
+
+                );
+
             if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";

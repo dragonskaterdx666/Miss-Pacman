@@ -55,7 +55,7 @@ namespace MsPacMan
             
             origin = targetPosition = position;
 
-            texture = game1.SpriteSheetPlayer;
+            texture = game1.SpriteSheet;
             
             spriteBatch = game1.SpriteBatch;
             
@@ -65,10 +65,10 @@ namespace MsPacMan
             
             spritePositions = new Dictionary<Direction, Vector2>();
 
-            spritePositions[Direction.Right] = new Vector2(1, 1);
-            spritePositions[Direction.Left] = new Vector2(1, 0);
-            spritePositions[Direction.Up] = new Vector2(4, 1);
-            spritePositions[Direction.Down] = new Vector2(4, 0);
+            spritePositions[Direction.Right] = new Vector2(3.2f, 1);
+            spritePositions[Direction.Left] = new Vector2(0, 1);
+            spritePositions[Direction.Up] = new Vector2(2, 0);
+            spritePositions[Direction.Down] = new Vector2(5.2f, 0);
         }
         #endregion
 
@@ -139,7 +139,8 @@ namespace MsPacMan
                     }
                     if ((board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] != ' ') && (board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] != '-'))
+                        targetPosition.Y / Game1.outputTileSize] != '-') && (board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] != '?'))
                     {
                         targetPosition = position;
                     }
@@ -172,8 +173,8 @@ namespace MsPacMan
                 new Rectangle(position, new Point(Game1.outputTileSize)),
                 new Rectangle(
 
-                    ((spritePositions[direction] + Vector2.UnitX * frame) * 16).ToPoint(),
-                    new Point(0,0)
+                    ((spritePositions[direction] + Vector2.UnitX * frame) * 31).ToPoint(),
+                    new Point(30)
 
                     ),
                 Color.White

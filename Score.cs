@@ -60,6 +60,15 @@ namespace MsPacMan
         #endregion
 
         #region Methods
+
+        public override void Update(GameTime gameTime)
+        {
+            Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
+            Rectangle eRect = new Rectangle(position, new Point(Game1.outputTileSize));
+
+            if (eRect.Intersects(pRect)) { game1.player.Die(); }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);

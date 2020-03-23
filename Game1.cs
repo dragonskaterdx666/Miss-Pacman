@@ -31,7 +31,7 @@ namespace MsPacMan
 
         public int boardWidth, boardHeight;
 
-        Player player;
+        public Player player;
 
         #endregion
 
@@ -222,44 +222,7 @@ namespace MsPacMan
                        case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                            /*right side*/
-                        //GHOST SPAWN
-                        /*middle top left corner*/
-
-                        case '4':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(29 * 35, 0, 35, 35), color: Color.White);
-                            break;
-                        /*middle top right corner*/
-                        case '5':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 0, 35, 35), color: Color.White);
-                            break;
-                        /*middle bottom left corner*/
-                        case '6':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(31 * 35, 0, 35, 35), color: Color.White);
-                            break;
-                        /*middle bottom right corner*/
-                        case '7':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(30 * 35, 0, 35, 35), color: Color.White);
-                            break;
-                        /*middle left vertical lines*/
-                        case '8':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 1 * 35, 35, 35), color: Color.White);
-                            break;
-                        /*middle right vertical lines*/
-                        case '9':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(19 * 35, 1 * 35, 35, 35), color: Color.White);
-                            break;
-                        /*middle bottom horizontal lines*/
-                        case 'K':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(27 * 35, 1 * 35, 35, 35), color: Color.White);
-                            break;
-                        /*middle top horizontal lines*/
-                        case 'W':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(28 * 35, 1 * 35, 35, 35), color: Color.White);
-                            break;
-                        case 'Ç':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 0, 35, 35), color: Color.White);
-                            break;
+                            /*right side*/                      
 
                     }
 

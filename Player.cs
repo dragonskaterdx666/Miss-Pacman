@@ -72,6 +72,8 @@ namespace MsPacMan
         }
         #endregion
 
+        Score score;
+
         #region Methods
 
 

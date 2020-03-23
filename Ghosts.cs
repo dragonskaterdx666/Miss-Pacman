@@ -55,12 +55,48 @@ namespace MsPacMan
                 return board;
             }
         }
-    
+
         #endregion
 
         #region Methods
 
 
+        public override void Update(GameTime gameTime)
+        {
+            Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
+            Rectangle eRect = new Rectangle(position, new Point(Game1.outputTileSize));
+
+            if (eRect.Intersects(pRect)) { game1.player.Die(); }
+
+
+            //if (position == targetPosition)
+            //{
+            //    if (Math.Abs(patrolPosition) > patrolSize)
+            //        direction *= 1;
+
+            //    targetPosition +=
+            //        orientation == Orientation.Horizontal
+            //        ? new Point(direction * Game1.outputTileSize, 0) : new Point(0, direction * Game1.outputTileSize);
+
+            //    if (game.Board.board[targetPosition.X / Game1.outputTileSize,
+            //        targetPosition.Y / Game1.outputTileSize] == ' ')
+            //    {
+            //        patrolPosition++;
+            //    }
+            //    else
+            //    {
+            //        targetPosition = position;
+            //        direction = -direction;
+            //    }
+
+            //}
+            //else
+            //{
+            //    Vector2 dir = (targetPosition - position).ToVector2();
+            //    dir.Normalize();
+            //    position += dir.ToPoint();
+            //}
+        }
 
         //Draws the different types of ghosts
         public override void Draw(GameTime gameTime)

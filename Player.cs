@@ -39,6 +39,8 @@ namespace MsPacMan
         
         Game1 game1;
         
+        Score score;
+        
         #endregion
 
         #region Constructors
@@ -57,7 +59,7 @@ namespace MsPacMan
             
             origin = targetPosition = position;
 
-            texture = game1.SpriteSheet;
+            texture = game1.SpriteSheetPlayer;
             
             spriteBatch = game1.SpriteBatch;
             
@@ -79,7 +81,7 @@ namespace MsPacMan
         }
         #endregion
 
-        Score score;
+        
 
         #region Methods
 

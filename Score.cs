@@ -85,10 +85,10 @@ namespace MsPacMan
                     spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
                     break;
                 case 'L':
-                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);
+                    spriteBatch.Draw(texture: game1.SpriteSheet, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);
                     break;
                 case 'M':
-                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, outRect, Upgrade, Color.White);
+                    spriteBatch.Draw(texture: game1.SpriteSheet, outRect, Upgrade, Color.White);
                     break;
             }
 

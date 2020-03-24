@@ -31,7 +31,7 @@ namespace MsPacMan
         #region Constructor
         public Ghosts(Game1 game, int x, int y, char ghostType) : base(game)
         {
-            this.texture = game.SpriteSheetAssets;
+            this.texture = game.SpriteSheet;
             
             this.spriteBatch = game.SpriteBatch;
             
@@ -66,7 +66,10 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
-            if (EnemyArea.Intersects(pRect)) { game1.player.Die(); }
+            if (EnemyArea.Intersects(pRect)) 
+            { 
+                game1.player.Die(); 
+            }
 
 
             //if (position == targetPosition)

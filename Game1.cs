@@ -21,13 +21,13 @@ namespace MsPacMan
 
         private List<Ghosts> ghostList;
 
-        private List<Score> scoreList;
+        private List<Score> scoreList; 
+        
+        private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
 
-        SpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
 
-        Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
-
-        Board board;
+        private Board board;
 
         public int boardWidth, boardHeight;
 
@@ -50,52 +50,15 @@ namespace MsPacMan
         #region Properties
 
         //Properties referring to the assets used on the game
-        public Texture2D SpriteSheet
-        {
-            get
-            {
-                return spriteSheet;
-            }
-        }
-        public Texture2D SpriteSheetPlayer
-        {
-            get
-            {
-                return spriteSheetPlayer;
-            }
-        }
-        public Texture2D SpriteSheetMap
-        {
-            get
-            {
-                return spriteSheetMap;
-            }
-        }
-        public Texture2D SpriteSheetAssets
-        {
-            get
-            {
-                return spriteSheetAssets;
-            }
-        }
+        public Texture2D SpriteSheet => spriteSheet;
+        public Texture2D SpriteSheetPlayer => spriteSheetPlayer;
+        
+        public Texture2D SpriteSheetMap => spriteSheetMap;
 
         public Player player => p;
         //property refering to the textures to create the assets
-        public SpriteBatch SpriteBatch
-        {
-            get
-            {
-                return spriteBatch;
-            }
-        }
-        public Board Board
-        {
-            get
-            {
-                return board;
-            }
-        }
-
+        public SpriteBatch SpriteBatch => spriteBatch;
+        public Board Board => board;
         public List<Dot> Dots => dotList;
 
         #endregion
@@ -122,11 +85,9 @@ namespace MsPacMan
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //creating the spritesheets that are going to be used
-            spriteSheet = Content.Load<Texture2D>("sprites");
+            spriteSheetPlayer = Content.Load<Texture2D>("sprites");
 
-            spriteSheetPlayer = Content.Load<Texture2D>("mspacman");
-
-            spriteSheetAssets = Content.Load<Texture2D>("sprites2");
+            spriteSheet = Content.Load<Texture2D>("sprites2");
 
             spriteSheetMap = Content.Load<Texture2D>("mappa");
 

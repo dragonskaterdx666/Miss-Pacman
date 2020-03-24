@@ -193,8 +193,37 @@ namespace MsPacMan
                        case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                            /*right side*/                      
-
+                        /*right side*/
+                        case '4':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 1 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '5':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(17 * 35, 1 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '6':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 1 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '7':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(17 * 35, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '8':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '9':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(20 * 35, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'N':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case '-':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(19 * 35, 2 * 35, 35, 35), color: Color.White);
+                            break;
+                        case 'O':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(18 * 35, 0, 35, 35), color: Color.White);
+                            break;
+                        case 'Ç':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(19 * 35, 0, 35, 35), color: Color.White);
+                            break;
                     }
 
                 }
@@ -264,7 +293,7 @@ namespace MsPacMan
                         {
                             score.numberOfPoints++;
 
-                        }
+                        } 
 
                     }
                     else if (filePosition == 'S')

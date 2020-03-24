@@ -114,7 +114,6 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bap.png" />
     <Content Include="Content\map.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

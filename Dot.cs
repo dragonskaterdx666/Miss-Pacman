@@ -51,7 +51,7 @@ namespace MsPacMan
         {
             Rectangle playerPosition = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
             
-            Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(12));
+            Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 
             if (DotArea.Intersects(playerPosition))
             {

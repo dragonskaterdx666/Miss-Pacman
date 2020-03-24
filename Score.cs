@@ -27,6 +27,14 @@ namespace MsPacMan
 
         public int numberOfPoints;
 
+        public Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
+
+        public Rectangle Upgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
+
+        public Rectangle Dots = new Rectangle(16 * 35, 4 * 35, 35, 35);
+
+        public Rectangle EmptySpace = new Rectangle(0, 1 * 35, 35, 35);
+
         #endregion
 
         #region Constructor
@@ -66,7 +74,12 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
             Rectangle eRect = new Rectangle(position, new Point(Game1.outputTileSize));
 
-            if (eRect.Intersects(pRect)) { game1.player.Die(); }
+            if (Dots.Intersects(pRect))
+            {
+                Dots.X = EmptySpace.X;
+                Dots.Y = EmptySpace.Y;
+                numberOfPoints++;
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -78,19 +91,19 @@ namespace MsPacMan
             switch (pointsType)
             {
                 case '.':
-                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 1 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, outRect, EmptySpace, Color.White);
                     break;
                 case '?':
-                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(15 * 35, 4 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
                     break;
                 case ' ':
-                    spriteBatch.Draw(texture, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 4 * 35, 35, 35), color: Color.White);
+                    spriteBatch.Draw(texture, outRect, Dots, Color.White);
                     break;
                 case 'L':
-                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 16, 2 * 16, 16, 16), color: Color.White);
+                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);
                     break;
                 case 'M':
-                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, destinationRectangle: outRect, sourceRectangle: new Rectangle(13 * 16, 9 * 16, 16, 16), color: Color.White);
+                    spriteBatch.Draw(texture: game1.SpriteSheetAssets, outRect, Upgrade, Color.White);
                     break;
             }
 

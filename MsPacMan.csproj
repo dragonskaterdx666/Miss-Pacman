@@ -46,6 +46,7 @@
     <Compile Include="Dot.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Ghosts.cs" />
+    <Compile Include="Live.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

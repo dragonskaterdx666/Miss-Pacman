@@ -21,8 +21,10 @@ namespace MsPacMan
 
         private List<Ghosts> ghostList;
 
-        private List<Score> scoreList; 
-        
+        private List<Score> scoreList;
+
+        private List<Live> liveList;
+
         private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
 
         private SpriteBatch spriteBatch;
@@ -60,6 +62,9 @@ namespace MsPacMan
         public SpriteBatch SpriteBatch => spriteBatch;
         public Board Board => board;
         public List<Dot> Dots => dotList;
+        public List<Score> Scores => scoreList;
+
+        public List<Live> Lives => liveList;
 
         #endregion
 
@@ -219,6 +224,8 @@ namespace MsPacMan
 
             dotList = new List<Dot>();
 
+            liveList = new List<Live>();
+
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             
@@ -249,7 +256,7 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?' || filePosition == '.' || filePosition == 'L' || filePosition == 'M')
+                    else if(filePosition == '?' || filePosition == '.' || filePosition == 'M')
                     {
                         Score score = new Score(this, j, i, filePosition);
 
@@ -258,10 +265,6 @@ namespace MsPacMan
                             score.numberOfPoints++;
 
                         }
-                 
-                        scoreList.Add(score);
-
-                        Components.Add(score);
 
                     }
                     else if (filePosition == 'S')
@@ -279,6 +282,14 @@ namespace MsPacMan
                         dotList.Add(dot);
 
                         Components.Add(dot);
+                    }
+                    else if(filePosition == 'L')
+                    {
+                        Live live = new Live(this, j, i);
+
+                        liveList.Add(live);
+
+                        Components.Add(live);
                     }
                     else
                     {

@@ -40,6 +40,7 @@ namespace MsPacMan
         Game1 game1;
         
         Score score;
+
         
         #endregion
 
@@ -64,8 +65,6 @@ namespace MsPacMan
             spriteBatch = game1.SpriteBatch;
             
             board = game1.Board;
-            
-
             
             spritePositions = new Dictionary<Direction, Vector2>();
 
@@ -177,20 +176,13 @@ namespace MsPacMan
         //Draws pacman on the different positions
         public override void Draw(GameTime gameTime)
         {
+            Rectangle outRec = new Rectangle(position, new Point(Game1.outputTileSize));
+
+            Rectangle sourceRec = new Rectangle(((spritePositions[direction] + (Vector2.UnitX * frame)) * 32).ToPoint(), new Point(32));
+
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture,
-
-                new Rectangle(position, new Point(Game1.outputTileSize)),
-                new Rectangle(
-
-                    ((spritePositions[direction] + (Vector2.UnitX * frame)) * 32).ToPoint(),
-                    new Point(32)
-
-                    ),
-                Color.White
-
-                );
+            spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
             if (lives <= 0)
             {

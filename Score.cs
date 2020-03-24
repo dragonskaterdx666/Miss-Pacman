@@ -19,7 +19,7 @@ namespace MsPacMan
 
         Game1 game1;
 
-        public Board board;
+        private Board board;
 
         Point position;
 
@@ -57,13 +57,7 @@ namespace MsPacMan
         #endregion
 
         #region Properties
-        public Board Board
-        {
-            get
-            {
-                return board;
-            }
-        }
+        public Board Board => board;
 
         #endregion
 
@@ -83,9 +77,6 @@ namespace MsPacMan
                     break;
                 case '?':
                     spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
-                    break;
-                case 'L':
-                    spriteBatch.Draw(texture: game1.SpriteSheet, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);
                     break;
                 case 'M':
                     spriteBatch.Draw(texture: game1.SpriteSheet, outRect, Upgrade, Color.White);

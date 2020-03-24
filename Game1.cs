@@ -14,10 +14,14 @@ namespace MsPacMan
     public class Game1 : Game
     {
         #region Variables
-        
-        public const int outputTileSize = 25;       
 
-        public GraphicsDeviceManager graphics;
+        private Player p;
+
+        private List<Dot> dotList;
+
+        private List<Ghosts> ghostList;
+
+        private List<Score> scoreList;
 
         SpriteBatch spriteBatch;
 
@@ -25,13 +29,11 @@ namespace MsPacMan
 
         Board board;
 
-        List<Ghosts> ghostList;
-
-        List<Score> scoreList;
-
         public int boardWidth, boardHeight;
 
-        public Player player;
+        public const int outputTileSize = 25;       
+
+        public GraphicsDeviceManager graphics;
 
         #endregion
 
@@ -77,6 +79,7 @@ namespace MsPacMan
             }
         }
 
+        public Player player => p;
         //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch
         {
@@ -92,6 +95,8 @@ namespace MsPacMan
                 return board;
             }
         }
+
+        public List<Dot> Dots => dotList;
 
         #endregion
 
@@ -251,6 +256,8 @@ namespace MsPacMan
 
             scoreList = new List<Score>();
 
+            dotList = new List<Dot>();
+
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             
@@ -281,7 +288,7 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?' || filePosition == '.' || filePosition == ' ' || filePosition == 'L' || filePosition == 'M')
+                    else if(filePosition == '?' || filePosition == '.' || filePosition == 'L' || filePosition == 'M')
                     {
                         Score score = new Score(this, j, i, filePosition);
 
@@ -298,11 +305,19 @@ namespace MsPacMan
                     }
                     else if (filePosition == 'S')
                     {
-                        player = new Player(this, j, i);
+                        p = new Player(this, j, i);
                         
                         Components.Add(player);
                         
                         Board.board[j, i] = ' '; 
+                    }
+                    else if(filePosition == ' ')
+                    {
+                        Dot dot = new Dot(this, j, i);
+
+                        dotList.Add(dot);
+
+                        Components.Add(dot);
                     }
                     else
                     {

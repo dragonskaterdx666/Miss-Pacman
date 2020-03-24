@@ -69,18 +69,6 @@ namespace MsPacMan
 
         #region Methods
 
-        public override void Update(GameTime gameTime)
-        {
-            Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
-            Rectangle eRect = new Rectangle(position, new Point(Game1.outputTileSize));
-
-            if (Dots.Intersects(pRect))
-            {
-                Dots.X = EmptySpace.X;
-                Dots.Y = EmptySpace.Y;
-                numberOfPoints++;
-            }
-        }
 
         public override void Draw(GameTime gameTime)
         {
@@ -95,9 +83,6 @@ namespace MsPacMan
                     break;
                 case '?':
                     spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
-                    break;
-                case ' ':
-                    spriteBatch.Draw(texture, outRect, Dots, Color.White);
                     break;
                 case 'L':
                     spriteBatch.Draw(texture: game1.SpriteSheetAssets, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);

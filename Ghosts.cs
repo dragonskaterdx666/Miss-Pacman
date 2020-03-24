@@ -64,9 +64,9 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
             Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
-            Rectangle eRect = new Rectangle(position, new Point(Game1.outputTileSize));
+            Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
-            if (eRect.Intersects(pRect)) { game1.player.Die(); }
+            if (EnemyArea.Intersects(pRect)) { game1.player.Die(); }
 
 
             //if (position == targetPosition)

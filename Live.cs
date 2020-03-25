@@ -65,7 +65,7 @@ namespace MsPacMan
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture: game1.SpriteSheet, outRect, new Rectangle(8 * 16, 2 * 16, 16, 16), Color.White);
+            spriteBatch.Draw(texture: game1.SpriteSheet, outRect, new Rectangle(10 * 16, 2 * 16, 16, 16), Color.White);
 
             spriteBatch.End();
         }

@@ -19,7 +19,7 @@ namespace MsPacMan
 
         private List<Dot> dotList;
 
-        private List<Ghosts> ghostList;
+        private List<Ghost> ghostList;
 
         private List<Score> scoreList;
 
@@ -30,6 +30,8 @@ namespace MsPacMan
         private SpriteBatch spriteBatch;
 
         private Board board;
+
+        public static Random rnd = new Random();
 
         public int boardWidth, boardHeight;
 
@@ -53,16 +55,18 @@ namespace MsPacMan
 
         //Properties referring to the assets used on the game
         public Texture2D SpriteSheet => spriteSheet;
-        public Texture2D SpriteSheetPlayer => spriteSheetPlayer;
-        
+        public Texture2D SpriteSheetPlayer => spriteSheetPlayer;        
         public Texture2D SpriteSheetMap => spriteSheetMap;
 
-        public Player player => p;
         //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch => spriteBatch;
+
+        public Player player => p;
         public Board Board => board;
         public List<Dot> Dots => dotList;
         public List<Score> Scores => scoreList;
+
+        public List<Ghost> Ghosts => ghostList;
 
         public List<Live> Lives => liveList;
 
@@ -246,8 +250,10 @@ namespace MsPacMan
             boardWidth = file[0].Length;
 
             boardHeight = file.Length;
+
+            //initializing lists
             
-            ghostList = new List<Ghosts>();
+            ghostList = new List<Ghost>();
 
             scoreList = new List<Score>();
 
@@ -274,9 +280,9 @@ namespace MsPacMan
                 {
                     filePosition = file[i][j];
 
-                    if (filePosition == '1' || filePosition == '2' || filePosition == '3')
+                    if (filePosition == '1' || filePosition == '2' || filePosition == '3' || filePosition == '+')
                     {
-                        Ghosts ghost = new Ghosts(this, j, i, filePosition);
+                        Ghost ghost = new Ghost(this, j, i, filePosition);
 
                         ghostList.Add(ghost);
                         
@@ -289,18 +295,16 @@ namespace MsPacMan
                     {
                         Score score = new Score(this, j, i, filePosition);
 
-                        if(filePosition == ' ')
-                        {
-                            score.numberOfPoints++;
+                        scoreList.Add(score);
 
-                        } 
+                        Components.Add(score);
 
                     }
                     else if (filePosition == 'S')
                     {
                         p = new Player(this, j, i);
-                        
-                        Components.Add(player);
+
+                        Components.Add(p);
                         
                         Board.board[j, i] = ' '; 
                     }
@@ -315,7 +319,7 @@ namespace MsPacMan
                     else if(filePosition == 'L')
                     {
                         Live live = new Live(this, j, i);
-
+                        
                         liveList.Add(live);
 
                         Components.Add(live);

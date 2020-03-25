@@ -45,7 +45,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Dot.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Ghosts.cs" />
+    <Compile Include="Ghost.cs" />
     <Compile Include="Live.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

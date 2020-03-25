@@ -25,24 +25,16 @@ namespace MsPacMan
 
         char pointsType;
 
-        public int numberOfPoints;
-
-        public Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
-
-        public Rectangle Upgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
-
-        public Rectangle Dots = new Rectangle(16 * 35, 4 * 35, 35, 35);
-
-        public Rectangle EmptySpace = new Rectangle(0, 1 * 35, 35, 35);
+        public int numberOfPoints = 0;
 
         #endregion
 
         #region Constructor
         public Score(Game1 game, int x, int y, char pointsType) : base(game)
         {
-            this.texture = game.SpriteSheetMap;
+            texture = game.SpriteSheetMap;
 
-            this.spriteBatch = game.SpriteBatch;
+            spriteBatch = game.SpriteBatch;
 
             position.Y = y;
 
@@ -62,12 +54,16 @@ namespace MsPacMan
         #endregion
 
         #region Methods
-
-
         public override void Draw(GameTime gameTime)
         {
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
+            
+            Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
 
+            Rectangle Upgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
+
+            Rectangle EmptySpace = new Rectangle(0, 1 * 35, 35, 35);
+            
             spriteBatch.Begin();
 
             switch (pointsType)

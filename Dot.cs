@@ -13,15 +13,15 @@ namespace MsPacMan
     {
         #region variables
 
-        Texture2D texture;
+        private Texture2D texture;
 
-        SpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
 
-        Game1 game1;
+        private Game1 game1;
 
         private Board board;
 
-        Point position;
+        private Point position;
 
         Score score;
 
@@ -49,7 +49,7 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
-            Rectangle playerPosition = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
+            Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
             
             Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 

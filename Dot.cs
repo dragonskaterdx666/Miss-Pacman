@@ -49,7 +49,7 @@ namespace MsPacMan
 
         #region Properties
 
-        public Player currentScore => playerScore;
+        public Player Score => playerScore;
 
         #endregion
 
@@ -67,9 +67,7 @@ namespace MsPacMan
 
                 game1.Dots.Remove(this);
 
-                //currentScore.numberOfPoints += dotValue;
-
-                //game1.Scores.Add(currentScore);
+                playerScore.Score += dotValue;
 
             }
         }

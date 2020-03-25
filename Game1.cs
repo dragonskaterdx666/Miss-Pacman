@@ -310,6 +310,8 @@ namespace MsPacMan
                     }
                     else if(filePosition == ' ')
                     {
+                        Score score = new Score(this, j, i, filePosition);
+
                         Dot dot = new Dot(this, j, i);
 
                         dotList.Add(dot);

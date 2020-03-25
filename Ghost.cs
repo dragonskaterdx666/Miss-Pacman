@@ -77,9 +77,19 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.player.position, new Point(Game1.outputTileSize));
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
-            if (EnemyArea.Intersects(pRect)) 
-            { 
-                game1.player.Die(); 
+            if (EnemyArea.Intersects(pRect))
+            {
+                Pellet.GetPelletStatus();
+
+                if (Pellet.powerPellet == true)
+                {
+                    Die();
+                }
+                else
+                {
+                    game1.player.Die();
+                }
+                
             }
 
             if (position == targetPosition)
@@ -89,7 +99,8 @@ namespace MsPacMan
 
                 targetPosition +=
                     orientation == Orientation.Horizontal
-                    ? new Point(direction * Game1.outputTileSize, 0) : new Point(0, direction * Game1.outputTileSize);
+                    ? new Point(direction * Game1.outputTileSize, 0) :
+                    new Point(0, direction * Game1.outputTileSize);
 
                 if (game1.Board.board[targetPosition.X / Game1.outputTileSize, targetPosition.Y / Game1.outputTileSize] == ' ')
                     patrolPosition++;
@@ -140,7 +151,8 @@ namespace MsPacMan
 
         public void Die()
         {
-            enemyLives--;
+
+            enemyLives--; // tornar propriedade da lista
 
             game1.Ghosts.Remove(this);
 

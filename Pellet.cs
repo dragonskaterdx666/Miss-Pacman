@@ -25,6 +25,8 @@ namespace MsPacMan
 
         Score score;
 
+        public static bool powerPellet = false;
+
         #endregion
 
         #region constructor
@@ -45,12 +47,15 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
+
             Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
 
             Rectangle PelletArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(20));
 
+
             if (PelletArea.Intersects(playerPosition))
             {
+                powerPellet = true;
                 game1.Components.Remove(this);
 
                 game1.Pellets.Remove(this);
@@ -60,8 +65,18 @@ namespace MsPacMan
             }
         }
 
+        public static void GetPelletStatus()
+        {
+            if (powerPellet == true)
+            {
+                powerPellet = true;
+            }
+            
+            
+        }
         public override void Draw(GameTime gameTime)
         {
+
             spriteBatch.Begin();
 
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);

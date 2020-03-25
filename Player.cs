@@ -76,7 +76,7 @@ namespace MsPacMan
 
         #region Properties
 
-        public int Score => playerScore;
+        //public int Score => playerScore;
 
         #endregion
 

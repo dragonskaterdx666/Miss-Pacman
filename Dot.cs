@@ -67,9 +67,9 @@ namespace MsPacMan
 
                 game1.Dots.Remove(this);
 
-                currentScore.numberOfPoints += dotValue;
+                //currentScore.numberOfPoints += dotValue;
 
-                game1.Scores.Add(currentScore);
+                //game1.Scores.Add(currentScore);
 
             }
         }

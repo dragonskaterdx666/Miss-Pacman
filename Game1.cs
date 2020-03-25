@@ -19,6 +19,8 @@ namespace MsPacMan
 
         private List<Dot> dotList;
 
+        private List<Pellet> pelletList;
+
         private List<Ghost> ghostList;
 
         private List<Score> scoreList;
@@ -65,6 +67,8 @@ namespace MsPacMan
         public Board Board => board;
         public List<Dot> Dots => dotList;
         public List<Score> Scores => scoreList;
+
+        public List<Pellet> Pellets => pelletList;
 
         public List<Ghost> Ghosts => ghostList;
 
@@ -259,6 +263,8 @@ namespace MsPacMan
 
             dotList = new List<Dot>();
 
+            pelletList = new List<Pellet>();
+
             liveList = new List<Live>();
 
             //board takes in as size arguments the board size and the board width
@@ -298,6 +304,17 @@ namespace MsPacMan
                         scoreList.Add(score);
 
                         Components.Add(score);
+
+                        if (filePosition == '?')
+                        {
+                            Pellet pellet = new Pellet(this, j, i);
+
+                            pelletList.Add(pellet);
+
+                            Components.Add(pellet);
+                        }
+
+                        
 
                     }
                     else if (filePosition == 'S')

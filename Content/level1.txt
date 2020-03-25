@@ -1,29 +1,29 @@
-﻿PAAAAAAAAAAAAAXPAAAAAAAAAAAAAX
-R?            VR             V
-R 0TTB 0TTTTB VR 0TTTTB 0TTB V
-R V..R V....R VR V....R?V..R V
-R HAAD HAAAAD HD HAAAAD HAAD V
-R                            V
-QTTTB 0B 0TTTB  0TTTB 0B 0TTTY
-....R VR HAAAD  HAAAD  VR V....
-....R VR..............VR V....
-....R VR.5666O..Ç6664.VR V....
-AAAAD HD.7..........8.HD HAAAA
-.       .7#+#2##3#1#8.     ? .
-.  ?    .7##########8.       .
-TTTTB 0B.9NNNNNNNNNN-.0B 0TTTT
-....R VR..............VR V....
-....R VR  0TTTTTTTTB  VR V....
-....R HD  HAAAXPAAAD  HD V....
-PAAAD         VR         HAAAX
-R     0TTTTB  VR  0TTTTB     V
-R     HAAAAD  HD  HAAAAD     V
-R              S        *    V
-QTTTB 0B  0TTTTTTTTB  0B 0TTTY
-PAAAD VR  HAAAXPAAAD  VR HAAAX
-R     VR      VR      VR     V
-R 0TTTYQTTTB  VR  0TTTYQTTTB V
-R HAAAAAAAAD  HD  HAAAAAAAAD V
-R?                           V
-QTTTTTTTTTTTTTTTTTTTTTTTTTTTTY
-........L.L.L..........M......
+﻿.PAAAAAAAAAAAAAXPAAAAAAAAAAAAAX.
+.R?            VR             V.
+.R 0TTB 0TTTTB VR 0TTTTB 0TTB V.
+.R V..R V....R VR V....R?V..R V.
+.R HAAD HAAAAD HD HAAAAD HAAD V.
+.R                            V.
+.QTTTB 0B 0TTTB  0TTTB 0B 0TTTY.
+.....R VR HAAAD  HAAAD VR V.....
+.....R VR..............VR V.....
+.....R VR.5666O..Ç6664.VR V.....
+.PAAAD HD.7..........8.HD HAAAX.
+.R       .7#+#2##3#1#8.     ? V.
+.R  ?    .7##########8.       V.
+.QTTTB 0B.9NNNNNNNNNN-.0B 0TTTY.
+.....R VR..............VR V.....
+.....R VR  0TTTTTTTTB  VR V.....
+.PAAAD HD  HAAAXPAAAD  HD HAAAX.
+.R             VR             V.
+.R 0TB 0TTTTB  VR  0TTTTB 0TB V.
+.R HAD HAAAAD  HD  HAAAAD HAD V.
+.R              S        *    V.
+.QTTTTB 0B 0TTTTTTTTB 0B 0TTTTY.
+.PAAAAD VR HAAAXPAAAD VR HAAAAX.
+.R      VR     VR     VR      V.
+.R 0TTTTYQTTB  VR  0TTYQTTTTB V.
+.R HAAAAAAAAD  HD  HAAAAAAAAD V.
+.R?                           V.
+.QTTTTTTTTTTTTTTTTTTTTTTTTTTTTY.
+.........L.L.L..........M.......

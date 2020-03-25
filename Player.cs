@@ -148,7 +148,8 @@ namespace MsPacMan
                     if ((board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] != ' ') && (board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] != '.') && (board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] != '?'))
+                        targetPosition.Y / Game1.outputTileSize] != '?') && (board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] != '*'))
                     {
                         targetPosition = position;
                     }

@@ -19,8 +19,6 @@ namespace MsPacMan
 
         Game1 game1;
 
-        private Board board;
-
         Point position;
 
         public Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
@@ -45,7 +43,6 @@ namespace MsPacMan
 
         #region Properties
 
-        public Board Board => board;
 
         #endregion
 

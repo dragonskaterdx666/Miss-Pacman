@@ -326,7 +326,6 @@ namespace MsPacMan
                     }
                     else if(filePosition == ' ')
                     {
-
                         Dot dot = new Dot(this, j, i);
 
                         dotList.Add(dot);
@@ -358,6 +357,14 @@ namespace MsPacMan
                             cherriesList.Add(cherry);
 
                             Components.Add(cherry);
+                        }
+                        else
+                        {
+                            Dot dot = new Dot(this, j, i);
+
+                            dotList.Add(dot);
+
+                            Components.Add(dot);
                         }
                     }
                     else

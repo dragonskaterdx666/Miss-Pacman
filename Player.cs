@@ -221,11 +221,12 @@ namespace MsPacMan
             int totalDotPoints = amountOfDots * 10;
 
             if(Score == totalDotPoints)
-            {
                 allDotsCollected = true;
-            }
-
-            return true;
+            
+            else
+                allDotsCollected = false;
+            
+            return allDotsCollected;
         }
         #endregion
     }

@@ -52,14 +52,15 @@ namespace MsPacMan
         {
             Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
-            Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
+            Rectangle CherryArea = new Rectangle((position.ToVector2() * Game1.outputTileSize).ToPoint(), new Point(11));
 
-            if (DotArea.Intersects(playerPosition))
+            if (CherryArea.Intersects(playerPosition))
             {
+                game1.Cherries.Remove(this);
 
+                game1.Components.Remove(this);
 
                 game1.Player.Score += cherryValue;
-
             }
         }
 

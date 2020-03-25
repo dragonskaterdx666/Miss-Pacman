@@ -22,8 +22,8 @@ namespace MsPacMan
         private Board board;
 
         private Point position;
-        
-        private Score currentScore;
+
+        private Player playerScore;
 
         int dotValue = 10;        
 
@@ -49,7 +49,7 @@ namespace MsPacMan
 
         #region Properties
 
-        public Score Score => currentScore;
+        public Player currentScore => playerScore;
 
         #endregion
 

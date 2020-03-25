@@ -315,16 +315,13 @@ namespace MsPacMan
                     {
                         Score score = new Score(this, j, i, filePosition);
 
-<<<<<<< Updated upstream
+
                         Pellet pellet = new Pellet(this, j, i);
 
                         pelletList.Add(pellet);
-=======
-                            Components.Add(pellet);
-                        }                       
->>>>>>> Stashed changes
 
                         Components.Add(pellet);
+
                     }
                     
                     else if (filePosition == 'S')

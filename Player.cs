@@ -19,8 +19,6 @@ namespace MsPacMan
         private SpriteBatch spriteBatch;
         
         private Board board;
-
-        private int playerScore = 0;
         
         private Game1 game1;
 

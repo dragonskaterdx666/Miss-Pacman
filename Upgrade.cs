@@ -23,8 +23,6 @@ namespace MsPacMan
 
         private Point position;
 
-        Score score;
-
         public Rectangle SourceUpgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
 
         #endregion
@@ -53,7 +51,7 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
-            Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
+            Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
             Rectangle UpgradeArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(15));
 
@@ -62,8 +60,6 @@ namespace MsPacMan
                 game1.Components.Remove(this);
 
                 game1.Upgrades.Remove(this);
-
-                game1.Scores.Add(score);
 
             }
         }

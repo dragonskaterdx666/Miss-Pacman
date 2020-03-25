@@ -71,10 +71,7 @@ namespace MsPacMan
                 case '.':
                     spriteBatch.Draw(texture, outRect, EmptySpace, Color.White);
                     break;
-                
-                case 'M':
-                    spriteBatch.Draw(texture: game1.SpriteSheet, outRect, Upgrade, Color.White);
-                    break;
+
             }
 
             spriteBatch.End();

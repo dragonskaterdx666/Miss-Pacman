@@ -23,8 +23,6 @@ namespace MsPacMan
 
         Point position;
 
-        Score score;
-
         public Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
 
         #endregion

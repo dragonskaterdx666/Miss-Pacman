@@ -23,8 +23,6 @@ namespace MsPacMan
 
         private Point position;
 
-        Score score;
-
         public static bool powerPellet = false;
 
         #endregion
@@ -48,7 +46,7 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
 
-            Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
+            Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
             Rectangle PelletArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(20));
 
@@ -59,8 +57,6 @@ namespace MsPacMan
                 game1.Components.Remove(this);
 
                 game1.Pellets.Remove(this);
-
-                game1.Scores.Add(score);
 
             }
         }

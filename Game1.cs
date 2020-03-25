@@ -23,8 +23,6 @@ namespace MsPacMan
 
         private List<Ghost> ghostList;
 
-        private List<Score> scoreList;
-
         private List<Live> liveList;
 
         private List<Upgrade> upgradeList;
@@ -65,12 +63,11 @@ namespace MsPacMan
         //property refering to the textures to create the assets
         public SpriteBatch SpriteBatch => spriteBatch;
 
-        public Player player => p;
+        public Player Player => p;
 
         public Board Board => board;
 
         public List<Dot> Dots => dotList;
-        public List<Score> Scores => scoreList;
         public List<Pellet> Pellets => pelletList;
         public List<Ghost> Ghosts => ghostList;
         public List<Live> Lives => liveList;
@@ -234,6 +231,9 @@ namespace MsPacMan
                         case 'Ç':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(19 * 35, 0, 35, 35), color: Color.White);
                             break;
+                        case '.':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 0, 35, 35), Color.White);
+                            break;
                     }
 
                 }
@@ -260,8 +260,6 @@ namespace MsPacMan
             //initializing lists
             
             ghostList = new List<Ghost>();
-
-            scoreList = new List<Score>();
 
             dotList = new List<Dot>();
 
@@ -301,27 +299,14 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '.' || filePosition == 'M')
-                    {
-                        Score score = new Score(this, j, i, filePosition);
-
-                        scoreList.Add(score);
-
-                        Components.Add(score);
-
-                    }
-
                     else if(filePosition == '?')
                     {
-                        Score score = new Score(this, j, i, filePosition);
-
 
                         Pellet pellet = new Pellet(this, j, i);
 
                         pelletList.Add(pellet);
 
                         Components.Add(pellet);
-
                     }
                     
                     else if (filePosition == 'S')
@@ -329,12 +314,13 @@ namespace MsPacMan
                         p = new Player(this, j, i);
 
                         Components.Add(p);
-                        
+
+                        p.Score = 0;
+
                         Board.board[j, i] = ' '; 
                     }
                     else if(filePosition == ' ')
                     {
-                        Score score = new Score(this, j, i, filePosition);
 
                         Dot dot = new Dot(this, j, i);
 

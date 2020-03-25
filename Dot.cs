@@ -19,15 +19,9 @@ namespace MsPacMan
 
         private Game1 game1;
 
-        private Board board;
-
         private Point position;
 
-        private Player playerScore;
-
         int dotValue = 10;        
-
-        public Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
 
         #endregion
 
@@ -49,15 +43,13 @@ namespace MsPacMan
 
         #region Properties
 
-        public Player Score => playerScore;
-
         #endregion
 
         #region Methods
 
         public override void Update(GameTime gameTime)
         {
-            Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
+            Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
             
             Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 
@@ -67,13 +59,19 @@ namespace MsPacMan
 
                 game1.Dots.Remove(this);
 
-                playerScore.Score += dotValue;
+                game1.Player.Score += dotValue;
 
             }
         }
 
+        /// <summary>
+        /// Draws the dots in game
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
+            
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();

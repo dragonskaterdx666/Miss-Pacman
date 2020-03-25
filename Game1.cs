@@ -297,7 +297,7 @@ namespace MsPacMan
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?' || filePosition == '.' || filePosition == 'M')
+                    else if(filePosition == '.' || filePosition == 'M')
                     {
                         Score score = new Score(this, j, i, filePosition);
 
@@ -305,18 +305,19 @@ namespace MsPacMan
 
                         Components.Add(score);
 
-                        if (filePosition == '?')
-                        {
-                            Pellet pellet = new Pellet(this, j, i);
-
-                            pelletList.Add(pellet);
-
-                            Components.Add(pellet);
-                        }
-
-                        
-
                     }
+
+                    else if(filePosition == '?')
+                    {
+                        Score score = new Score(this, j, i, filePosition);
+
+                        Pellet pellet = new Pellet(this, j, i);
+
+                        pelletList.Add(pellet);
+
+                        Components.Add(pellet);
+                    }
+                    
                     else if (filePosition == 'S')
                     {
                         p = new Player(this, j, i);

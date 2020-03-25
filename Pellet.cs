@@ -60,7 +60,18 @@ namespace MsPacMan
             }
         }
 
-        
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+
+            Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
+
+            Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
+            spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
+            
+
+            spriteBatch.End();
+        }
         #endregion
 
     }

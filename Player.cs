@@ -10,13 +10,20 @@ namespace MsPacMan
 {
     public class Player : DrawableGameComponent
     {
-        enum Direction
-        {
-            Up, Down, Right, Left
-        }
+        enum Direction { Up, Down, Right, Left }
 
         #region Variables
+
+        private Texture2D texture;
         
+        private SpriteBatch spriteBatch;
+        
+        private Board board;
+
+        private int playerScore = 0;
+        
+        private Game1 game1;
+
         public Point position, targetPosition, origin;
        
         public int lives = 3;
@@ -28,20 +35,9 @@ namespace MsPacMan
         int frame = 0;
 
         float speed = 2.0f;
-        
-        Texture2D texture;
-        
-        SpriteFont arial;
-        
-        SpriteBatch spriteBatch;
-        
-        Board board;
-        
-        Game1 game1;
-        
-        Score score;
 
-        
+        SpriteFont arial;
+          
         #endregion
 
         #region Constructors
@@ -80,11 +76,13 @@ namespace MsPacMan
         }
         #endregion
 
-        
+        #region Properties
+
+        public int Score => playerScore;
+
+        #endregion
 
         #region Methods
-
-
         public override void Update(GameTime gameTime)
         {
             if (targetPosition == position)

@@ -27,7 +27,9 @@ namespace MsPacMan
 
         private List<Live> liveList;
 
-        private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap, spriteSheetAssets;
+        private List<Upgrade> upgradeList;
+
+        private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap;
 
         private SpriteBatch spriteBatch;
 
@@ -64,15 +66,15 @@ namespace MsPacMan
         public SpriteBatch SpriteBatch => spriteBatch;
 
         public Player player => p;
+
         public Board Board => board;
+
         public List<Dot> Dots => dotList;
         public List<Score> Scores => scoreList;
-
         public List<Pellet> Pellets => pelletList;
-
         public List<Ghost> Ghosts => ghostList;
-
         public List<Live> Lives => liveList;
+        public List<Upgrade> Upgrades => upgradeList;
 
         #endregion
 
@@ -245,7 +247,7 @@ namespace MsPacMan
         public void LoadLevel()
         {
             //this reads the file from content
-            string[] file = File.ReadAllLines(Content.RootDirectory + "/map.txt");
+            string[] file = File.ReadAllLines(Content.RootDirectory + "/level1.txt");
 
             int y, x, i, j;
 
@@ -266,6 +268,8 @@ namespace MsPacMan
             pelletList = new List<Pellet>();
 
             liveList = new List<Live>();
+
+            upgradeList = new List<Upgrade>();
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
@@ -311,9 +315,14 @@ namespace MsPacMan
                     {
                         Score score = new Score(this, j, i, filePosition);
 
+<<<<<<< Updated upstream
                         Pellet pellet = new Pellet(this, j, i);
 
                         pelletList.Add(pellet);
+=======
+                            Components.Add(pellet);
+                        }                       
+>>>>>>> Stashed changes
 
                         Components.Add(pellet);
                     }
@@ -343,6 +352,14 @@ namespace MsPacMan
                         liveList.Add(live);
 
                         Components.Add(live);
+                    }
+                    else if(filePosition == 'M')
+                    {
+                        Upgrade upgrade = new Upgrade(this, j, i);
+
+                        upgradeList.Add(upgrade);
+
+                        Components.Add(upgrade);
                     }
                     else
                     {

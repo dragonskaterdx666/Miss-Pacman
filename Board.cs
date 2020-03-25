@@ -25,5 +25,6 @@ namespace MsPacMan
             board = new char[width, height];
         }
         #endregion
+
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Dot: DrawableGameComponent
+    public class Upgrade : DrawableGameComponent
     {
         #region variables
 
@@ -22,17 +22,15 @@ namespace MsPacMan
         private Board board;
 
         private Point position;
-        
-        private Score currentScore;
 
-        int dotValue = 10;        
+        Score score;
 
-        public Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
+        public Rectangle SourceUpgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
 
         #endregion
 
         #region Constructor
-        public Dot(Game1 game,int x, int y): base(game)
+        public Upgrade(Game1 game, int x, int y) : base(game)
         {
             position.X = x;
 
@@ -42,14 +40,12 @@ namespace MsPacMan
 
             spriteBatch = game.SpriteBatch;
 
-            texture = game.SpriteSheetMap;
+            texture = game.SpriteSheet;
 
         }
         #endregion
 
         #region Properties
-
-        public Score Score => currentScore;
 
         #endregion
 
@@ -58,18 +54,16 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
             Rectangle playerPosition = new Rectangle(game1.player.position, new Point(16));
-            
-            Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 
-            if (DotArea.Intersects(playerPosition))
+            Rectangle UpgradeArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(15));
+
+            if (UpgradeArea.Intersects(playerPosition))
             {
                 game1.Components.Remove(this);
 
-                game1.Dots.Remove(this);
+                game1.Upgrades.Remove(this);
 
-                currentScore.numberOfPoints += dotValue;
-
-                game1.Scores.Add(currentScore);
+                game1.Scores.Add(score);
 
             }
         }
@@ -80,10 +74,11 @@ namespace MsPacMan
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture, outRect, SourceDots, Color.White);
+            spriteBatch.Draw(texture, outRect, SourceUpgrade, Color.White);
 
             spriteBatch.End();
         }
         #endregion
+
     }
 }

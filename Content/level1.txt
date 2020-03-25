@@ -22,7 +22,7 @@ TTTTB 0B.9NNNNNNNNNN-.0B 0TTTT
 ....R         VR         V....
 PAAAD 0TTTTB  VR  0TTTTB HAAAX
 R     HAAAAD  HD  HAAAAD     V
-R              S             V
+R              S        *    V
 R  0TTTB  0TTTTTTTTB  0TTTB  V
 R  HAAXR  V........R  VPAAD  V
 R     HD  HAAAAAAAAD  HD     V

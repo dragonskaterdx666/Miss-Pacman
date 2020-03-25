@@ -23,6 +23,8 @@ namespace MsPacMan
         private Game1 game1;
 
         public Point position, targetPosition, origin;
+
+        public bool allDotsCollected = false;
        
         public int lives = 3;
         
@@ -210,6 +212,20 @@ namespace MsPacMan
                     gameComponent.Enabled = false;
                 }
             }
+        }
+
+        public bool CollectedAllDots()
+        {
+            int amountOfDots = game1.Dots.Count;
+
+            int totalDotPoints = amountOfDots * 10;
+
+            if(Score == totalDotPoints)
+            {
+                allDotsCollected = true;
+            }
+
+            return true;
         }
         #endregion
     }

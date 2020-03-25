@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Upgrade : DrawableGameComponent
+    public class Cherry: DrawableGameComponent
     {
+
         #region variables
 
         private Texture2D texture;
@@ -19,16 +20,14 @@ namespace MsPacMan
 
         private Game1 game1;
 
-        private Board board;
-
         private Point position;
 
-        public Rectangle SourceUpgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
+        int cherryValue = 100;
 
         #endregion
 
         #region Constructor
-        public Upgrade(Game1 game, int x, int y) : base(game)
+        public Cherry(Game1 game, int x, int y) : base(game)
         {
             position.X = x;
 
@@ -53,28 +52,33 @@ namespace MsPacMan
         {
             Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
-            Rectangle UpgradeArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(15));
+            Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 
-            if (UpgradeArea.Intersects(playerPosition))
+            if (DotArea.Intersects(playerPosition))
             {
-                game1.Components.Remove(this);
 
-                game1.Upgrades.Remove(this);
+
+                game1.Player.Score += cherryValue;
 
             }
         }
 
+        /// <summary>
+        /// Draws the dots in game
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            Rectangle sourceCherry = new Rectangle(0, 7 * 16, 16, 15);
+
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture, outRect, SourceUpgrade, Color.White);
+            spriteBatch.Draw(texture, outRect, sourceCherry, Color.White);
 
             spriteBatch.End();
         }
         #endregion
-
     }
 }

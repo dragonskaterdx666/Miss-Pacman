@@ -27,6 +27,8 @@ namespace MsPacMan
 
         private List<Upgrade> upgradeList;
 
+        private List<Cherry> cherriesList;
+
         private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap;
 
         private SpriteBatch spriteBatch;
@@ -72,6 +74,7 @@ namespace MsPacMan
         public List<Ghost> Ghosts => ghostList;
         public List<Live> Lives => liveList;
         public List<Upgrade> Upgrades => upgradeList;
+        public List<Cherry> Cherries => cherriesList;
 
         #endregion
 
@@ -269,6 +272,8 @@ namespace MsPacMan
 
             upgradeList = new List<Upgrade>();
 
+            cherriesList = new List<Cherry>();
+
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             
@@ -343,6 +348,17 @@ namespace MsPacMan
                         upgradeList.Add(upgrade);
 
                         Components.Add(upgrade);
+                    }
+                    else if(filePosition == '*')
+                    {
+                        if(Player.CollectedAllDots() == true)
+                        {
+                            Cherry cherry = new Cherry(this, j, i);
+
+                            cherriesList.Add(cherry);
+
+                            Components.Add(cherry);
+                        }
                     }
                     else
                     {

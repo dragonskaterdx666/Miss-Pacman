@@ -21,7 +21,7 @@ namespace MsPacMan
 
         private Point position;
 
-        int dotValue = 10;        
+        public int dotValue = 10;        
 
         #endregion
 

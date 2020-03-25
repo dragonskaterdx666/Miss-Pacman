@@ -13,6 +13,8 @@ namespace MsPacMan
     {
         enum Orientation { Horizontal, Vertical }
 
+        enum GhostTypes { Blue, Orange, Purple, Red }
+
         #region variables
 
         private Texture2D texture;
@@ -99,11 +101,13 @@ namespace MsPacMan
 
                 targetPosition +=
                     orientation == Orientation.Horizontal
-                    ? new Point(direction * Game1.outputTileSize, 0) :
-                    new Point(0, direction * Game1.outputTileSize);
+                    ? new Point(direction * Game1.outputTileSize, 0) : new Point(0, direction * Game1.outputTileSize);
 
-                if (game1.Board.board[targetPosition.X / Game1.outputTileSize, targetPosition.Y / Game1.outputTileSize] == ' ')
+                if (game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                    targetPosition.Y / Game1.outputTileSize] == '#')
+                {
                     patrolPosition++;
+                }
                 else
                 {
                     targetPosition = position;
@@ -114,9 +118,7 @@ namespace MsPacMan
             else
             {
                 Vector2 dir = (targetPosition - position).ToVector2();
-
                 dir.Normalize();
-
                 position += dir.ToPoint();
             }
         }
@@ -126,7 +128,9 @@ namespace MsPacMan
         {
             
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
-            
+
+            GhostTypes ghostTypes;
+
             spriteBatch.Begin();
 
             switch (ghostType)
@@ -134,15 +138,19 @@ namespace MsPacMan
                 //allows for different types of ghosts
                 case '1':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0,2 * 16, 16, 15), Color.White);
+                    ghostTypes = GhostTypes.Blue;
                     break;
                 case '2':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0,3 * 16, 16, 15), Color.White);
+                    ghostTypes = GhostTypes.Orange;
                     break;
                 case '3':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0,4 * 16, 16, 15), Color.White);
+                    ghostTypes = GhostTypes.Purple;
                     break;
                 case '+':
                     spriteBatch.Draw(texture, outRect, new Rectangle(0, 0, 16, 15), Color.White);
+                    ghostTypes = GhostTypes.Red;
                     break;
             }
 

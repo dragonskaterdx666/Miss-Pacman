@@ -34,7 +34,7 @@ namespace MsPacMan
 
             spriteBatch = game.SpriteBatch;
 
-            texture = game.SpriteSheet;
+            texture = game.SpriteSheetPlayer;
 
         }
         #endregion
@@ -54,13 +54,13 @@ namespace MsPacMan
 
         public override void Draw(GameTime gameTime)
         {
-            Rectangle SourceLives = new Rectangle(10 * 16, 2 * 16, 16, 16);
+            Rectangle SourceLives = new Rectangle(0, 1 * 32, 32, 32);
 
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture: game1.SpriteSheet, outRect, SourceLives, Color.White);
+            spriteBatch.Draw(texture, outRect, SourceLives, Color.White);
 
             spriteBatch.End();
         }

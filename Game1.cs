@@ -19,6 +19,14 @@ namespace MsPacMan
 
         private Live l;
 
+        private Dot d;
+
+        private Cherry c;
+
+        private Upgrade u;
+
+        private Pellet pellet;
+
         private List<Dot> dotList;
 
         private List<Pellet> pelletList;
@@ -70,6 +78,14 @@ namespace MsPacMan
         public Player Player => p;
 
         public Live Live => l;
+
+        public Dot Dot => d;
+
+        public Cherry Cherry => c;
+
+        public Upgrade Upgrade => u;
+
+        public Pellet Pellet => pellet;
 
         public Board Board => board;
 
@@ -241,7 +257,7 @@ namespace MsPacMan
                         case '.':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 0, 35, 35), Color.White);
                             break;
-                        //SPELLING HIGHSCORE
+                        //SPELLING HIGHSCORE, SCORE AND LIVES USING THE SPRITESHEET
                         case '%':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 2 * 35, 35, 35), Color.White);
                             break;
@@ -265,6 +281,12 @@ namespace MsPacMan
                             break;
                         case '~':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(7 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '»':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(8 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '«':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(9 * 35, 2 * 35, 35, 35), Color.White);
                             break;
 
                     }
@@ -336,8 +358,7 @@ namespace MsPacMan
                     }
                     else if(filePosition == '?')
                     {
-
-                        Pellet pellet = new Pellet(this, j, i);
+                        pellet = new Pellet(this, j, i);
 
                         pelletList.Add(pellet);
 
@@ -356,11 +377,11 @@ namespace MsPacMan
                     }
                     else if(filePosition == ' ')
                     {
-                        Dot dot = new Dot(this, j, i);
+                        d = new Dot(this, j, i);
 
-                        dotList.Add(dot);
+                        dotList.Add(d);
 
-                        Components.Add(dot);
+                        Components.Add(d);
                     }
                     else if(filePosition == 'L')
                     {
@@ -372,29 +393,29 @@ namespace MsPacMan
                     }
                     else if(filePosition == 'M')
                     {
-                        Upgrade upgrade = new Upgrade(this, j, i);
+                        u = new Upgrade(this, j, i);
 
-                        upgradeList.Add(upgrade);
+                        upgradeList.Add(u);
 
-                        Components.Add(upgrade);
+                        Components.Add(u);
                     }
                     else if(filePosition == '*')
                     {
                         if(Player.CollectedAllDots() == true)
                         {
-                            Cherry cherry = new Cherry(this, j, i);
+                            c = new Cherry(this, j, i);
 
-                            cherriesList.Add(cherry);
+                            cherriesList.Add(c);
 
-                            Components.Add(cherry);
+                            Components.Add(c);
                         }
                         else
                         {
-                            Dot dot = new Dot(this, j, i);
+                            d = new Dot(this, j, i);
 
-                            dotList.Add(dot);
+                            dotList.Add(d);
 
-                            Components.Add(dot);
+                            Components.Add(d);
                         }
                     }
                     else

@@ -249,19 +249,11 @@ namespace MsPacMan
 
         public void Die()
         {
-
-            enemyLives--; // tornar propriedade da lista
+            enemyLives--;
 
             game1.Ghosts.Remove(this);
 
-            if (enemyLives <= 0)
-            {
-
-                foreach (DrawableGameComponent gameComponent in game1.Components)
-                {
-                    gameComponent.Enabled = false;
-                }
-            }
+            game1.Components.Remove(this);
         }
 
         #endregion

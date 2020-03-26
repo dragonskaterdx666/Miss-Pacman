@@ -185,6 +185,7 @@ namespace MsPacMan
 
             spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
+            //prints the score
             spriteBatch.DrawString(minecraft, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
             if (lives <= 0)
@@ -238,6 +239,7 @@ namespace MsPacMan
             return allDotsCollected;
         }
 
+        //counts the score to see if the players gets and extra life
         public void ScoreCount()
         {
             int i;

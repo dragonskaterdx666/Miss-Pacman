@@ -13,6 +13,8 @@ namespace MsPacMan
     {
         enum Orientation { Horizontal, Vertical }
 
+        enum GDirection { Up, Down, Left, Right }
+
         enum GhostTypes { Blue, Orange, Purple, Red }
 
         #region variables
@@ -39,6 +41,18 @@ namespace MsPacMan
         
         int direction = 1;
 
+        Dictionary<GDirection, Vector2> ghostRed;
+
+        Dictionary<GDirection, Vector2> ghostOrange;
+
+        Dictionary<GDirection, Vector2> ghostPurple;
+
+        Dictionary<GDirection, Vector2> ghostBlue;
+
+        GDirection gDirection = GDirection.Up;
+
+        int frame = 0;
+
         #endregion
 
         #region Constructor
@@ -54,7 +68,7 @@ namespace MsPacMan
             
             position.X = x;
 
-            targetPosition = position;
+            targetPosition = position;//+ (new Point(0, -2 * 16));
             
             game1 = game;
             
@@ -63,7 +77,44 @@ namespace MsPacMan
             this.ghostType = ghostType;
 
             patrolSize = 2 + Game1.rnd.Next(4);
+
+            #region ghost sprites
+
+            ghostRed = new Dictionary<GDirection, Vector2>();
+
+            ghostRed[GDirection.Right] = new Vector2(0, 0);
+            ghostRed[GDirection.Left] = new Vector2(2, 0);
+            ghostRed[GDirection.Up] = new Vector2(4, 0);
+            ghostRed[GDirection.Down] = new Vector2(6, 0);
+
+
+            ghostPurple = new Dictionary<GDirection, Vector2>();
+
+            ghostPurple[GDirection.Right] = new Vector2(0, 4);
+            ghostPurple[GDirection.Left] = new Vector2(2, 4);
+            ghostPurple[GDirection.Up] = new Vector2(4, 4);
+            ghostPurple[GDirection.Down] = new Vector2(6, 4);
+
+
+            ghostBlue = new Dictionary<GDirection, Vector2>();
+
+            ghostBlue[GDirection.Right] = new Vector2(0, 2);
+            ghostBlue[GDirection.Left] = new Vector2(2, 2);
+            ghostBlue[GDirection.Up] = new Vector2(4, 2);
+            ghostBlue[GDirection.Down] = new Vector2(6, 2);
+
+
+            ghostOrange = new Dictionary<GDirection, Vector2>();
+
+            ghostOrange[GDirection.Right] = new Vector2(0, 3);
+            ghostOrange[GDirection.Left] = new Vector2(2, 3);
+            ghostOrange[GDirection.Up] = new Vector2(4, 3);
+            ghostOrange[GDirection.Down] = new Vector2(6, 3);
+
+            #endregion
         }
+
+
         #endregion
 
         #region Properties
@@ -103,9 +154,11 @@ namespace MsPacMan
                     orientation == Orientation.Horizontal
                     ? new Point(direction * Game1.outputTileSize, 0) : new Point(0, direction * Game1.outputTileSize);
 
-                if (game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                    targetPosition.Y / Game1.outputTileSize] == '#')
-                {
+                if ((game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == ' ') && (game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == '.') && game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == '?')
+                    {
                     patrolPosition++;
                 }
                 else
@@ -126,33 +179,70 @@ namespace MsPacMan
         //Draws the different types of ghosts
         public override void Draw(GameTime gameTime)
         {
-            
+            #region ghosts
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
+            Rectangle sourceRedRec = new Rectangle(((ghostRed[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+            Rectangle sourcePurpleRec = new Rectangle(((ghostPurple[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+            Rectangle sourceBlueRec = new Rectangle(((ghostBlue[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+            Rectangle sourceOrangeRec = new Rectangle(((ghostOrange[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+            Rectangle sourcePelletRec1 = new Rectangle(8*16, 0, 16, 15);
 
             GhostTypes ghostTypes;
 
             spriteBatch.Begin();
 
-            switch (ghostType)
+            Pellet.GetPelletStatus();
+
+            if (Pellet.powerPellet == false)
             {
-                //allows for different types of ghosts
-                case '1':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0,2 * 16, 16, 15), Color.White);
-                    ghostTypes = GhostTypes.Blue;
-                    break;
-                case '2':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0,3 * 16, 16, 15), Color.White);
-                    ghostTypes = GhostTypes.Orange;
-                    break;
-                case '3':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0,4 * 16, 16, 15), Color.White);
-                    ghostTypes = GhostTypes.Purple;
-                    break;
-                case '+':
-                    spriteBatch.Draw(texture, outRect, new Rectangle(0, 0, 16, 15), Color.White);
-                    ghostTypes = GhostTypes.Red;
-                    break;
+                switch (ghostType)
+                {
+                    //allows for different types of ghosts
+                    case '1':
+                        spriteBatch.Draw(texture, outRect, sourceBlueRec, Color.White);
+                        ghostTypes = GhostTypes.Blue;
+                        break;
+                    case '2':
+                        spriteBatch.Draw(texture, outRect, sourceOrangeRec, Color.White);
+                        ghostTypes = GhostTypes.Orange;
+                        break;
+                    case '3':
+                        spriteBatch.Draw(texture, outRect, sourcePurpleRec, Color.White);
+                        ghostTypes = GhostTypes.Purple;
+                        break;
+                    case '+':
+                        spriteBatch.Draw(texture, outRect, sourceRedRec, Color.White);
+                        ghostTypes = GhostTypes.Red;
+                        break;
+                }
             }
+            else
+            {
+                switch (ghostType)
+                {
+                    //allows for different types of ghosts
+                    case '1':
+                        spriteBatch.Draw(texture, outRect, sourcePelletRec1, Color.White);
+                        ghostTypes = GhostTypes.Blue;
+                        break;
+                    case '2':
+                        spriteBatch.Draw(texture, outRect, sourcePelletRec1, Color.White);
+                        ghostTypes = GhostTypes.Orange;
+                        break;
+                    case '3':
+                        spriteBatch.Draw(texture, outRect, sourcePelletRec1, Color.White);
+                        ghostTypes = GhostTypes.Purple;
+                        break;
+                    case '+':
+                        spriteBatch.Draw(texture, outRect, sourcePelletRec1, Color.White);
+                        ghostTypes = GhostTypes.Red;
+                        break;
+
+                        #endregion
+                }
+            }
+
+           
 
             spriteBatch.End();
         }

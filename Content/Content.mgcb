@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin arial.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:arial.spritefont
-
 #begin mappa.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -31,6 +24,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mappa.png
+
+#begin minecraft.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:minecraft.spritefont
 
 #begin sprites.png
 /importer:TextureImporter

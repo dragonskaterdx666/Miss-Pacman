@@ -61,6 +61,8 @@ namespace MsPacMan
 
                 game1.Player.Score += dotValue;
 
+                game1.Player.ScoreCount();
+
             }
         }
 

@@ -114,6 +114,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="Content\minecraft.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\level1.txt">

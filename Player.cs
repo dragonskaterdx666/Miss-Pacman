@@ -36,7 +36,7 @@ namespace MsPacMan
 
         float speed = 2.0f;
 
-        SpriteFont arial;
+        SpriteFont minecraft;
           
         #endregion
 
@@ -69,7 +69,7 @@ namespace MsPacMan
             spritePositions[Direction.Up] = new Vector2(2, 0);
             spritePositions[Direction.Down] = new Vector2(5, 0);
 
-            arial = game.Content.Load<SpriteFont>("arial");
+            minecraft = game.Content.Load<SpriteFont>("minecraft");
 
             //spritePositions[Direction.Right] = new Vector2(3.2f, 1);
             //spritePositions[Direction.Left] = new Vector2(0, 1);
@@ -185,19 +185,19 @@ namespace MsPacMan
 
             spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
-            spriteBatch.DrawString(arial, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.3F * Game1.outputTileSize), Color.White);
+            spriteBatch.DrawString(minecraft, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
             if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";
                 
-                Vector2 stringSize = arial.MeasureString(gameOverText);
+                Vector2 stringSize = minecraft.MeasureString(gameOverText);
                 
                 Vector2 screenSize = new Vector2(game1.graphics.PreferredBackBufferWidth, game1.graphics.PreferredBackBufferHeight);
                 
                 Vector2 textPos = (screenSize - stringSize) / 2.0f;
 
-                spriteBatch.DrawString(arial, gameOverText, textPos, Color.White);
+                spriteBatch.DrawString(minecraft, gameOverText, textPos, Color.White);
             }
             
             spriteBatch.End();
@@ -208,10 +208,17 @@ namespace MsPacMan
             lives--;
 
             position = targetPosition = origin;
-            
+
+            foreach(Live live1 in game1.Lives)
+            {
+                game1.Lives.Remove(live1);
+            }
+
+            game1.Lives.RemoveRange(1, 1);
+
             if (lives <= 0)
             {
-
+               
                 foreach (DrawableGameComponent gameComponent in game1.Components)
                 {
                     gameComponent.Enabled = false;
@@ -242,22 +249,24 @@ namespace MsPacMan
 
             int totalDotPoints = amountOfDots * 10;
 
+            int currentScore = game1.Player.Score;
+
             for (i = 0; i < totalDotPoints; i++)
             {
                 //if the player gets 1000 points he earns a life
-                if(game1.Player.Score == 1000)
+                if(currentScore == 1000)
                 {
                     Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
 
                     game1.Lives.Add(live);
                 }
-                if(game1.Player.Score == 2000)
+                if(currentScore == 2000)
                 {
                     Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
 
                     game1.Lives.Add(live);
                 }
-                if(game1.Player.Score == 3000)
+                if(currentScore == 3000)
                 {
                     Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
 

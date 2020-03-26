@@ -27,6 +27,8 @@ namespace MsPacMan
 
         int pelletValue = 50;
 
+        float timer;
+
         #endregion
 
         #region constructor
@@ -47,6 +49,12 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
+            timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timer < 0)           
+            {
+              powerPellet = false;
+            }
 
             Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
@@ -55,6 +63,8 @@ namespace MsPacMan
 
             if (PelletArea.Intersects(playerPosition))
             {
+                timer = 3f;
+
                 powerPellet = true;
                 
                 game1.Components.Remove(this);
@@ -62,7 +72,10 @@ namespace MsPacMan
                 game1.Pellets.Remove(this);
 
                 game1.Player.Score += pelletValue;
+
+                
             }
+
         }
 
         public static void GetPelletStatus()
@@ -71,7 +84,6 @@ namespace MsPacMan
             {
                 powerPellet = true;
             }
-            
             
         }
         public override void Draw(GameTime gameTime)

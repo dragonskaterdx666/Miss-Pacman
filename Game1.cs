@@ -17,6 +17,8 @@ namespace MsPacMan
 
         private Player p;
 
+        private Live l;
+
         private List<Dot> dotList;
 
         private List<Pellet> pelletList;
@@ -66,6 +68,8 @@ namespace MsPacMan
         public SpriteBatch SpriteBatch => spriteBatch;
 
         public Player Player => p;
+
+        public Live Live => l;
 
         public Board Board => board;
 
@@ -360,11 +364,11 @@ namespace MsPacMan
                     }
                     else if(filePosition == 'L')
                     {
-                        Live live = new Live(this, j, i);
+                        l = new Live(this, j, i);
                         
-                        liveList.Add(live);
+                        liveList.Add(l);
 
-                        Components.Add(live);
+                        Components.Add(l);
                     }
                     else if(filePosition == 'M')
                     {

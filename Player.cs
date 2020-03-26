@@ -209,12 +209,9 @@ namespace MsPacMan
 
             position = targetPosition = origin;
 
-            foreach(Live live1 in game1.Lives)
-            {
-                game1.Lives.Remove(live1);
-            }
+            game1.Lives.Remove(game1.Live);
 
-            game1.Lives.RemoveRange(1, 1);
+            game1.Components.Remove(game1.Live);
 
             if (lives <= 0)
             {
@@ -256,21 +253,15 @@ namespace MsPacMan
                 //if the player gets 1000 points he earns a life
                 if(currentScore == 1000)
                 {
-                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
-
-                    game1.Lives.Add(live);
+                    game1.Lives.Add(game1.Live);
                 }
                 if(currentScore == 2000)
                 {
-                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
-
-                    game1.Lives.Add(live);
+                    game1.Lives.Add(game1.Live);
                 }
                 if(currentScore == 3000)
                 {
-                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
-
-                    game1.Lives.Add(live);
+                    game1.Lives.Add(game1.Live);
                 }
             }
 

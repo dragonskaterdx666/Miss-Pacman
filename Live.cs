@@ -70,10 +70,6 @@ namespace MsPacMan
 
         }
 
-        public void LiveRemove()
-        {
-        }
-
         #endregion
     }
 }

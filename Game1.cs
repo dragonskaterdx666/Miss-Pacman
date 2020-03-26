@@ -237,6 +237,32 @@ namespace MsPacMan
                         case '.':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 0, 35, 35), Color.White);
                             break;
+                        //SPELLING HIGHSCORE
+                        case '%':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '(':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(1 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case ')':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(2 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '$':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(3 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '=':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(4 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case 'º':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(5 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '´':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(6 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+                        case '~':
+                            spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(7 * 35, 2 * 35, 35, 35), Color.White);
+                            break;
+
                     }
 
                 }

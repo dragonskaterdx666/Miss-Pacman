@@ -21,8 +21,6 @@ namespace MsPacMan
 
         Point position;
 
-        public Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
-
         #endregion
 
         #region Constructor
@@ -56,13 +54,20 @@ namespace MsPacMan
 
         public override void Draw(GameTime gameTime)
         {
+            Rectangle SourceLives = new Rectangle(10 * 16, 2 * 16, 16, 16);
+
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture: game1.SpriteSheet, outRect, new Rectangle(10 * 16, 2 * 16, 16, 16), Color.White);
+            spriteBatch.Draw(texture: game1.SpriteSheet, outRect, SourceLives, Color.White);
 
             spriteBatch.End();
+        }
+
+        public void LiveCount()
+        {
+
         }
         #endregion
     }

@@ -136,7 +136,7 @@ namespace MsPacMan
 
                 if (Pellet.powerPellet == true)
                 {
-                    Die();
+                    this.Die();
                 }
                 else
                 {

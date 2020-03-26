@@ -69,6 +69,8 @@ namespace MsPacMan
             spritePositions[Direction.Up] = new Vector2(2, 0);
             spritePositions[Direction.Down] = new Vector2(5, 0);
 
+            arial = game.Content.Load<SpriteFont>("arial");
+
             //spritePositions[Direction.Right] = new Vector2(3.2f, 1);
             //spritePositions[Direction.Left] = new Vector2(0, 1);
             //spritePositions[Direction.Up] = new Vector2(2, 0);
@@ -183,6 +185,8 @@ namespace MsPacMan
 
             spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
+            spriteBatch.DrawString(arial, $"{game1.Player.Score}", new Vector2(15 * Game1.outputTileSize, 1.3F * Game1.outputTileSize), Color.White);
+
             if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";
@@ -228,6 +232,39 @@ namespace MsPacMan
                 allDotsCollected = false;
             
             return allDotsCollected;
+        }
+
+        public void ScoreCount()
+        {
+            int i;
+
+            int amountOfDots = game1.Dots.Count;
+
+            int totalDotPoints = amountOfDots * 10;
+
+            for (i = 0; i < totalDotPoints; i++)
+            {
+                //if the player gets 1000 points he earns a life
+                if(game1.Player.Score == 1000)
+                {
+                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
+
+                    game1.Lives.Add(live);
+                }
+                if(game1.Player.Score == 2000)
+                {
+                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
+
+                    game1.Lives.Add(live);
+                }
+                if(game1.Player.Score == 3000)
+                {
+                    Live live = new Live(game1, game1.boardWidth, game1.boardHeight);
+
+                    game1.Lives.Add(live);
+                }
+            }
+
         }
         #endregion
     }

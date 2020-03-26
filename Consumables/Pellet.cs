@@ -25,6 +25,8 @@ namespace MsPacMan
 
         public static bool powerPellet = false;
 
+        int pelletValue = 50;
+
         #endregion
 
         #region constructor
@@ -54,10 +56,12 @@ namespace MsPacMan
             if (PelletArea.Intersects(playerPosition))
             {
                 powerPellet = true;
+                
                 game1.Components.Remove(this);
 
                 game1.Pellets.Remove(this);
 
+                game1.Player.Score += pelletValue;
             }
         }
 

@@ -27,7 +27,7 @@ namespace MsPacMan
 
         int pelletValue = 50;
 
-        float timer;
+        static float timer;
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace MsPacMan
 
             if (PelletArea.Intersects(playerPosition))
             {
-                timer = 3f;
+                timer = 80f;
 
                 powerPellet = true;
                 

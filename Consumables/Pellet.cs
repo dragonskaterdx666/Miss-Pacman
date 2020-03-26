@@ -49,28 +49,37 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
+            //decreases the timer
             timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //if the timer has a value lower than 0
             if (timer < 0)           
             {
+              //the effect of the power pellet wears out 
               powerPellet = false;
             }
 
+            //area occupied by player 
             Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
 
+            //area occupied by pellet
             Rectangle PelletArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(20));
 
-
+            //if the pellet area is intersected by the player
             if (PelletArea.Intersects(playerPosition))
             {
+                //timer starts
                 timer = 80f;
 
+                //power pellet effect kicks in
                 powerPellet = true;
                 
+                //pellet is removed from the map
                 game1.Components.Remove(this);
 
                 game1.Pellets.Remove(this);
 
+                //player gets 50 points for eating the pellet
                 game1.Player.Score += pelletValue;
 
                 
@@ -78,6 +87,9 @@ namespace MsPacMan
 
         }
 
+        /// <summary>
+        /// Method to test wether the power pellet has been consumed or not (TO BE IMPROVED)
+        /// </summary>
         public static void GetPelletStatus()
         {
             if (powerPellet == true)
@@ -93,7 +105,9 @@ namespace MsPacMan
 
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
+            //pellets
             Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
+            //draws the pellet
             spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
             
 

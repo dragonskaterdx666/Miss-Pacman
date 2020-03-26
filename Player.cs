@@ -179,15 +179,19 @@ namespace MsPacMan
         {
             Rectangle outRec = new Rectangle(position, new Point(Game1.outputTileSize));
 
+            //player rectangle
             Rectangle sourceRec = new Rectangle(((spritePositions[direction] + (Vector2.UnitX * frame)) * 32).ToPoint(), new Point(32));
 
             spriteBatch.Begin();
 
+            //draws player 
             spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
             //prints the score
             spriteBatch.DrawString(minecraft, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
+
+            //game over
             if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";
@@ -204,6 +208,7 @@ namespace MsPacMan
             spriteBatch.End();
         }
 
+        //player death
         public void Die()
         {
             lives--;
@@ -224,6 +229,7 @@ namespace MsPacMan
             }
         }
 
+        //method to test if all the dots have been collected
         public bool CollectedAllDots()
         {
             int amountOfDots = game1.Dots.Count;

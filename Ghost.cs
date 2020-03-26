@@ -127,19 +127,28 @@ namespace MsPacMan
 
         public override void Update(GameTime gameTime)
         {
+            //area occupied by the player
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+
+            //area occupied by the enemy 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
+            //if the player area is intersected by the enemy 
             if (EnemyArea.Intersects(pRect))
             {
+                //check pellet status
                 Pellet.GetPelletStatus();
 
+                //if the pellet has been consumed
                 if (Pellet.powerPellet == true)
                 {
+                    //enemy dies
                     this.Die();
                 }
+                //if the pellet has not been consumed
                 else
                 {
+                    //player dies
                     game1.Player.Die();
                 }
                 
@@ -154,16 +163,22 @@ namespace MsPacMan
                     orientation == Orientation.Horizontal
                     ? new Point(direction * Game1.outputTileSize, 0) : new Point(0, direction * Game1.outputTileSize);
 
+                //if the target position is occupied by any of those symbols
                 if ((game1.Board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] == ' ') && (game1.Board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] == '.') && game1.Board.board[targetPosition.X / Game1.outputTileSize,
                         targetPosition.Y / Game1.outputTileSize] == '?')
                     {
+                    //enemy moves
                     patrolPosition++;
                 }
+                //if not
                 else
                 {
+                    //enemy stops
                     targetPosition = position;
+
+                    //changes direction
                     direction = -direction;
                 }
 
@@ -181,20 +196,33 @@ namespace MsPacMan
         {
             #region ghosts
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
+
+            //red ghost sprite
             Rectangle sourceRedRec = new Rectangle(((ghostRed[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+
+            //purple ghost sprite
             Rectangle sourcePurpleRec = new Rectangle(((ghostPurple[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+
+            //blue ghost sprite
             Rectangle sourceBlueRec = new Rectangle(((ghostBlue[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+
+            //orange ghost sprite
             Rectangle sourceOrangeRec = new Rectangle(((ghostOrange[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+
+            //pellet effect ghost sprite
             Rectangle sourcePelletRec1 = new Rectangle(8*16, 0, 16, 15);
 
             GhostTypes ghostTypes;
 
             spriteBatch.Begin();
 
+            //check pellet effect status
             Pellet.GetPelletStatus();
 
+            //if the pellet has not been consumed
             if (Pellet.powerPellet == false)
             {
+                //use the following sprites for the ghosts
                 switch (ghostType)
                 {
                     //allows for different types of ghosts
@@ -216,8 +244,11 @@ namespace MsPacMan
                         break;
                 }
             }
+
+            //if the pellet has been consumed
             else
             {
+                //use the following sprites for the ghosts
                 switch (ghostType)
                 {
                     //allows for different types of ghosts

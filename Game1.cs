@@ -19,6 +19,8 @@ namespace MsPacMan
 
         private Live l;
 
+        private ExtraLive extraLive;
+
         private Dot d;
 
         private Cherry c;
@@ -34,6 +36,8 @@ namespace MsPacMan
         private List<Ghost> ghostList;
 
         private List<Live> liveList;
+
+        private List<ExtraLive> extraLiveList;
 
         private List<Upgrade> upgradeList;
 
@@ -83,6 +87,8 @@ namespace MsPacMan
 
         public Live Live => l;
 
+        public ExtraLive ExtraLive => extraLive;
+
         public Dot Dot => d;
 
         public Cherry Cherry => c;
@@ -97,6 +103,7 @@ namespace MsPacMan
         public List<Pellet> Pellets => pelletList;
         public List<Ghost> Ghosts => ghostList;
         public List<Live> Lives => liveList;
+        public List<ExtraLive> ExtraLives => extraLiveList;
         public List<Upgrade> Upgrades => upgradeList;
         public List<Cherry> Cherries => cherriesList;
 
@@ -342,6 +349,8 @@ namespace MsPacMan
 
             cherriesList = new List<Cherry>();
 
+            extraLiveList = new List<ExtraLive>();
+
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
             
@@ -445,6 +454,26 @@ namespace MsPacMan
                             Components.Add(d);
                         }
 
+                    }
+                    else if(filePosition == '£')
+                    {
+                        if((p.Score == 1000  || p.Score == 2000 || p.Score == 3000) && p.isPlayerAbleToGetNewLife == true)
+                        {
+                            extraLive = new ExtraLive(this, j, i);
+
+                            extraLiveList.Add(extraLive);
+
+                            Components.Add(extraLive);
+                        }
+
+                        if (p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
+                        {
+                            d = new Dot(this, j, i);
+
+                            dotList.Add(d);
+
+                            Components.Add(d);
+                        }
                     }
                     else
                     {

@@ -45,6 +45,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Consumables\Cherry.cs" />
     <Compile Include="Consumables\Dot.cs" />
+    <Compile Include="ExtraLive.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Characters\Ghost.cs" />
     <Compile Include="Live.cs" />

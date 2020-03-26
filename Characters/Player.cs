@@ -28,6 +28,8 @@ namespace MsPacMan
 
         public bool allDotsCollected = false;
 
+        public bool isPlayerAbleToGetNewLife = false;
+
         public int lives = 3;
 
         Dictionary<Direction, Vector2> spritePositions;
@@ -97,6 +99,9 @@ namespace MsPacMan
         #region Methods
         public override void Update(GameTime gameTime)
         {
+            Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+
+            //DO THE TELEPORT
             if (targetPosition == position)
             {
                 frame = 0;
@@ -182,6 +187,7 @@ namespace MsPacMan
 
                 if (frame > 0) frame = -2;
             }
+
         }
 
         //Draws pacman on the different positions
@@ -198,6 +204,7 @@ namespace MsPacMan
             //prints the score
             spriteBatch.DrawString(minecraft, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
+            //prints the highscore
             spriteBatch.DrawString(minecraft, $"{game1.Player.HighScore}", new Vector2(15 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
             if (lives == 0)
@@ -220,52 +227,21 @@ namespace MsPacMan
         /// Function that's activated once the pacman is killed
         /// </summary>
         public void Die()
-        {
-            //gets the file to overwrite the highscore
-            string filePath = Environment.CurrentDirectory + "/highscore.txt";
-
-            //new line to insert on the text file
-            string line;
-
-            //opens the file to overwrite it
-            StreamWriter sw = File.AppendText(filePath);
-
-            int currentScore, highScore;
-
-            //pacman loses lives
+        {            
             lives--;
 
-            //setting the variables to their current state
-            currentScore = this.Score;
-
-            highScore = this.HighScore;
-
-            //comparing to get the highest score
-            if (currentScore > highScore)
-            {
-                highScore = currentScore;
-
-                this.HighScore = highScore;
-
-                line = highScore.ToString();
-
-                sw.WriteLine(line);
-            }
-            else
-            {
-                this.HighScore = highScore;
-            }
-
-            //closes the file opener
-            sw.Close();
-
+            this.SetHighScore();
+            
             //sets the pacman to the spawn
             position = targetPosition = origin;
 
-            //removes the lives from the list and from the game components
-            game1.Lives.Remove(game1.Live);
+            if(lives > 0 && lives <= 3) 
+            { 
+               //removes the lives from the list and from the game components
+               game1.Lives.Remove(game1.Live);
 
-            game1.Components.Remove(game1.Live);
+               game1.Components.Remove(game1.Live);
+            }
 
             if (lives <= 0)
             {
@@ -303,27 +279,87 @@ namespace MsPacMan
 
             //if the player gets 1000 points he earns a life
             if (currentScore == 1000)
-            {
-                game1.Lives.Add(game1.Live);
+            { 
+                isPlayerAbleToGetNewLife = true;
+
+                game1.Dots.Remove(game1.Dot);
+
+                game1.Components.Remove(game1.Dot);
+
+                game1.ExtraLives.Add(game1.ExtraLive);
+
+                game1.Components.Add(game1.ExtraLive);
 
                 game1.Cherries.Add(game1.Cherry);
 
                 game1.Components.Add(game1.Cherry);
+
             }
             if (currentScore == 2000)
             {
-                game1.Lives.Add(game1.Live);
+                isPlayerAbleToGetNewLife = true;
+
+                game1.ExtraLives.Add(game1.ExtraLive);
 
                 game1.Upgrades.Add(game1.Upgrade);
 
                 game1.Components.Add(game1.Upgrade);
+
             }
             if (currentScore == 3000)
             {
+                isPlayerAbleToGetNewLife = true;
+
                 game1.Lives.Add(game1.Live);
+
+                game1.Components.Add(game1.Live);
+
             }
 
         }
+
+        public void SetHighScore()
+        {
+            //gets the file to overwrite the highscore
+            string filePath = Environment.CurrentDirectory + "/highscore.txt";
+
+            //new line to insert on the text file
+            string line;
+
+            //opens the file to overwrite it
+            StreamWriter sw = File.AppendText(filePath);
+
+            int currentScore, highScore;
+
+            //pacman loses lives
+
+
+            //setting the variables to their current state
+            currentScore = this.Score;
+
+            highScore = this.HighScore;
+
+            //comparing to get the highest score
+            if (currentScore > highScore)
+            {
+                highScore = currentScore;
+
+                this.HighScore = highScore;
+
+                line = highScore.ToString();
+
+                sw.WriteLine(line);
+            }
+            else
+            {
+                this.HighScore = highScore;
+            }
+
+            //closes the file opener
+            sw.Close();
+
+        }
+
         #endregion
     }
 }

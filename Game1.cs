@@ -47,6 +47,10 @@ namespace MsPacMan
 
         public static Random rnd = new Random();
 
+        public  Random randomX = new Random();
+
+        public  Random randomY = new Random();
+
         public int boardWidth, boardHeight;
 
         public const int outputTileSize = 25;       
@@ -304,9 +308,21 @@ namespace MsPacMan
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/level1.txt");
 
-            int y, x, i, j;
+            int y, x, i, j, rndPosX, rndPosY, y2, x2, x3;
+
+            Random backUpRndY = new Random();
+
+            x2 = 6; x3 = 23;
+
+            y2 = backUpRndY.Next(9, 24);
+
+            rndPosX = randomX.Next(1, 31);
+
+            rndPosY = randomY.Next(5, 30);
 
             char filePosition;
+
+            char randomPos;
 
             boardWidth = file[0].Length;
 
@@ -401,15 +417,26 @@ namespace MsPacMan
                     }
                     else if(filePosition == '*')
                     {
-                        if(Player.CollectedAllDots() == true)
+                        randomPos = file[rndPosX][rndPosY];
+
+                        if (randomPos == ' ')
                         {
-                            c = new Cherry(this, j, i);
+                            //randomly assigns the cherry spot
+                            c = new Cherry(this, rndPosX, rndPosY);
 
-                            cherriesList.Add(c);
-
-                            Components.Add(c);
+                            //randomly assigns the upgrade spot
+                            u = new Upgrade(this, rndPosX, rndPosY);
                         }
                         else
+                        {
+                            //randomly assigns the cherry spot
+                            c = new Cherry(this, x2, y2);
+
+                            //randomly assigns the upgrade spot
+                            u = new Upgrade(this, x3, y2);
+                        }
+
+                        if(p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
                         {
                             d = new Dot(this, j, i);
 
@@ -417,6 +444,7 @@ namespace MsPacMan
 
                             Components.Add(d);
                         }
+
                     }
                     else
                     {

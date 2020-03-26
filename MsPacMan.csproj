@@ -46,10 +46,10 @@
     <Compile Include="Consumables\Cherry.cs" />
     <Compile Include="Consumables\Dot.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Ghost.cs" />
+    <Compile Include="Characters\Ghost.cs" />
     <Compile Include="Live.cs" />
     <Compile Include="Consumables\Pellet.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Characters\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Consumables\Upgrade.cs" />

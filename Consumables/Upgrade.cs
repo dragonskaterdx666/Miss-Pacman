@@ -63,6 +63,8 @@ namespace MsPacMan
 
                 game1.Player.Score += 5000;
 
+                game1.Player.ScoreCount();
+
             }
         }
 

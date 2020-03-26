@@ -185,7 +185,7 @@ namespace MsPacMan
 
             spriteBatch.Draw(texture, outRec, sourceRec, Color.White);
 
-            spriteBatch.DrawString(arial, $"{game1.Player.Score}", new Vector2(15 * Game1.outputTileSize, 1.3F * Game1.outputTileSize), Color.White);
+            spriteBatch.DrawString(arial, $"{game1.Player.Score}", new Vector2(27 * Game1.outputTileSize, 1.3F * Game1.outputTileSize), Color.White);
 
             if (lives <= 0)
             {

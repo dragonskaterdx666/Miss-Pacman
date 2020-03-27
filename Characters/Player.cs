@@ -274,7 +274,40 @@ namespace MsPacMan
 
             int currentScore = game1.Player.Score;
 
+            //gets the amount of dots in the map
+            int amountOfDots = game1.Dots.Count;
+
+            //gets the amount of point value on the map
+            int totalDotPoints = amountOfDots * 10;
+
             //if the player gets 1000 points he earns a life
+            if (currentScore == 1000)
+            {
+                isPlayerAbleToGetNewLife = false;
+
+                game1.Cherries.Add(game1.Cherry);
+
+                game1.Components.Add(game1.Cherry);
+
+            }
+            if (currentScore == 2000)
+            {
+                isPlayerAbleToGetNewLife = false;
+
+                game1.Strawberries.Add(game1.Strawberry);
+
+                game1.Components.Add(game1.Strawberry);
+
+            }
+            if (currentScore == 3000)
+            {
+                isPlayerAbleToGetNewLife = false;
+
+                game1.Upgrades.Add(game1.Upgrade);
+
+                game1.Components.Add(game1.Upgrade);
+
+            }
             if (currentScore == 1000)
             {
                 isPlayerAbleToGetNewLife = true;
@@ -287,32 +320,7 @@ namespace MsPacMan
 
                 game1.Components.Add(game1.ExtraLive);
 
-                game1.Cherries.Add(game1.Cherry);
-
-                game1.Components.Add(game1.Cherry);
-
             }
-            if (currentScore == 2000)
-            {
-                isPlayerAbleToGetNewLife = true;
-
-                game1.ExtraLives.Add(game1.ExtraLive);
-
-                game1.Upgrades.Add(game1.Upgrade);
-
-                game1.Components.Add(game1.Upgrade);
-
-            }
-            if (currentScore == 3000)
-            {
-                isPlayerAbleToGetNewLife = true;
-
-                game1.Lives.Add(game1.Live);
-
-                game1.Components.Add(game1.Live);
-
-            }
-
         }
 
         public void SetHighScore()

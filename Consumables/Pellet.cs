@@ -19,8 +19,6 @@ namespace MsPacMan
 
         private Game1 game1;
 
-        private Board board;
-
         private Point position;
 
         public static bool powerPellet = false;
@@ -46,7 +44,9 @@ namespace MsPacMan
             texture = game.SpriteSheetMap;
 
         }
+        #endregion
 
+        #region Methods
         public override void Update(GameTime gameTime)
         {
             //decreases the timer

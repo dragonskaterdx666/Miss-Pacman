@@ -26,26 +26,20 @@ namespace MsPacMan
         private Game1 game1;
 
         public Board board;
-        
+
         private Orientation orientation;
 
         public Point position, targetPosition;
 
-        int enemyLives = 1;
+        int enemyLives = 4;
 
         int patrolSize;
-        
+
         int patrolPosition = 0;
-        
+
         int direction = 1;
 
         Dictionary<GDirection, Vector2> ghostColor;
-
-        //Dictionary<GDirection, Vector2> ghostOrange;
-
-        //Dictionary<GDirection, Vector2> ghostPurple;
-
-        //Dictionary<GDirection, Vector2> ghostBlue;
 
         Dictionary<GDirection, Point> Surroundings;
 
@@ -53,28 +47,28 @@ namespace MsPacMan
 
         int frame = 0;
 
+        int ghostValue = 200;
+
         #endregion
 
         #region Constructor
         public Ghost(Game1 game, int x, int y, int ghostType) : base(game)
         {
             orientation = Game1.rnd.Next(2) > 0 ? Orientation.Horizontal : Orientation.Vertical;
-            
+
             texture = game.SpriteSheet;
-            
+
             spriteBatch = game.SpriteBatch;
-            
+
             position.Y = y;
-            
+
             position.X = x;
 
             targetPosition = position;
-            
+
             game1 = game;
-            
-            board = game1.Board;  
-            
-            
+
+            board = game1.Board;
 
             patrolSize = 2 + Game1.rnd.Next(4);
 
@@ -86,14 +80,13 @@ namespace MsPacMan
                 [GDirection.Right] = new Point(0, 1),
             };
 
-            #region ghost sprites
-
             ghostColor = new Dictionary<GDirection, Vector2>();
 
             ghostColor[GDirection.Right] = new Vector2(0, ghostType);
             ghostColor[GDirection.Left] = new Vector2(2, ghostType);
             ghostColor[GDirection.Up] = new Vector2(4, ghostType);
             ghostColor[GDirection.Down] = new Vector2(6, ghostType);
+
 
         }
 
@@ -125,7 +118,7 @@ namespace MsPacMan
                 {
                     game1.Player.Die();
                 }
-                
+
             }
 
             if (position == targetPosition)
@@ -151,12 +144,12 @@ namespace MsPacMan
                 else
                 {
                     targetPosition = position;
-                    direction = -direction; 
+                    direction = -direction;
                 }
             }
             else
             {
-                
+
                 Vector2 dir = (targetPosition - position).ToVector2();
                 dir.Normalize();
                 position += dir.ToPoint();
@@ -167,7 +160,7 @@ namespace MsPacMan
         public override void Draw(GameTime gameTime)
         {
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
-            
+
             Rectangle sourceRec = new Rectangle(((ghostColor[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
 
             Rectangle sourcePelletRec = new Rectangle(8 * 16, 0, 16, 15);
@@ -177,9 +170,9 @@ namespace MsPacMan
 
             Pellet.GetPelletStatus();
 
-            if (!Pellet.powerPellet) 
-            { 
-              spriteBatch.Draw(texture, outRect, sourceRec, Color.White);
+            if (!Pellet.powerPellet)
+            {
+                spriteBatch.Draw(texture, outRect, sourceRec, Color.White);
             }
             else
             {
@@ -193,7 +186,7 @@ namespace MsPacMan
         /// </summary>
         public void GhostMovement()
         {
-            
+
 
 
 
@@ -211,9 +204,20 @@ namespace MsPacMan
         {
             enemyLives--;
 
+            int n = 4 - enemyLives;
+
+            AssignGhostValue(n);
+
             game1.Ghosts.Remove(this);
 
             game1.Components.Remove(this);
+        }
+
+        public void AssignGhostValue(int n)
+        {
+            ghostValue = ghostValue * n;
+
+            game1.Player.Score += ghostValue;
         }
 
         #endregion

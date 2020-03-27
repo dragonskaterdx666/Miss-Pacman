@@ -25,6 +25,8 @@ namespace MsPacMan
 
         private Cherry c;
 
+        private Strawberry strawberry;
+
         private Upgrade u;
 
         private Pellet pellet;
@@ -43,18 +45,22 @@ namespace MsPacMan
 
         private List<Cherry> cherriesList;
 
+        private List<Strawberry> strawberryList;
+
         private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap;
 
         private SpriteBatch spriteBatch;
 
         private Board board;
 
+        //random variables
         public static Random rnd = new Random();
 
         public  Random randomX = new Random();
 
         public  Random randomY = new Random();
 
+        //board related variables
         public int boardWidth, boardHeight;
 
         public const int outputTileSize = 25;       
@@ -92,7 +98,9 @@ namespace MsPacMan
         public Dot Dot => d;
 
         public Cherry Cherry => c;
-
+        
+        public Strawberry Strawberry => strawberry;
+        
         public Upgrade Upgrade => u;
 
         public Pellet Pellet => pellet;
@@ -106,6 +114,8 @@ namespace MsPacMan
         public List<ExtraLive> ExtraLives => extraLiveList;
         public List<Upgrade> Upgrades => upgradeList;
         public List<Cherry> Cherries => cherriesList;
+
+        public List<Strawberry> Strawberries => strawberryList;
 
         #endregion
 
@@ -299,7 +309,10 @@ namespace MsPacMan
                         case '«':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(9 * 35, 2 * 35, 35, 35), Color.White);
                             break;
-
+                        //ASSETS SHOWN
+                        case 'M':
+                            spriteBatch.Draw(texture: spriteSheet, outRect, new Rectangle(13 * 16, 9 * 16, 16, 16), Color.White);
+                            break;
                     }
 
                 }
@@ -319,7 +332,7 @@ namespace MsPacMan
 
             Random backUpRndY = new Random();
 
-            x2 = 6; x3 = 23;
+            x2 = 6; x3 = 22;
 
             y2 = backUpRndY.Next(9, 24);
 
@@ -350,6 +363,8 @@ namespace MsPacMan
             cherriesList = new List<Cherry>();
 
             extraLiveList = new List<ExtraLive>();
+
+            strawberryList = new List<Strawberry>();
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
@@ -421,14 +436,6 @@ namespace MsPacMan
 
                         Components.Add(l);
                     }
-                    else if(filePosition == 'M')
-                    {
-                        u = new Upgrade(this, j, i);
-
-                        upgradeList.Add(u);
-
-                        Components.Add(u);
-                    }
                     else if(filePosition == '*')
                     {
                         randomPos = file[rndPosX][rndPosY];
@@ -440,6 +447,8 @@ namespace MsPacMan
 
                             //randomly assigns the upgrade spot
                             u = new Upgrade(this, rndPosX, rndPosY);
+
+                            strawberry = new Strawberry(this, rndPosX, rndPosY);
                         }
                         else
                         {
@@ -448,9 +457,11 @@ namespace MsPacMan
 
                             //randomly assigns the upgrade spot
                             u = new Upgrade(this, x3, y2);
+
+                            strawberry = new Strawberry(this, x2, y2);
                         }
 
-                        if(p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
+                        if(p.Score != 10000)
                         {
                             d = new Dot(this, j, i);
 

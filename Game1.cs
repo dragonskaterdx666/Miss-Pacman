@@ -363,20 +363,26 @@ namespace MsPacMan
                     Board.board[x, y] = file[y][x];
                 }
             }
-           
+
+
             for (i = 0; i < boardHeight; i++)
             {
                 for (j = 0; j < boardWidth; j++)
                 {
                     filePosition = file[i][j];
 
-                    if (filePosition == '1' || filePosition == '2' || filePosition == '3' || filePosition == '+')
+                    if (filePosition == '1')
                     {
-                        Ghost ghost = new Ghost(this, j, i, filePosition);
+                        int i1;
 
-                        ghostList.Add(ghost);
+                        for (i1 = 0; i1 < 4; i1++)
+                        {
+                          Ghost ghost = new Ghost(this, j, i, i1);
+                             
+                          ghostList.Add(ghost);
                         
-                        Components.Add(ghost);
+                          Components.Add(ghost);
+                        }
 
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
@@ -388,8 +394,7 @@ namespace MsPacMan
                         pelletList.Add(pellet);
 
                         Components.Add(pellet);
-                    }
-                    
+                    }                   
                     else if (filePosition == 'S')
                     {
                         p = new Player(this, j, i);
@@ -466,7 +471,7 @@ namespace MsPacMan
                             Components.Add(extraLive);
                         }
 
-                        if (p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
+                        else if (p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
                         {
                             d = new Dot(this, j, i);
 

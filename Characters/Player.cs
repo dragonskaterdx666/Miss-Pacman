@@ -207,7 +207,7 @@ namespace MsPacMan
             //prints the highscore
             spriteBatch.DrawString(minecraft, $"{game1.Player.HighScore}", new Vector2(15 * Game1.outputTileSize, 1.12F * Game1.outputTileSize), Color.LightBlue);
 
-            if (lives == 0)
+            if (lives <= 0)
             {
                 string gameOverText = "GAME OVER!";
 
@@ -227,21 +227,18 @@ namespace MsPacMan
         /// Function that's activated once the pacman is killed
         /// </summary>
         public void Die()
-        {            
+        {
             lives--;
 
             this.SetHighScore();
-            
+
             //sets the pacman to the spawn
             position = targetPosition = origin;
 
-            if(lives > 0 && lives <= 3) 
-            { 
-               //removes the lives from the list and from the game components
-               game1.Lives.Remove(game1.Live);
+            //removes the lives from the list and from the game components
+            game1.Lives.Remove(game1.Live);
 
-               game1.Components.Remove(game1.Live);
-            }
+            game1.Components.Remove(game1.Live);
 
             if (lives <= 0)
             {
@@ -279,7 +276,7 @@ namespace MsPacMan
 
             //if the player gets 1000 points he earns a life
             if (currentScore == 1000)
-            { 
+            {
                 isPlayerAbleToGetNewLife = true;
 
                 game1.Dots.Remove(game1.Dot);

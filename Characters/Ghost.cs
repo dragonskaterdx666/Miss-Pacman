@@ -38,17 +38,17 @@ namespace MsPacMan
         int patrolPosition = 0;
 
         int direction = 1;
+        
+        int frame = 0;
 
+        int ghostValue = 200;
+        
         Dictionary<GDirection, Vector2> ghostColor;
 
         Dictionary<GDirection, Point> Surroundings;
 
         GDirection gDirection = GDirection.Up;
-
-        int frame = 0;
-
-        int ghostValue = 200;
-
+        
         #endregion
 
         #region Constructor
@@ -80,13 +80,13 @@ namespace MsPacMan
                 [GDirection.Right] = new Point(0, 1),
             };
 
-            ghostColor = new Dictionary<GDirection, Vector2>();
-
-            ghostColor[GDirection.Right] = new Vector2(0, ghostType);
-            ghostColor[GDirection.Left] = new Vector2(2, ghostType);
-            ghostColor[GDirection.Up] = new Vector2(4, ghostType);
-            ghostColor[GDirection.Down] = new Vector2(6, ghostType);
-
+            ghostColor = new Dictionary<GDirection, Vector2>
+            {
+                [GDirection.Right] = new Vector2(0, ghostType),
+                [GDirection.Left] = new Vector2(2, ghostType),
+                [GDirection.Up] = new Vector2(4, ghostType),
+                [GDirection.Down] = new Vector2(6, ghostType),
+            };
 
         }
 
@@ -104,6 +104,7 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
             if (EnemyArea.Intersects(pRect))
@@ -114,6 +115,7 @@ namespace MsPacMan
                 {
                     this.Die();
                 }
+
                 else
                 {
                     game1.Player.Die();
@@ -167,7 +169,6 @@ namespace MsPacMan
 
             spriteBatch.Begin();
 
-
             Pellet.GetPelletStatus();
 
             if (!Pellet.powerPellet)
@@ -187,8 +188,7 @@ namespace MsPacMan
         public void GhostMovement()
         {
 
-
-
+            
 
 
 

@@ -107,7 +107,7 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
-            targetPosition = position;
+            //targetPosition = position;
 
              if (position == targetPosition)
             {

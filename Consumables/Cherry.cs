@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Cherry: DrawableGameComponent
+    public class Cherry : DrawableGameComponent
     {
 
         #region variables
@@ -42,10 +42,6 @@ namespace MsPacMan
         }
         #endregion
 
-        #region Properties
-
-        #endregion
-
         #region Methods
 
         public override void Update(GameTime gameTime)
@@ -65,7 +61,7 @@ namespace MsPacMan
         }
 
         /// <summary>
-        /// Draws the dots in game
+        /// Draws the cherries in game
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)

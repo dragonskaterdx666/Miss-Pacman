@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Dot: DrawableGameComponent
+    public class Dot : DrawableGameComponent
     {
         #region variables
 
@@ -21,12 +21,12 @@ namespace MsPacMan
 
         private Point position;
 
-        public int dotValue = 10;        
+        public int dotValue = 10;
 
         #endregion
 
         #region Constructor
-        public Dot(Game1 game,int x, int y): base(game)
+        public Dot(Game1 game, int x, int y) : base(game)
         {
             position.X = x;
 
@@ -50,7 +50,7 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
             Rectangle playerPosition = new Rectangle(game1.Player.position, new Point(16));
-            
+
             Rectangle DotArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(8));
 
             if (DotArea.Intersects(playerPosition))
@@ -73,7 +73,7 @@ namespace MsPacMan
         public override void Draw(GameTime gameTime)
         {
             Rectangle SourceDots = new Rectangle(16 * 35, 4 * 35, 35, 35);
-            
+
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
             spriteBatch.Begin();

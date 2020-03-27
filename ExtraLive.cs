@@ -39,12 +39,6 @@ namespace MsPacMan
         }
         #endregion
 
-        #region Properties
-
-
-        #endregion
-
-
         #region Methods
 
         public override void Update(GameTime gameTime)

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Live: DrawableGameComponent
+    public class Live : DrawableGameComponent
     {
         #region variables
 
@@ -39,17 +39,11 @@ namespace MsPacMan
         }
         #endregion
 
-        #region Properties
-
-
-        #endregion
-
-
         #region Methods
 
         public override void Update(GameTime gameTime)
         {
-            
+
         }
 
         public override void Draw(GameTime gameTime)

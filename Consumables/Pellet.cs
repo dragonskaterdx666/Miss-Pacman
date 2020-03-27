@@ -53,10 +53,10 @@ namespace MsPacMan
             timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //if the timer has a value lower than 0
-            if (timer < 0)           
+            if (timer < 0)
             {
-              //the effect of the power pellet wears out 
-              powerPellet = false;
+                //the effect of the power pellet wears out 
+                powerPellet = false;
             }
 
             //area occupied by player 
@@ -73,7 +73,7 @@ namespace MsPacMan
 
                 //power pellet effect kicks in
                 powerPellet = true;
-                
+
                 //pellet is removed from the map
                 game1.Components.Remove(this);
 
@@ -82,7 +82,7 @@ namespace MsPacMan
                 //player gets 50 points for eating the pellet
                 game1.Player.Score += pelletValue;
 
-                
+
             }
 
         }
@@ -96,7 +96,7 @@ namespace MsPacMan
             {
                 powerPellet = true;
             }
-            
+
         }
         public override void Draw(GameTime gameTime)
         {
@@ -109,7 +109,7 @@ namespace MsPacMan
             Rectangle PowerPellets = new Rectangle(15 * 35, 4 * 35, 35, 35);
             //draws the pellet
             spriteBatch.Draw(texture, outRect, PowerPellets, Color.White);
-            
+
 
             spriteBatch.End();
         }

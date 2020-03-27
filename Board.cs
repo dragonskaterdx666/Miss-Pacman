@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    public class Board: DrawableGameComponent
+    public class Board : DrawableGameComponent
     {
         #region Variables
         public char[,] board;

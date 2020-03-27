@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MsPacMan
 {
-    
+
     public class Game1 : Game
     {
         #region Variables
@@ -56,14 +56,14 @@ namespace MsPacMan
         //random variables
         public static Random rnd = new Random();
 
-        public  Random randomX = new Random();
+        public Random randomX = new Random();
 
-        public  Random randomY = new Random();
+        public Random randomY = new Random();
 
         //board related variables
         public int boardWidth, boardHeight;
 
-        public const int outputTileSize = 25;       
+        public const int outputTileSize = 25;
 
         public GraphicsDeviceManager graphics;
 
@@ -83,7 +83,7 @@ namespace MsPacMan
 
         //Properties referring to the assets used on the game
         public Texture2D SpriteSheet => spriteSheet;
-        public Texture2D SpriteSheetPlayer => spriteSheetPlayer;        
+        public Texture2D SpriteSheetPlayer => spriteSheetPlayer;
         public Texture2D SpriteSheetMap => spriteSheetMap;
 
         //property refering to the textures to create the assets
@@ -98,9 +98,9 @@ namespace MsPacMan
         public Dot Dot => d;
 
         public Cherry Cherry => c;
-        
+
         public Strawberry Strawberry => strawberry;
-        
+
         public Upgrade Upgrade => u;
 
         public Pellet Pellet => pellet;
@@ -202,8 +202,8 @@ namespace MsPacMan
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 35, 35, 35), color: Color.White);
                             break;
 
-                            //CORNERS 
-                            /*top right corner*/
+                        //CORNERS 
+                        /*top right corner*/
                         case 'B':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(11 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
@@ -227,7 +227,7 @@ namespace MsPacMan
                         case 'Q':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(5 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
-                            /*top left corner*/
+                        /*top left corner*/
                         case 'P':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(9 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
@@ -240,8 +240,8 @@ namespace MsPacMan
                         case 'R':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(3 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                            /*right side vertical lines*/
-                       case 'V':
+                        /*right side vertical lines*/
+                        case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
                         /*right side*/
@@ -349,7 +349,7 @@ namespace MsPacMan
             boardHeight = file.Length;
 
             //initializing lists
-            
+
             ghostList = new List<Ghost>();
 
             dotList = new List<Dot>();
@@ -368,7 +368,7 @@ namespace MsPacMan
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
-            
+
             Components.Add(board);
 
             for (y = 0; y < boardHeight; y++)
@@ -392,24 +392,24 @@ namespace MsPacMan
 
                         for (i1 = 0; i1 < 4; i1++)
                         {
-                          Ghost ghost = new Ghost(this, j, i, i1);
-                             
-                          ghostList.Add(ghost);
-                        
-                          Components.Add(ghost);
+                            Ghost ghost = new Ghost(this, j, i, i1);
+
+                            ghostList.Add(ghost);
+
+                            Components.Add(ghost);
                         }
 
                         //this removes the enemy and adds a space
                         Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == '?')
+                    else if (filePosition == '?')
                     {
                         pellet = new Pellet(this, j, i);
 
                         pelletList.Add(pellet);
 
                         Components.Add(pellet);
-                    }                   
+                    }
                     else if (filePosition == 'S')
                     {
                         p = new Player(this, j, i);
@@ -418,9 +418,9 @@ namespace MsPacMan
 
                         p.Score = 0;
 
-                        Board.board[j, i] = ' '; 
+                        Board.board[j, i] = ' ';
                     }
-                    else if(filePosition == ' ')
+                    else if (filePosition == ' ')
                     {
                         d = new Dot(this, j, i);
 
@@ -428,15 +428,15 @@ namespace MsPacMan
 
                         Components.Add(d);
                     }
-                    else if(filePosition == 'L')
+                    else if (filePosition == 'L')
                     {
                         l = new Live(this, j, i);
-                        
+
                         liveList.Add(l);
 
                         Components.Add(l);
                     }
-                    else if(filePosition == '*')
+                    else if (filePosition == '*')
                     {
                         randomPos = file[rndPosX][rndPosY];
 
@@ -461,7 +461,7 @@ namespace MsPacMan
                             strawberry = new Strawberry(this, x2, y2);
                         }
 
-                        if(p.Score != 10000)
+                        if (p.Score != 10000)
                         {
                             d = new Dot(this, j, i);
 
@@ -471,9 +471,9 @@ namespace MsPacMan
                         }
 
                     }
-                    else if(filePosition == '£')
+                    else if (filePosition == '£')
                     {
-                        if((p.Score == 1000  || p.Score == 2000 || p.Score == 3000) && p.isPlayerAbleToGetNewLife == true)
+                        if ((p.Score == 1000 || p.Score == 2000 || p.Score == 3000) && p.isPlayerAbleToGetNewLife == true)
                         {
                             extraLive = new ExtraLive(this, j, i);
 
@@ -500,9 +500,9 @@ namespace MsPacMan
 
             //Set Preferred Window Size
             graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;
-            
+
             graphics.PreferredBackBufferHeight = (boardHeight + 1) * outputTileSize;
-            
+
             graphics.ApplyChanges();
         }
         #endregion

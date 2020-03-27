@@ -74,11 +74,6 @@ namespace MsPacMan
             spritePositions[Direction.Down] = new Vector2(5, 0);
 
             minecraft = game.Content.Load<SpriteFont>("minecraft");
-
-            //spritePositions[Direction.Right] = new Vector2(3.2f, 1);
-            //spritePositions[Direction.Left] = new Vector2(0, 1);
-            //spritePositions[Direction.Up] = new Vector2(2, 0);
-            //spritePositions[Direction.Down] = new Vector2(5.2f, 0);
         }
         #endregion
 

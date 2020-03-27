@@ -11,6 +11,7 @@ namespace MsPacMan
 {
     public class Ghost : DrawableGameComponent
     {
+        //enumeradores
         enum Orientation { Horizontal, Vertical }
 
         enum GDirection { Up, Down, Left, Right }

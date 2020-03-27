@@ -30,7 +30,7 @@ namespace MsPacMan
 
         private Orientation orientation;
 
-        public Point position, targetPosition;
+        public Point position, targetPosition, origin;
 
         int enemyLives = 4;
 
@@ -71,6 +71,8 @@ namespace MsPacMan
 
             board = game1.Board;
 
+            origin = targetPosition = position;
+
             patrolSize = 2 + Game1.rnd.Next(4);
 
             Surroundings = new Dictionary<GDirection, Point>
@@ -109,7 +111,7 @@ namespace MsPacMan
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
             //targetPosition = position;
 
-             if (position == targetPosition)
+            if (position == targetPosition)
             {
 
                 if (Math.Abs(patrolPosition) > patrolSize)
@@ -120,10 +122,9 @@ namespace MsPacMan
                     ? new Point(direction, 0)
                     : new Point(0, direction);
 
-                if (game1.Board.board[targetPosition.X,
-                    targetPosition.Y] == '#' || game1.Board.board[targetPosition.X,
-                        targetPosition.Y] == ' ' || game1.Board.board[targetPosition.X,
-                        targetPosition.Y] == '.')
+                if (game1.Board.board[targetPosition.X,targetPosition.Y] == '#' || 
+                    game1.Board.board[targetPosition.X,targetPosition.Y] == ' ' || 
+                    game1.Board.board[targetPosition.X,targetPosition.Y] == '.')
                 {
                     // increment patrol Position
                     patrolPosition++;
@@ -206,6 +207,7 @@ namespace MsPacMan
 
         public void Die()
         {
+
             enemyLives--;
 
             int n = 4 - enemyLives;
@@ -215,6 +217,12 @@ namespace MsPacMan
             game1.Ghosts.Remove(this);
 
             game1.Components.Remove(this);
+
+            position = targetPosition = origin;
+
+            game1.Ghosts.Add(this);
+
+            game1.Components.Add(this);
         }
 
         public void AssignGhostValue(int n)

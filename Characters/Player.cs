@@ -28,6 +28,8 @@ namespace MsPacMan
 
         public bool allDotsCollected = false;
 
+        public string filePath = Environment.CurrentDirectory + "/highscore.txt";
+
         public bool isPlayerAbleToGetNewLife = false;
 
         public int lives = 3;
@@ -204,6 +206,8 @@ namespace MsPacMan
 
             if (lives <= 0)
             {
+                this.SetHighScore();
+
                 string gameOverText = "GAME OVER!";
 
                 Vector2 stringSize = minecraft.MeasureString(gameOverText);
@@ -224,8 +228,6 @@ namespace MsPacMan
         public void Die()
         {
             lives--;
-
-            this.SetHighScore();
 
             //sets the pacman to the spawn
             position = targetPosition = origin;
@@ -320,24 +322,28 @@ namespace MsPacMan
 
         public void SetHighScore()
         {
-            //gets the file to overwrite the highscore
-            string filePath = Environment.CurrentDirectory + "/highscore.txt";
 
             //new line to insert on the text file
             string line;
 
             //opens the file to overwrite it
-            StreamWriter sw = File.AppendText(filePath);
+            StreamWriter sw;
 
             int currentScore, highScore;
-
-            //pacman loses lives
-
 
             //setting the variables to their current state
             currentScore = this.Score;
 
             highScore = this.HighScore;
+
+            if (File.Exists(filePath))
+            {
+                sw = File.AppendText(filePath);
+            }
+            else
+            {
+                sw = File.CreateText(filePath);
+            }
 
             //comparing to get the highest score
             if (currentScore > highScore)
@@ -346,17 +352,16 @@ namespace MsPacMan
 
                 this.HighScore = highScore;
 
-                line = highScore.ToString();
+                line = highScore.ToString() + ";";
 
                 sw.WriteLine(line);
+                //closes the file opener
+                sw.Close();
             }
             else
             {
                 this.HighScore = highScore;
             }
-
-            //closes the file opener
-            sw.Close();
 
         }
 

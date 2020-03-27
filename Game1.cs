@@ -130,6 +130,9 @@ namespace MsPacMan
         protected override void Initialize()
         {
             base.Initialize();
+
+            Player.HighScore = File.ReadAllText(Player.filePath).ToList().Count;
+                      
         }
 
         /// <summary>
@@ -440,6 +443,7 @@ namespace MsPacMan
                     {
                         randomPos = file[rndPosX][rndPosY];
 
+                        //to avoid appearing in assets
                         if (randomPos == ' ')
                         {
                             //randomly assigns the cherry spot
@@ -481,15 +485,6 @@ namespace MsPacMan
 
                             Components.Add(extraLive);
                         }
-
-                        else if (p.Score != 1000 || p.Score != 2000 || p.Score != 3000)
-                        {
-                            d = new Dot(this, j, i);
-
-                            dotList.Add(d);
-
-                            Components.Add(d);
-                        }
                     }
                     else
                     {
@@ -506,7 +501,20 @@ namespace MsPacMan
             graphics.ApplyChanges();
         }
         #endregion
+        //public void ReadHighscore()
+        //{
+        //    char endOfFile = ';';
+
+        //    string[] input = File.ReadAllLines(Environment.CurrentDirectory + "/highscore.txt");
+
+
+
+        //    Player.HighScore = input.FirstOrDefault;
+        //}
+
 
     }
+
+
 
 }

@@ -69,7 +69,7 @@ namespace MsPacMan
             if (PelletArea.Intersects(playerPosition))
             {
                 //timer starts
-                timer = 80f;
+                timer = 60f;
 
                 //power pellet effect kicks in
                 powerPellet = true;

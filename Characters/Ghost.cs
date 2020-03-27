@@ -65,7 +65,7 @@ namespace MsPacMan
 
             position.X = x;
 
-            targetPosition = position - new Point(0, 1 * 16);
+            targetPosition = position;
 
             game1 = game;
 
@@ -107,6 +107,41 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
+            targetPosition = position;
+
+             if (position == targetPosition)
+            {
+
+                if (Math.Abs(patrolPosition) > patrolSize)
+                    direction *= 1;
+
+                // move horizontally or vertically one unit
+                targetPosition += orientation == Orientation.Horizontal
+                    ? new Point(direction, 0)
+                    : new Point(0, direction);
+
+                if (game1.Board.board[targetPosition.X,
+                    targetPosition.Y] == '#' || game1.Board.board[targetPosition.X,
+                        targetPosition.Y] == ' ' || game1.Board.board[targetPosition.X,
+                        targetPosition.Y] == '.')
+                {
+                    // increment patrol Position
+                    patrolPosition++;
+                }
+                else
+                {
+                    targetPosition = position;
+                    direction = -direction;
+                }
+            }
+            else
+            {
+
+                Vector2 dir = (targetPosition - position).ToVector2();
+                dir.Normalize();
+                position += dir.ToPoint();
+            }
+
 
             if (EnemyArea.Intersects(pRect))
             {
@@ -123,40 +158,9 @@ namespace MsPacMan
                 }
 
             }
-
-            if (position == targetPosition)
-            {
-
-                if (Math.Abs(patrolPosition) > patrolSize)
-                    direction *= -1;
-
-                // move horizontally or vertically one unit
-                targetPosition += orientation == Orientation.Horizontal
-                    ? new Point(direction * Game1.outputTileSize, 0)
-                    : new Point(0, direction * Game1.outputTileSize);
-
-                if (game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                    targetPosition.Y / Game1.outputTileSize] == '#' && game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] == ' ' && game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] == '.')
-                {
-                    // increment patrol Position
-                    patrolPosition += direction;
-                }
-                else
-                {
-                    targetPosition = position;
-                    direction = -direction;
-                }
-            }
-            else
-            {
-
-                Vector2 dir = (targetPosition - position).ToVector2();
-                dir.Normalize();
-                position += dir.ToPoint();
-            }
         }
+
+
 
         //Draws the different types of ghosts
         public override void Draw(GameTime gameTime)

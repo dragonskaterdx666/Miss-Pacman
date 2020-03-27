@@ -65,7 +65,7 @@ namespace MsPacMan
 
             position.X = x;
 
-            targetPosition = position - new Point(0, 1 * 16);
+            targetPosition = position;
 
             game1 = game;
 
@@ -124,28 +124,30 @@ namespace MsPacMan
 
             }
 
+            targetPosition = position;
             if (position == targetPosition)
             {
 
                 if (Math.Abs(patrolPosition) > patrolSize)
-                    direction *= -1;
+                    direction *= 1;
 
                 // move horizontally or vertically one unit
-                targetPosition += orientation == Orientation.Horizontal
+                targetPosition += orientation == Orientation.Vertical
                     ? new Point(direction * Game1.outputTileSize, 0)
                     : new Point(0, direction * Game1.outputTileSize);
 
                 if (game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                    targetPosition.Y / Game1.outputTileSize] == '#' && game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] == ' ' && game1.Board.board[targetPosition.X / Game1.outputTileSize,
-                        targetPosition.Y / Game1.outputTileSize] == '.')
+                    targetPosition.Y / Game1.outputTileSize] == '#' || game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == ' ' || game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == '.' || game1.Board.board[targetPosition.X / Game1.outputTileSize,
+                        targetPosition.Y / Game1.outputTileSize] == '*')
                 {
                     // increment patrol Position
-                    patrolPosition += direction;
+                    patrolPosition++;
                 }
                 else
                 {
-                    targetPosition = position;
+                    position = targetPosition;
                     direction = -direction;
                 }
             }

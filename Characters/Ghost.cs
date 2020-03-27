@@ -64,7 +64,7 @@ namespace MsPacMan
 
             position.X = x;
 
-            targetPosition = position;
+            targetPosition = position - new Point(0, 1 * 16);
 
             game1 = game;
 
@@ -130,8 +130,7 @@ namespace MsPacMan
                     direction *= -1;
 
                 // move horizontally or vertically one unit
-                targetPosition +=
-                        orientation == Orientation.Horizontal
+                targetPosition += orientation == Orientation.Horizontal
                     ? new Point(direction * Game1.outputTileSize, 0)
                     : new Point(0, direction * Game1.outputTileSize);
 

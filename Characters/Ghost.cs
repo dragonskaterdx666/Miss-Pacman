@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +17,6 @@ namespace MsPacMan
 
         enum GDirection { Up, Down, Left, Right }
 
-        enum GhostTypes { Blue, Orange, Purple, Red }
 
         #region variables
 
@@ -93,7 +93,7 @@ namespace MsPacMan
                 [GDirection.Left] = new Vector2(2, ghostType),
                 [GDirection.Up] = new Vector2(4, ghostType),
                 [GDirection.Down] = new Vector2(6, ghostType),
-            };           
+            };
 
         }
 
@@ -141,7 +141,7 @@ namespace MsPacMan
         {
             Rectangle outRect = new Rectangle(position.X * Game1.outputTileSize, position.Y * Game1.outputTileSize, Game1.outputTileSize, Game1.outputTileSize);
 
-            Rectangle sourceRec = new Rectangle(((ghostColor[gDirection] + (Vector2.UnitX * frame)) * 16).ToPoint(), new Point(15));
+            Rectangle sourceRec = new Rectangle(((ghostColor[gDirection] + Vector2.UnitX * frame) * 16).ToPoint(), new Point(15));
 
             Rectangle sourcePelletRec = new Rectangle(8 * 16, 0, 16, 15);
 
@@ -212,10 +212,76 @@ namespace MsPacMan
                 ChaseRandom();
             }
         }
+
         public void ChaseAggressive()
         {
             //Blinky the red ghost is very aggressive in its approach while chasing Pac - Man and will follow Pac-Man once located
+            Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
+            Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
+
+            string[] file = File.ReadAllLines(Game.Content.RootDirectory + "/level1.txt");
+
+            int i, j;
+
+            char filePosition;
+
+            for (i = 0; i < file.Length; i++)
+            {
+                for (j = 0; j < file[0].Length; j++)
+                {
+                    filePosition = file[i][j];
+
+                    if (filePosition == ' ')
+                    {
+
+                        if (position == targetPosition)
+                        {
+
+                            if (Math.Abs(patrolPosition) > patrolSize)
+                                direction *= 1;
+
+                            // move horizontally or vertically one unit
+                            targetPosition += orientation == Orientation.Horizontal
+                                ? new Point(direction, 0)
+                                : new Point(0, direction);
+
+                            if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
+                                game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                                game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
+                            {
+                                // increment patrol Position
+                                patrolPosition++;
+                            }
+                            else
+                            {
+                                targetPosition = position;
+                                direction = -direction;
+                                
+                            }
+
+                        }
+                        else
+                        {
+                            // Position is not the same, move the guy
+                            Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+                            vec.Normalize();
+                            position = (position.ToVector2() + vec).ToPoint();
+                            // Incrementar frame
+                            if ((position.X + position.Y) % 4 == 0)
+                                frame++;
+                            if (frame > 1) frame = -1;
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public void ChaseAmbush()
+        {
+            //Pinky the pink ghost will attempt to ambush Pac-Man by trying to get in front of him and cut him off
             if (position == targetPosition)
             {
 
@@ -238,35 +304,28 @@ namespace MsPacMan
                 {
 
                     targetPosition = position;
+                    direction = -direction;
 
-                    orientation = Orientation.Vertical;
-
-                    Point wall = new Point(14, 13);
-
-                    if (position == wall)
-                    {
-                        orientation = Orientation.Horizontal;
-                    }
                 }
+
             }
             else
             {
-
                 Vector2 dir = (targetPosition - position).ToVector2();
                 dir.Normalize();
                 position += dir.ToPoint();
-
+                // Position is not the same, move the guy
+                Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+                vec.Normalize();
+                position = (position.ToVector2() + vec).ToPoint();
+                // Incrementar frame
+                if ((position.X + position.Y) % 4 == 0)
+                    frame++;
+                if (frame > 1) frame = -1;
             }
 
-
         }
 
-        public void ChaseAmbush()
-        {
-            //Pinky the pink ghost will attempt to ambush Pac-Man by trying to get in front of him and cut him off
-            position = targetPosition;
-
-        }
 
         public void ChasePatrol()
         {

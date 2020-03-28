@@ -339,9 +339,9 @@ namespace MsPacMan
 
             y2 = backUpRndY.Next(9, 24);
 
-            rndPosX = randomX.Next(1, 31);
+            rndPosX = randomX.Next(2, 30);
 
-            rndPosY = randomY.Next(5, 30);
+            rndPosY = randomY.Next(4, 29);
 
             char filePosition;
 

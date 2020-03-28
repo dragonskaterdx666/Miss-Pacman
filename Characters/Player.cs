@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MsPacMan
 {
@@ -19,6 +20,10 @@ namespace MsPacMan
         private Texture2D texture;
 
         private SpriteBatch spriteBatch;
+
+        private SoundEffect deathSound;
+
+        private SoundEffect pacmanChomp;
 
         private Board board;
 
@@ -68,6 +73,10 @@ namespace MsPacMan
 
             board = game1.Board;
 
+            pacmanChomp = game1.Content.Load<SoundEffect>("pacman_chomp");
+
+            deathSound = game1.Content.Load<SoundEffect>("pacman_death");
+
             spritePositions = new Dictionary<Direction, Vector2>();
 
             spritePositions[Direction.Right] = new Vector2(5, 1);
@@ -116,6 +125,7 @@ namespace MsPacMan
                 #region Player Movement Controls
 
                 bool keyPressed = false;
+
                 if (state.IsKeyDown(Keys.W))
                 {
                     direction = Direction.Up;
@@ -147,6 +157,7 @@ namespace MsPacMan
                 #region Player Movement Positions
                 if (keyPressed == true)
                 {
+                    pacmanChomp.Play();
 
                     switch (direction)
                     {
@@ -253,6 +264,8 @@ namespace MsPacMan
         /// </summary>
         public void Die()
         {
+            deathSound.Play();
+
             lives--;
 
             //sets the pacman to the spawn
@@ -310,7 +323,7 @@ namespace MsPacMan
             int totalDotPoints = amountOfDots * 10;
 
             //if the player gets 1000 points he earns a life
-            if (currentScore >= 1000  && currentScore <= 1500)
+            if (currentScore == 1000)
             {
                 isPlayerAbleToGetNewLife = false;
 
@@ -319,7 +332,7 @@ namespace MsPacMan
                 game1.Components.Add(game1.Cherry);
 
             }
-            if (currentScore >= 2000 && currentScore <= 2000)
+            if (currentScore == 2000)
             {
                 isPlayerAbleToGetNewLife = false;
 
@@ -328,7 +341,7 @@ namespace MsPacMan
                 game1.Components.Add(game1.Strawberry);
 
             }
-            if (currentScore >= 3000)
+            if (currentScore == 3000)
             {
                 isPlayerAbleToGetNewLife = false;
 

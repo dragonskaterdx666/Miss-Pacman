@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MsPacMan
 {
@@ -22,6 +23,8 @@ namespace MsPacMan
         private Texture2D texture;
 
         private SpriteBatch spriteBatch;
+
+        private SoundEffect eatghostSound;
 
         private Game1 game1;
 
@@ -77,6 +80,8 @@ namespace MsPacMan
             origin = targetPosition = position;
 
             patrolSize = 2 + Game1.rnd.Next(4);
+
+            eatghostSound = game1.Content.Load<SoundEffect>("pacman_eatghost");
 
             Surroundings = new Dictionary<GDirection, Point>
             {
@@ -158,6 +163,7 @@ namespace MsPacMan
 
         public void Die()
         {
+            eatghostSound.Play();
 
             enemyLives--;
 

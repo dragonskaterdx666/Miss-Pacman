@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MsPacMan
 {
@@ -31,6 +32,7 @@ namespace MsPacMan
 
         private Pellet pellet;
 
+        #region lists
         private List<Dot> dotList;
 
         private List<Pellet> pelletList;
@@ -46,10 +48,13 @@ namespace MsPacMan
         private List<Cherry> cherriesList;
 
         private List<Strawberry> strawberryList;
+        #endregion
 
         private Texture2D spriteSheet, spriteSheetPlayer, spriteSheetMap;
 
         private SpriteBatch spriteBatch;
+
+        private SoundEffect beginning;
 
         private Board board;
 
@@ -132,6 +137,8 @@ namespace MsPacMan
             base.Initialize();
 
             Player.HighScore = File.ReadAllText(Player.filePath).ToList().Count;
+
+            beginning.Play();            
                      
         }
 
@@ -149,6 +156,8 @@ namespace MsPacMan
             spriteSheet = Content.Load<Texture2D>("sprites2");
 
             spriteSheetMap = Content.Load<Texture2D>("mappa");
+
+            beginning = Content.Load<SoundEffect>("pacman_beginning");
 
             //calls the function responsible for initializing the level
             LoadLevel();

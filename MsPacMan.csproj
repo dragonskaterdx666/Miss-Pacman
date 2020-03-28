@@ -123,6 +123,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\mappa.png" />
+    <Content Include="Content\pacman_beginning.wav" />
+    <Content Include="Content\pacman_chomp.wav" />
+    <Content Include="Content\pacman_death.wav" />
+    <Content Include="Content\pacman_eatfruit.wav" />
+    <Content Include="Content\pacman_eatghost.wav" />
+    <Content Include="Content\pacman_intermission.wav" />
     <Content Include="Content\sprites.png" />
     <Content Include="Content\sprites2.png" />
   </ItemGroup>

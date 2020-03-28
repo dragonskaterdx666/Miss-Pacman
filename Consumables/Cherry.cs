@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MsPacMan
 {
@@ -17,6 +18,8 @@ namespace MsPacMan
         private Texture2D texture;
 
         private SpriteBatch spriteBatch;
+
+        private SoundEffect eatFruitSound;
 
         private Game1 game1;
 
@@ -39,6 +42,8 @@ namespace MsPacMan
 
             texture = game.SpriteSheet;
 
+            eatFruitSound = game1.Content.Load<SoundEffect>("pacman_eatfruit");
+
         }
         #endregion
 
@@ -52,6 +57,8 @@ namespace MsPacMan
 
             if (CherryArea.Intersects(playerPosition))
             {
+                eatFruitSound.Play();
+
                 game1.Cherries.Remove(this);
 
                 game1.Components.Remove(this);

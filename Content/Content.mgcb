@@ -32,6 +32,42 @@
 /processorParam:TextureFormat=Compressed
 /build:minecraft.spritefont
 
+#begin pacman_beginning.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_beginning.wav
+
+#begin pacman_chomp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_chomp.wav
+
+#begin pacman_death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_death.wav
+
+#begin pacman_eatfruit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_eatfruit.wav
+
+#begin pacman_eatghost.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_eatghost.wav
+
+#begin pacman_intermission.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacman_intermission.wav
+
 #begin sprites.png
 /importer:TextureImporter
 /processor:TextureProcessor

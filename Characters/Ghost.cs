@@ -17,7 +17,6 @@ namespace MsPacMan
 
         enum GDirection { Up, Down, Left, Right }
 
-
         #region variables
 
         private Texture2D texture;
@@ -28,7 +27,7 @@ namespace MsPacMan
 
         private int ghostType;
 
-        public Board board;
+        private Board board;
 
         private Orientation orientation;
 
@@ -45,10 +44,6 @@ namespace MsPacMan
         int frame = 0;
 
         public static int ghostValue = 200;
-
-        bool right;
-
-        float distance;
 
         Dictionary<GDirection, Vector2> ghostColor;
 
@@ -117,7 +112,6 @@ namespace MsPacMan
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
-            //targetPosition = position;
 
             ChasePattern(ghostType);
 
@@ -207,7 +201,6 @@ namespace MsPacMan
             {
                 ChasePatrol();
             }
-            //the orange ghost will move avoiding the pacman 
             else if (ghosType == clyde)
             {
                 ChaseRandom();
@@ -217,70 +210,69 @@ namespace MsPacMan
         public void ChaseAggressive()
         {
             //Blinky the red ghost is very aggressive in its approach while chasing Pac - Man and will follow Pac-Man once located
-            
+
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
 
-            string[] file = File.ReadAllLines(Game.Content.RootDirectory + "/level1.txt");
 
-            int i, j;
-
-            char filePosition;
-
-            for (i = 0; i < file.Length; i++)
+            if (position == targetPosition)
             {
-                for (j = 0; j < file[0].Length; j++)
+
+                if (Math.Abs(patrolPosition) > patrolSize)
+                    direction *= 1;
+
+                // move horizontally or vertically one unit
+                targetPosition += orientation == Orientation.Horizontal
+                    ? new Point(direction, 3)
+                    : new Point(0, direction);
+
+                if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
+                    game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                    game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
                 {
-                    filePosition = file[i][j];
-
-                    if (filePosition == ' ')
-                    {
-
-                        if (position == targetPosition)
-                        {
-
-                            if (Math.Abs(patrolPosition) > patrolSize)
-                                direction *= 1;
-
-                            // move horizontally or vertically one unit
-                            targetPosition += orientation == Orientation.Horizontal
-                                ? new Point(direction, 3)
-                                : new Point(0, direction);
-
-                            if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
-                                game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
-                                game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
-                            {
-                                // increment patrol Position
-                                patrolPosition++;
-                            }
-                            else
-                            {
-                                targetPosition = position;
-                                direction = -direction;
-
-                                new Point(direction, 6);
-
-
-                            }
-
-                        }
-                        else
-                        {
-                            // Position is not the same, move the guy
-                            Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
-                            vec.Normalize();
-                            position = (position.ToVector2() + vec).ToPoint();
-                            // Incrementar frame
-                            if ((position.X + position.Y) % 4 == 0)
-                                frame++;
-                            if (frame > 1) frame = -1;
-
-                        }
-                    }
+                    // increment patrol Position
+                    patrolPosition++;
                 }
+                else
+                {
+                    targetPosition = position;
+                   
+                    if(position.X < game1.Player.position.X)
+                    {
+                        position.X += targetPosition.X;
+                    }
+
+                    if(position.Y < game1.Player.position.Y)
+                    {
+                        position.X += targetPosition.X;
+                    }
+                    if (position.X > game1.Player.position.X)
+                    {
+                        position.X -= targetPosition.X;
+                    }
+
+                    if (position.Y > game1.Player.position.Y)
+                    {
+                        position.X -= targetPosition.X;
+                    }
+
+                }
+
             }
+            else
+            {
+                // Position is not the same, move the guy
+                Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+                vec.Normalize();
+                position = (position.ToVector2() + vec).ToPoint();
+                // Incrementar frame
+                if ((position.X + position.Y) % 4 == 0)
+                    frame++;
+                if (frame > 1) frame = -1;
+
+            }
+
 
         }
 
@@ -307,10 +299,8 @@ namespace MsPacMan
                 }
                 else
                 {
-
                     targetPosition = position;
                     direction = -direction;
-
                 }
 
             }
@@ -351,6 +341,7 @@ namespace MsPacMan
             //    orientation = Orientation.Horizontal;
             //}
         }
+
         #endregion
     }
 }

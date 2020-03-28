@@ -122,6 +122,7 @@
     <Content Include="Content\level1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\level2.txt" />
     <Content Include="Content\mappa.png" />
     <Content Include="Content\pacman_beginning.wav" />
     <Content Include="Content\pacman_chomp.wav" />

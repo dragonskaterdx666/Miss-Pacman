@@ -34,7 +34,7 @@ namespace MsPacMan
 
         private Orientation orientation;
 
-        public Point position, targetPosition, origin;
+        public Point position, targetPosition, origin, dir;
 
         int enemyLives = 4;
 
@@ -217,68 +217,112 @@ namespace MsPacMan
         {
             //Blinky the red ghost is very aggressive in its approach while chasing Pac - Man and will follow Pac-Man once located
 
-            Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+            //Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
-            Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
+            //Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
+
+            //#region code
+            ////if (position == targetPosition)
+            ////{
+
+            ////    if (Math.Abs(patrolPosition) > patrolSize)
+            ////        direction *= 1;
+
+            ////    // move horizontally or vertically one unit
+            ////    targetPosition += orientation == Orientation.Horizontal
+            ////        ? new Point(direction, 3)
+            ////        : new Point(0, direction);
+
+            ////    if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
+            ////        game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+            ////        game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
+            ////    {
+            ////        // increment patrol Position
+            ////        patrolPosition++;
+            ////    }
+            ////    else
+            ////    {
+            ////        targetPosition = position;
+
+            ////        if(position.X < game1.Player.position.X)
+            ////        {
+            ////            position.X += targetPosition.X;
+            ////        }
+
+            ////        if(position.Y < game1.Player.position.Y)
+            ////        {
+            ////            position.X += targetPosition.X;
+            ////        }
+            ////        if (position.X > game1.Player.position.X)
+            ////        {
+            ////            position.X -= targetPosition.X;
+            ////        }
+
+            ////        if (position.Y > game1.Player.position.Y)
+            ////        {
+            ////            position.X -= targetPosition.X;
+            ////        }
+
+            ////    }
+
+            ////}
+            ////else
+            ////{
+            ////    // Position is not the same, move the guy
+            ////    Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+            ////    vec.Normalize();
+            ////    position = (position.ToVector2() + vec).ToPoint();
+            ////    // Incrementar frame
+            ////    if ((position.X + position.Y) % 4 == 0)
+            ////        frame++;
+            ////    if (frame > 1) frame = -1;
+
+            ////}
+            ////float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
+            //#endregion
+
+            //float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
+
+            //if (dist <= 1)
+            //{
+            //    List<GDirection> availableDirections = new List<GDirection>();
+
+            //    foreach (var dir in Surroundings)
+            //        if (game1.Board[targetPosition.X / (Game1.outputTileSize) + dir] == ' ')
+            //            availableDirections.Add(dir.Key);
+
+            //    // This shouldn't happen, but better safe than sorry
+            //    if (availableDirections.Count == 0) return;
+
+            //    availableDirections = availableDirections.OrderBy(dir =>
+            //    {
+            //        float distP1 = Vector2.Distance(targetPosition + (dir).ToVector2() * Game1.outputTileSize, game1.Player.position);
+
+            //    }).ToList();
 
 
-            if (position == targetPosition)
-            {
 
-                if (Math.Abs(patrolPosition) > patrolSize)
-                    direction *= 1;
+            //    // Where's the closest player?!?! I'M GOING FOR HIM!!!
+            //    direction = availableDirections[GDirection];
 
-                // move horizontally or vertically one unit
-                targetPosition += orientation == Orientation.Horizontal
-                    ? new Point(direction, 3)
-                    : new Point(0, direction);
 
-                if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
-                    game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
-                    game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
-                {
-                    // increment patrol Position
-                    patrolPosition++;
-                }
-                else
-                {
-                    targetPosition = position;
-                   
-                    if(position.X < game1.Player.position.X)
-                    {
-                        position.X += targetPosition.X;
-                    }
+            //    direction = Surroundings[availableDirections.Count - 1];
 
-                    if(position.Y < game1.Player.position.Y)
-                    {
-                        position.X += targetPosition.X;
-                    }
-                    if (position.X > game1.Player.position.X)
-                    {
-                        position.X -= targetPosition.X;
-                    }
 
-                    if (position.Y > game1.Player.position.Y)
-                    {
-                        position.X -= targetPosition.X;
-                    }
+            //    targetPosition = targetPosition + availableDirections[direction].Multiply(Game1.outputTileSize);
+            //}
+            //else
+            //{
+            //    // Position is not the same, move the guy
+            //    Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
+            //    vec.Normalize();
+            //    position = (position.ToVector2() + vec).ToPoint();
+            //    // Incrementar frame
+            //    if ((position.X + position.Y) % 4 == 0)
+            //        frame++;
+            //    if (frame > 1) frame = -1;
 
-                }
-
-            }
-            else
-            {
-                // Position is not the same, move the guy
-                Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
-                vec.Normalize();
-                position = (position.ToVector2() + vec).ToPoint();
-                // Incrementar frame
-                if ((position.X + position.Y) % 4 == 0)
-                    frame++;
-                if (frame > 1) frame = -1;
-
-            }
-
+            //}
 
         }
 

@@ -94,6 +94,7 @@ namespace MsPacMan
         #endregion
 
         #region Methods
+
         public override void Update(GameTime gameTime)
         {
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));

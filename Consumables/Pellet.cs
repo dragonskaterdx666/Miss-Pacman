@@ -98,6 +98,7 @@ namespace MsPacMan
             }
 
         }
+
         public override void Draw(GameTime gameTime)
         {
 

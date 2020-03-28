@@ -26,7 +26,7 @@ namespace MsPacMan
 
         public Point position, targetPosition, origin;
 
-        public bool allDotsCollected = false;
+        public bool allPointsCollected = false;
 
         public string filePath = Environment.CurrentDirectory + "/highscore.txt";
 
@@ -98,6 +98,11 @@ namespace MsPacMan
         public override void Update(GameTime gameTime)
         {
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+
+            if (Score > HighScore)
+            {
+                HighScore = Score;
+            }
 
             //DO THE TELEPORT
             if (targetPosition == position)
@@ -220,6 +225,26 @@ namespace MsPacMan
                 spriteBatch.DrawString(minecraft, gameOverText, textPos, Color.White);
             }
 
+            CollectedAllPoints();
+
+            if (allPointsCollected == true)
+            {
+                if (lives >= 0)
+                {
+                    this.SetHighScore();
+
+                    string winText = "YOU WIN";
+
+                    Vector2 stringSize = minecraft.MeasureString(winText);
+
+                    Vector2 screenSize = new Vector2(game1.graphics.PreferredBackBufferWidth, game1.graphics.PreferredBackBufferHeight);
+
+                    Vector2 textPos = (screenSize - stringSize) / 2.0f;
+
+                    spriteBatch.DrawString(minecraft, winText, textPos, Color.White);
+
+                }
+            }
             spriteBatch.End();
         }
 
@@ -248,22 +273,28 @@ namespace MsPacMan
             }
         }
 
-        public bool CollectedAllDots()
+        public bool CollectedAllPoints()
         {
             //gets the amount of dots in the map
-            int amountOfDots = game1.Dots.Count;
+            int amountOfDots = game1.Dots.Count();
+
+            int amountOfPellets = game1.Pellets.Count();
 
             //gets the amount of point value on the map
             int totalDotPoints = amountOfDots * 10;
 
+            int totalPelletPoints = amountOfPellets * 50;
+
+            int total = totalDotPoints + totalPelletPoints + Cherry.cherryValue + Strawberry.strawberryValue + Upgrade.monalisaValue + game1.Ghosts.Count() * Ghost.ghostValue;
+
             //if the score is the same as all points caught then all the dots are collected
-            if (Score == totalDotPoints)
-                allDotsCollected = true;
+            if (Score >= total)
+                allPointsCollected = true;
 
             else
-                allDotsCollected = false;
+                allPointsCollected = false;
 
-            return allDotsCollected;
+            return allPointsCollected;
         }
 
         //counts the score to see if the players gets and extra life
@@ -279,7 +310,7 @@ namespace MsPacMan
             int totalDotPoints = amountOfDots * 10;
 
             //if the player gets 1000 points he earns a life
-            if (currentScore == 1000)
+            if (currentScore >= 1000  && currentScore <= 1500)
             {
                 isPlayerAbleToGetNewLife = false;
 
@@ -288,7 +319,7 @@ namespace MsPacMan
                 game1.Components.Add(game1.Cherry);
 
             }
-            if (currentScore == 2000)
+            if (currentScore >= 2000 && currentScore <= 2000)
             {
                 isPlayerAbleToGetNewLife = false;
 
@@ -297,7 +328,7 @@ namespace MsPacMan
                 game1.Components.Add(game1.Strawberry);
 
             }
-            if (currentScore == 3000)
+            if (currentScore >= 3000)
             {
                 isPlayerAbleToGetNewLife = false;
 
@@ -363,6 +394,11 @@ namespace MsPacMan
             {
                 this.HighScore = highScore;
             }
+
+        }
+
+        public void Win()
+        {           
 
         }
 

@@ -21,7 +21,7 @@ namespace MsPacMan
 
         private Point position;
 
-        public int monalisaValue = 5000;
+        public static int monalisaValue = 5000;
 
         public Rectangle SourceUpgrade = new Rectangle(13 * 16, 9 * 16, 16, 16);
 

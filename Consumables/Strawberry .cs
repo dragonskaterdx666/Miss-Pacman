@@ -23,7 +23,7 @@ namespace MsPacMan
 
         private Point position;
 
-        int strawberryValue = 300;
+        public static int strawberryValue = 300;
 
         #endregion
 

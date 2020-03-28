@@ -44,7 +44,11 @@ namespace MsPacMan
 
         int frame = 0;
 
-        int ghostValue = 200;
+        public static int ghostValue = 200;
+
+        bool right;
+
+        float distance;
 
         Dictionary<GDirection, Vector2> ghostColor;
 
@@ -121,7 +125,7 @@ namespace MsPacMan
             {
                 Pellet.GetPelletStatus();
 
-                if (Pellet.powerPellet == true)
+                if (Pellet.powerPellet)
                 {
                     this.Die();
                 }
@@ -133,8 +137,6 @@ namespace MsPacMan
 
             }
         }
-
-
 
         //Draws the different types of ghosts
         public override void Draw(GameTime gameTime)
@@ -159,7 +161,6 @@ namespace MsPacMan
             }
             spriteBatch.End();
         }
-
 
         public void Die()
         {
@@ -216,6 +217,7 @@ namespace MsPacMan
         public void ChaseAggressive()
         {
             //Blinky the red ghost is very aggressive in its approach while chasing Pac - Man and will follow Pac-Man once located
+            
             Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
 
             Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
@@ -243,7 +245,7 @@ namespace MsPacMan
 
                             // move horizontally or vertically one unit
                             targetPosition += orientation == Orientation.Horizontal
-                                ? new Point(direction, 0)
+                                ? new Point(direction, 3)
                                 : new Point(0, direction);
 
                             if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
@@ -257,7 +259,10 @@ namespace MsPacMan
                             {
                                 targetPosition = position;
                                 direction = -direction;
-                                
+
+                                new Point(direction, 6);
+
+
                             }
 
                         }

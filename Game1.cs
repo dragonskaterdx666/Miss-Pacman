@@ -132,7 +132,7 @@ namespace MsPacMan
             base.Initialize();
 
             Player.HighScore = File.ReadAllText(Player.filePath).ToList().Count;
-                      
+                     
         }
 
         /// <summary>
@@ -331,9 +331,13 @@ namespace MsPacMan
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/level1.txt");
 
-            int y, x, i, j, rndPosX, rndPosY, y2, x2, x3;
+            int y, x, i, j, rndPosX, rndPosY,rndPosX2, rndPosY2, y2, x2, x3;
 
             Random backUpRndY = new Random();
+
+            Random randomX2 = new Random();
+
+            Random randomY2 = new Random();
 
             x2 = 6; x3 = 22;
 
@@ -342,6 +346,10 @@ namespace MsPacMan
             rndPosX = randomX.Next(2, 30);
 
             rndPosY = randomY.Next(4, 29);
+
+            rndPosX2 = randomX2.Next(2, 30);
+
+            rndPosY2 = randomY2.Next(4, 29);
 
             char filePosition;
 
@@ -450,9 +458,9 @@ namespace MsPacMan
                             c = new Cherry(this, rndPosX, rndPosY);
 
                             //randomly assigns the upgrade spot
-                            u = new Upgrade(this, rndPosX, rndPosY);
+                            u = new Upgrade(this, rndPosX2, rndPosY2);
 
-                            strawberry = new Strawberry(this, rndPosX, rndPosY);
+                            strawberry = new Strawberry(this, rndPosX2, rndPosY);
                         }
                         else
                         {
@@ -477,7 +485,7 @@ namespace MsPacMan
                     }
                     else if (filePosition == '£')
                     {
-                        if ((p.Score == 1000 || p.Score == 2000 || p.Score == 3000) && p.isPlayerAbleToGetNewLife == true)
+                        if ((p.Score >= 10000) && p.isPlayerAbleToGetNewLife == true)
                         {
                             extraLive = new ExtraLive(this, j, i);
 

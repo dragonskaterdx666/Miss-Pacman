@@ -22,7 +22,7 @@ namespace MsPacMan
 
         private Point position;
 
-        int cherryValue = 100;
+        public static int cherryValue = 100;
 
         #endregion
 

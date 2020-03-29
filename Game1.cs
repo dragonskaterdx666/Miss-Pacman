@@ -167,7 +167,7 @@ namespace MsPacMan
             //calls the function responsible for initializing the level
             LoadLevel();
 
-            if(p.isSecondLevelEnabled)
+            if (p.isSecondLevelEnabled)
             {
                 LoadSecondLevel();
             }
@@ -178,7 +178,7 @@ namespace MsPacMan
         /// </summary>
         protected override void UnloadContent()
         {
-            if(p.isSecondLevelEnabled)
+            if (p.isSecondLevelEnabled)
             {
                 LoadLevel();
             }
@@ -235,15 +235,15 @@ namespace MsPacMan
                         case '0':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
-                            /*top right corner*/
+                        /*top right corner*/
                         case 'B':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(11 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
-                         /*bottom left cornerS*/
+                        /*bottom left cornerS*/
                         case 'H':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                            /*bottom right corner*/
+                        /*bottom right corner*/
                         case 'D':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
@@ -252,10 +252,10 @@ namespace MsPacMan
                         #region CORNERS
                         case 'X':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(10 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;                       
+                            break;
                         case 'Y':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(6 * 35, 5 * 35, 35, 35), color: Color.White);
-                            break;                      
+                            break;
                         case 'Q':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(5 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;

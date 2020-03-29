@@ -189,7 +189,7 @@ namespace MsPacMan
             game1.Components.Remove(this);
 
             //RESPAWNER
-            if(Time.TotalSeconds == 10f)
+            if (Time.TotalSeconds == 10f)
             {
                 Respawn();
             }
@@ -244,7 +244,7 @@ namespace MsPacMan
 
             float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
 
-            if(dist > 1)
+            if (dist > 1)
             {
                 dist -= position.X;
             }
@@ -418,10 +418,10 @@ namespace MsPacMan
         /// </summary>
         public void Respawn()
         {
-           game1.Ghosts.Add(this);
+            game1.Ghosts.Add(this);
 
-           game1.Components.Add(this);   
-           
+            game1.Components.Add(this);
+
 
         }
 

@@ -35,6 +35,8 @@ namespace MsPacMan
 
         public string filePath = Environment.CurrentDirectory + "/highscore.txt";
 
+        //booleans
+
         public bool isPlayerAbleToGetNewLife = false;
 
         public bool isFruitAvailable = false;
@@ -336,7 +338,7 @@ namespace MsPacMan
         {
             int currentScore = game1.Player.Score;
 
-            
+
             if (currentScore == 1000)
             {
                 isFruitAvailable = true;
@@ -404,19 +406,19 @@ namespace MsPacMan
                 HighScore = highScore;
 
                 var newHighScore = File.Create(filePath);
-                
+
                 newHighScore.Close();
-                
+
                 File.WriteAllText(filePath, line);
-                
-                newHighScore.Close();   
+
+                newHighScore.Close();
             }
             else
             {
                 HighScore = highScore;
 
             }
-            
+
         }
 
         /// <summary>

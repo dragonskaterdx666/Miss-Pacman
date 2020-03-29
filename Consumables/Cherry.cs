@@ -64,7 +64,7 @@ namespace MsPacMan
                 game1.Cherries.Remove(this);
 
                 game1.Components.Remove(this);
-                
+
                 //adds to players score
                 game1.Player.Score += cherryValue;
             }

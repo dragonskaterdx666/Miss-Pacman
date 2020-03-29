@@ -21,9 +21,9 @@ namespace MsPacMan
         public Board(Game1 game, int width, int height) : base(game)
         {
             this.width = width;
-            
+
             this.height = height;
-            
+
             board = new char[width, height];
         }
         #endregion

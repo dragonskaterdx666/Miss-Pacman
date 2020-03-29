@@ -74,6 +74,7 @@ Appears on the map when the player has reached a score of 10000.
 
 ----------SOUNDTRACK----------
 
+
 We used several different soundtracks from the original game, which are used at times like:
 
 -> when you start the game
@@ -81,4 +82,20 @@ We used several different soundtracks from the original game, which are used at 
 -> when the player dies
 -> when the player eats fruit
 -> when the player eats a ghost
+
+
+----------SUCCESSFULLY IMPLEMENTED----------
+
+-> tile based implementation
+-> Game Over concept
+-> possible to win
+-> use of animations
+-> use of sound
+
+
+----------THINGS THAT AREN'T WORKING QUITE RIGHT :(----------
+
+-> enemy autonomous movement
+-> more than one level
+
 

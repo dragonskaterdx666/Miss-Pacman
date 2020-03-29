@@ -41,6 +41,8 @@ namespace MsPacMan
 
         public bool isLifeEnabled = true;
 
+        public bool isSecondLevelEnabled = false;
+
         public bool win = false;
 
         public int lives = 3;
@@ -427,6 +429,8 @@ namespace MsPacMan
             {
                 comp.Enabled = false;
             }
+
+            isSecondLevelEnabled = true;
         }
 
         #endregion

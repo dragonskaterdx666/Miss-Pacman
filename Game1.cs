@@ -166,6 +166,11 @@ namespace MsPacMan
 
             //calls the function responsible for initializing the level
             LoadLevel();
+
+            if(p.isSecondLevelEnabled)
+            {
+                LoadSecondLevel();
+            }
         }
 
         /// <summary>
@@ -173,7 +178,10 @@ namespace MsPacMan
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            if(p.isSecondLevelEnabled)
+            {
+                LoadLevel();
+            }
         }
 
         /// <summary>
@@ -356,10 +364,198 @@ namespace MsPacMan
         }
         #endregion
 
+        /// <summary>
+        /// Loads the first level of the game
+        /// </summary>
         public void LoadLevel()
         {
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/level1.txt");
+
+            int y, x, i, j, rndPosX, rndPosY, rndPosX2, rndPosY2, y2, x2, x3;
+
+            Random backUpRndY = new Random();
+
+            Random randomX2 = new Random();
+
+            Random randomY2 = new Random();
+
+            x2 = 6; x3 = 22;
+
+            y2 = backUpRndY.Next(9, 24);
+
+            rndPosX = randomX.Next(2, 30);
+
+            rndPosY = randomY.Next(4, 29);
+
+            rndPosX2 = randomX2.Next(2, 30);
+
+            rndPosY2 = randomY2.Next(4, 29);
+
+            char filePosition;
+
+            char randomPos;
+
+            boardWidth = file[0].Length;
+
+            boardHeight = file.Length;
+
+            //initializing lists
+
+            ghostList = new List<Ghost>();
+
+            dotList = new List<Dot>();
+
+            pelletList = new List<Pellet>();
+
+            liveList = new List<Live>();
+
+            upgradeList = new List<Upgrade>();
+
+            cherriesList = new List<Cherry>();
+
+            extraLiveList = new List<ExtraLive>();
+
+            strawberryList = new List<Strawberry>();
+
+            //board takes in as size arguments the board size and the board width
+            board = new Board(this, boardWidth, boardHeight);
+
+            Components.Add(board);
+
+            for (y = 0; y < boardHeight; y++)
+            {
+                for (x = 0; x < boardWidth; x++)
+                {
+                    Board.board[x, y] = file[y][x];
+                }
+            }
+
+
+            for (i = 0; i < boardHeight; i++)
+            {
+                for (j = 0; j < boardWidth; j++)
+                {
+                    filePosition = file[i][j];
+
+                    if (filePosition == '1')
+                    {
+                        int i1;
+
+                        for (i1 = 0; i1 < 4; i1++)
+                        {
+                            Ghost ghost = new Ghost(this, j, i, i1);
+
+                            ghostList.Add(ghost);
+
+                            Components.Add(ghost);
+                        }
+
+                        //this removes the enemy and adds a space
+                        Board.board[j, i] = ' ';
+                    }
+                    else if (filePosition == '?')
+                    {
+                        pellet = new Pellet(this, j, i);
+
+                        pelletList.Add(pellet);
+
+                        Components.Add(pellet);
+                    }
+                    else if (filePosition == 'S')
+                    {
+                        p = new Player(this, j, i);
+
+                        Components.Add(p);
+
+                        p.Score = 0;
+
+                        Board.board[j, i] = ' ';
+                    }
+                    else if (filePosition == ' ')
+                    {
+                        d = new Dot(this, j, i);
+
+                        dotList.Add(d);
+
+                        Components.Add(d);
+                    }
+                    else if (filePosition == 'L')
+                    {
+                        l = new Live(this, j, i);
+
+                        liveList.Add(l);
+
+                        Components.Add(l);
+                    }
+                    else if (filePosition == '*')
+                    {
+                        randomPos = file[rndPosX][rndPosY];
+
+                        //to avoid appearing in assets
+                        if (randomPos == ' ')
+                        {
+                            //randomly assigns the cherry spot
+                            c = new Cherry(this, rndPosX, rndPosY);
+
+                            //randomly assigns the upgrade spot
+                            u = new Upgrade(this, rndPosX2, rndPosY2);
+
+                            strawberry = new Strawberry(this, rndPosX2, rndPosY);
+                        }
+                        else
+                        {
+                            //randomly assigns the cherry spot
+                            c = new Cherry(this, x2, y2);
+
+                            //randomly assigns the upgrade spot
+                            u = new Upgrade(this, x3, y2);
+
+                            strawberry = new Strawberry(this, x2, y2);
+                        }
+
+                        if (p.Score != 10000)
+                        {
+                            d = new Dot(this, j, i);
+
+                            dotList.Add(d);
+
+                            Components.Add(d);
+                        }
+
+                    }
+                    else if (filePosition == '£')
+                    {
+                        if ((p.Score >= 10000) && p.isPlayerAbleToGetNewLife == true)
+                        {
+                            extraLive = new ExtraLive(this, j, i);
+
+                            extraLiveList.Add(extraLive);
+
+                            Components.Add(extraLive);
+                        }
+                    }
+                    else
+                    {
+                        Board.board[j, i] = file[i][j];
+                    }
+                }
+            }
+            //Set Preferred Window Size
+            graphics.PreferredBackBufferWidth = boardWidth * outputTileSize;
+
+            graphics.PreferredBackBufferHeight = (boardHeight + 1) * outputTileSize;
+
+            graphics.ApplyChanges();
+        }
+
+        /// <summary>
+        /// L
+        /// </summary>
+        public void LoadSecondLevel()
+        {
+            //this reads the file from content
+            string[] file = File.ReadAllLines(Content.RootDirectory + "/level2.txt");
 
             #region VARIABLES INIT
             //instanciating variables

@@ -15,6 +15,8 @@ namespace MsPacMan
     {
         enum Direction { Up, Down, Right, Left }
 
+
+
         #region Variables
 
         private Texture2D texture;
@@ -35,7 +37,7 @@ namespace MsPacMan
 
         public string filePath = Environment.CurrentDirectory + "/highscore.txt";
 
-        //booleans
+        //boolean variables
 
         public bool isPlayerAbleToGetNewLife = false;
 

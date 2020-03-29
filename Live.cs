@@ -59,9 +59,15 @@ namespace MsPacMan
             spriteBatch.End();
         }
 
-        public void LiveCount()
+        /// <summary>
+        /// Counts the amount of lives on the list
+        /// </summary>
+        /// <returns></returns>
+        public int LiveCount()
         {
-
+            int lives = game1.Lives.Count();
+            
+            return lives;
         }
 
         #endregion

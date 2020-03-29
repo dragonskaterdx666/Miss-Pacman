@@ -58,12 +58,14 @@ namespace MsPacMan
 
             if (CherryArea.Intersects(playerPosition))
             {
+                //plays fruit sound
                 eatFruitSound.Play();
 
                 game1.Strawberries.Remove(this);
 
                 game1.Components.Remove(this);
 
+                //adds to player score
                 game1.Player.Score += strawberryValue;
             }
         }

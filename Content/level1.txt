@@ -21,7 +21,7 @@
 .R             VR             V.
 .R 0TB 0TTTTB  VR  0TTTTB 0TB V.
 .R HAD HAAAAD  HD  HAAAAD HAD V.
-.R             S          *   V.
+.R             S         *    V.
 .QTTTTB 0B 0TTTTTTTTB 0B 0TTTTY.
 .PAAAAD VR HAAAXPAAAD VR HAAAAX.
 .R      VR     VR     VR      V.

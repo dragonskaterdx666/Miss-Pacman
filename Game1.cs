@@ -142,9 +142,9 @@ namespace MsPacMan
             file = File.ReadAllText(Player.filePath);
 
             Player.HighScore = Int32.Parse(file);
-      
-            beginning.Play();            
-                     
+
+            beginning.Play();
+
         }
 
         /// <summary>
@@ -209,38 +209,45 @@ namespace MsPacMan
 
                     switch (Board.board[x, y])
                     {
+                        #region HORIZONTAL
                         //HORIZONTAL LINES
-                        /*top*/
+                        /*bottom but mid top*/
                         case 'T':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 5 * 35, 35, 35), color: Color.White);
                             break;
-                        /*bottom*/
+                        /*top but mid bottom*/
                         case 'A':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(0, 6 * 35, 35, 35), color: Color.White);
                             break;
+                        #endregion
 
-                        //CORNERS 
-                        /*top right corner*/
+                        #region ROUNDED CORNERS
+                        //ROUNDED CORNERS 
+                        /*top left corner*/
+                        case '0':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
+                            break;
+                            /*top right corner*/
                         case 'B':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(11 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
-
-                        case 'X':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(10 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;
-                        /*bottom right corner*/
-                        case 'D':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
-                            break;
-
-                        case 'Y':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(6 * 35, 5 * 35, 35, 35), color: Color.White);
-                            break;
-                        /*bottom left cornerS*/
+                         /*bottom left cornerS*/
                         case 'H':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(4 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
+                            /*bottom right corner*/
+                        case 'D':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(7 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;
+                        #endregion
 
+                        #region CORNERS
+                        case 'X':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(10 * 35, 6 * 35, 35, 35), color: Color.White);
+                            break;                       
+                        case 'Y':
+                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(6 * 35, 5 * 35, 35, 35), color: Color.White);
+                            break;                      
                         case 'Q':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(5 * 35, 5 * 35, 35, 35), color: Color.White);
                             break;
@@ -248,10 +255,9 @@ namespace MsPacMan
                         case 'P':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(9 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
-                        case '0':
-                            spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(8 * 35, 5 * 35, 35, 35), color: Color.White);
-                            break;
+                        #endregion
 
+                        #region VERTICAL
                         //VERTICAL LINES
                         /*left side vertical lines*/
                         case 'R':
@@ -261,6 +267,9 @@ namespace MsPacMan
                         case 'V':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(2 * 35, 6 * 35, 35, 35), color: Color.White);
                             break;
+                        #endregion
+
+                        #region MIDDLE SECTION
                         /*right side*/
                         case '4':
                             spriteBatch.Draw(texture: SpriteSheetMap, destinationRectangle: outRect, sourceRectangle: new Rectangle(16 * 35, 1 * 35, 35, 35), color: Color.White);
@@ -295,6 +304,9 @@ namespace MsPacMan
                         case '.':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 0, 35, 35), Color.White);
                             break;
+                        #endregion
+
+                        #region SPELLING AND WORDS
                         //SPELLING HIGHSCORE, SCORE AND LIVES USING THE SPRITESHEET
                         case '%':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(0, 2 * 35, 35, 35), Color.White);
@@ -326,10 +338,14 @@ namespace MsPacMan
                         case '«':
                             spriteBatch.Draw(texture: spriteSheetMap, outRect, new Rectangle(9 * 35, 2 * 35, 35, 35), Color.White);
                             break;
+                        #endregion
+
+                        #region CORNER ASSET
                         //ASSETS SHOWN
                         case 'M':
                             spriteBatch.Draw(texture: spriteSheet, outRect, new Rectangle(13 * 16, 9 * 16, 16, 16), Color.White);
                             break;
+                            #endregion
                     }
 
                 }
@@ -345,25 +361,19 @@ namespace MsPacMan
             //this reads the file from content
             string[] file = File.ReadAllLines(Content.RootDirectory + "/level1.txt");
 
-            int y, x, i, j, rndPosX, rndPosY,rndPosX2, rndPosY2, y2, x2, x3;
+            #region VARIABLES INIT
+            //instanciating variables
+            int y, x, i, j, rndPosX, rndPosY, rndPosX2, colunaE, colunaD;
 
-            Random backUpRndY = new Random();
+            rndPosX = randomX.Next(4, 27);
 
-            Random randomX2 = new Random();
+            rndPosY = randomY.Next(4, 23);
 
-            Random randomY2 = new Random();
+            rndPosX2 = randomX.Next(5, 27);
 
-            x2 = 6; x3 = 22;
+            colunaE = 7;
 
-            y2 = backUpRndY.Next(9, 24);
-
-            rndPosX = randomX.Next(2, 30);
-
-            rndPosY = randomY.Next(4, 29);
-
-            rndPosX2 = randomX2.Next(2, 30);
-
-            rndPosY2 = randomY2.Next(4, 29);
+            colunaD = 26;
 
             char filePosition;
 
@@ -372,7 +382,9 @@ namespace MsPacMan
             boardWidth = file[0].Length;
 
             boardHeight = file.Length;
+            #endregion
 
+            #region LISTS INIT
             //initializing lists
 
             ghostList = new List<Ghost>();
@@ -390,6 +402,7 @@ namespace MsPacMan
             extraLiveList = new List<ExtraLive>();
 
             strawberryList = new List<Strawberry>();
+            #endregion
 
             //board takes in as size arguments the board size and the board width
             board = new Board(this, boardWidth, boardHeight);
@@ -404,7 +417,7 @@ namespace MsPacMan
                 }
             }
 
-
+            //WRITTING IN BOARD
             for (i = 0; i < boardHeight; i++)
             {
                 for (j = 0; j < boardWidth; j++)
@@ -447,11 +460,45 @@ namespace MsPacMan
                     }
                     else if (filePosition == ' ')
                     {
+
                         d = new Dot(this, j, i);
 
                         dotList.Add(d);
 
                         Components.Add(d);
+
+                    }
+                    else if (filePosition == '*')
+                    {
+                        randomPos = file[rndPosX][rndPosY];
+
+                        //to avoid appearing in assets
+                        if (randomPos == ' ')
+                        {
+                            //randomly assigns the cherry spot
+                            c = new Cherry(this, rndPosY, rndPosX);
+
+                            rndPosX = randomX.Next(5, 29);
+
+                            rndPosY = randomY.Next(5, 23);
+
+                            //randomly assigns the upgrade spot
+                            u = new Upgrade(this, colunaE, rndPosX);
+
+                            rndPosX = randomX.Next(5, 29);
+
+                            strawberry = new Strawberry(this, colunaD, rndPosX);
+                        }
+
+                        if (p.Score != 10000)
+                        {
+                            d = new Dot(this, j, i);
+
+                            dotList.Add(d);
+
+                            Components.Add(d);
+                        }
+
                     }
                     else if (filePosition == 'L')
                     {
@@ -461,42 +508,6 @@ namespace MsPacMan
 
                         Components.Add(l);
                     }
-                        else if (filePosition == '*')
-                        {
-                            randomPos = file[rndPosX][rndPosY];
-
-                            //to avoid appearing in assets
-                            if (randomPos == ' ')
-                            {
-                                //randomly assigns the cherry spot
-                                c = new Cherry(this, rndPosX, rndPosY);
-
-                                //randomly assigns the upgrade spot
-                                u = new Upgrade(this, rndPosX2, rndPosY2);
-
-                                strawberry = new Strawberry(this, rndPosX2, rndPosY);
-                            }
-                            else
-                            {
-                                //randomly assigns the cherry spot
-                                c = new Cherry(this, x2, y2);
-
-                                //randomly assigns the upgrade spot
-                                u = new Upgrade(this, x3, y2);
-
-                                strawberry = new Strawberry(this, x2, y2);
-                            }
-
-                            if (p.Score != 10000)
-                            {
-                                d = new Dot(this, j, i);
-
-                                dotList.Add(d);
-
-                                Components.Add(d);
-                            }
-
-                        }
                     else if (filePosition == '£')
                     {
                         if ((p.Score >= 10000) && p.isPlayerAbleToGetNewLife == true)
@@ -523,20 +534,6 @@ namespace MsPacMan
             graphics.ApplyChanges();
         }
         #endregion
-        //public void ReadHighscore()
-        //{
-        //    char endOfFile = ';';
-
-        //    string[] input = File.ReadAllLines(Environment.CurrentDirectory + "/highscore.txt");
-
-
-
-        //    Player.HighScore = input.FirstOrDefault;
-        //}
-
 
     }
-
-
-
 }

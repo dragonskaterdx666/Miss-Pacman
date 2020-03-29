@@ -37,6 +37,12 @@ namespace MsPacMan
 
         public bool isPlayerAbleToGetNewLife = false;
 
+        public bool isFruitAvailable = false;
+
+        public bool isLifeEnabled = true;
+
+        public bool win = false;
+
         public int lives = 3;
 
         Dictionary<Direction, Vector2> spritePositions;
@@ -45,7 +51,7 @@ namespace MsPacMan
 
         int frame = 0;
 
-        float speed = 2.0f;
+        float speed = 1.3F;
 
         SpriteFont minecraft;
 
@@ -111,9 +117,10 @@ namespace MsPacMan
             if (Score > HighScore)
             {
                 HighScore = Score;
+                SetHighScore();
             }
 
-            //DO THE TELEPORT
+
             if (targetPosition == position)
             {
                 frame = 0;
@@ -207,8 +214,10 @@ namespace MsPacMan
         //Draws pacman on the different positions
         public override void Draw(GameTime gameTime)
         {
+            //corresponds to the position of the player
             Rectangle outRec = new Rectangle(position, new Point(Game1.outputTileSize));
 
+            //position in sprite
             Rectangle sourceRec = new Rectangle(((spritePositions[direction] + (Vector2.UnitX * frame)) * 32).ToPoint(), new Point(32));
 
             spriteBatch.Begin();
@@ -236,13 +245,10 @@ namespace MsPacMan
                 spriteBatch.DrawString(minecraft, gameOverText, textPos, Color.White);
             }
 
-            CollectedAllPoints();
-
-            if (allPointsCollected == true)
+            if (CollectedAllPoints())
             {
                 if (lives >= 0)
                 {
-
                     this.SetHighScore();
 
                     string winText = "YOU WIN";
@@ -255,6 +261,8 @@ namespace MsPacMan
 
                     spriteBatch.DrawString(minecraft, winText, textPos, Color.White);
 
+                    Win();
+
                 }
             }
             spriteBatch.End();
@@ -265,8 +273,10 @@ namespace MsPacMan
         /// </summary>
         public void Die()
         {
+            //sound effects
             deathSound.Play();
 
+            //decrements lives
             lives--;
 
             //sets the pacman to the spawn
@@ -277,12 +287,21 @@ namespace MsPacMan
 
             game1.Components.Remove(game1.Live);
 
+            isLifeEnabled = false;
+
             if (lives <= 0)
             {
-
+                foreach (GameComponent comp in game1.Components)
+                {
+                    comp.Enabled = false;
+                }
             }
         }
 
+        /// <summary>
+        /// Function that verifies if all the points were collected
+        /// </summary>
+        /// <returns></returns>
         public bool CollectedAllPoints()
         {
             //gets the amount of dots in the map
@@ -295,10 +314,11 @@ namespace MsPacMan
 
             int totalPelletPoints = amountOfPellets * 50;
 
-            int total = totalDotPoints + totalPelletPoints + Cherry.cherryValue + Strawberry.strawberryValue + Upgrade.monalisaValue + game1.Ghosts.Count() * Ghost.ghostValue;
+            int total = totalDotPoints + totalPelletPoints + Cherry.cherryValue + Strawberry.strawberryValue + Upgrade.monalisaValue;
 
+            int count = amountOfDots + amountOfPellets;
             //if the score is the same as all points caught then all the dots are collected
-            if (Score >= total)
+            if (count == 0)
                 allPointsCollected = true;
 
             else
@@ -307,22 +327,17 @@ namespace MsPacMan
             return allPointsCollected;
         }
 
-        //counts the score to see if the players gets and extra life
+        /// <summary>
+        /// Function that counts the amount of points the player has so it can assign a fruit
+        /// </summary>
         public void ScoreCount()
         {
-
             int currentScore = game1.Player.Score;
 
-            //gets the amount of dots in the map
-            int amountOfDots = game1.Dots.Count;
-
-            //gets the amount of point value on the map
-            int totalDotPoints = amountOfDots * 10;
-
-            //if the player gets 1000 points he earns a life
+            
             if (currentScore == 1000)
             {
-                isPlayerAbleToGetNewLife = false;
+                isFruitAvailable = true;
 
                 game1.Cherries.Add(game1.Cherry);
 
@@ -331,7 +346,7 @@ namespace MsPacMan
             }
             if (currentScore == 2000)
             {
-                isPlayerAbleToGetNewLife = false;
+                isFruitAvailable = true;
 
                 game1.Strawberries.Add(game1.Strawberry);
 
@@ -340,14 +355,15 @@ namespace MsPacMan
             }
             if (currentScore == 3000)
             {
-                isPlayerAbleToGetNewLife = false;
+                isFruitAvailable = true;
 
                 game1.Upgrades.Add(game1.Upgrade);
 
                 game1.Components.Add(game1.Upgrade);
 
             }
-            if (currentScore == 1000)
+            //if the player gets 10000 points he earns a life
+            if (currentScore == 10000)
             {
                 isPlayerAbleToGetNewLife = true;
 
@@ -362,9 +378,11 @@ namespace MsPacMan
             }
         }
 
+        /// <summary>
+        /// Function that sets the highscore
+        /// </summary>
         public void SetHighScore()
         {
-
             //new line to insert on the text file
             string line;
 
@@ -379,19 +397,17 @@ namespace MsPacMan
             //comparing to get the highest score
             if (currentScore >= highScore)
             {
-
                 highScore = currentScore;
 
                 HighScore = highScore;
 
                 var newHighScore = File.Create(filePath);
+                
                 newHighScore.Close();
+                
                 File.WriteAllText(filePath, line);
-                newHighScore.Close();
-
-                //closes the file opener
                 
-                
+                newHighScore.Close();   
             }
             else
             {
@@ -401,9 +417,16 @@ namespace MsPacMan
             
         }
 
+        /// <summary>
+        /// Function that's enabled once the player meets the winning conditions
+        /// </summary>
         public void Win()
         {
-            
+            win = true;
+            foreach (GameComponent comp in game1.Components)
+            {
+                comp.Enabled = false;
+            }
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -16,9 +17,11 @@ namespace MsPacMan
         //enumeradores
         enum Orientation { Horizontal, Vertical }
 
-        enum GDirection { Up, Down, Left, Right }
+        enum Direction { Up, Down, Left, Right }
 
         #region variables
+
+        TimeSpan Time = new TimeSpan();
 
         private Texture2D texture;
 
@@ -34,7 +37,7 @@ namespace MsPacMan
 
         private Orientation orientation;
 
-        public Point position, targetPosition, origin, dir;
+        public Point position, targetPosition, origin;
 
         int enemyLives = 4;
 
@@ -44,15 +47,17 @@ namespace MsPacMan
 
         int direction = 1;
 
+        float timer;
+
         int frame = 0;
 
         public static int ghostValue = 200;
 
-        Dictionary<GDirection, Vector2> ghostColor;
+        Dictionary<Direction, Vector2> ghostColor;
 
-        Dictionary<GDirection, Point> Surroundings;
+        Dictionary<Direction, Point> Surroundings;
 
-        GDirection gDirection = GDirection.Up;
+        Direction gDirection = Direction.Up;
 
         #endregion
 
@@ -77,26 +82,28 @@ namespace MsPacMan
 
             board = game1.Board;
 
-            origin = targetPosition = position;
+            origin = position;
+
+            targetPosition = origin + new Point(0, -3);
 
             patrolSize = 2 + Game1.rnd.Next(4);
 
             eatghostSound = game1.Content.Load<SoundEffect>("pacman_eatghost");
 
-            Surroundings = new Dictionary<GDirection, Point>
+            Surroundings = new Dictionary<Direction, Point>
             {
-                [GDirection.Up] = new Point(0, -1),
-                [GDirection.Down] = new Point(0, 1),
-                [GDirection.Left] = new Point(-1, 0),
-                [GDirection.Right] = new Point(0, 1),
+                [Direction.Up] = new Point(0, -1),
+                [Direction.Down] = new Point(0, 1),
+                [Direction.Left] = new Point(-1, 0),
+                [Direction.Right] = new Point(1, 0),
             };
 
-            ghostColor = new Dictionary<GDirection, Vector2>
+            ghostColor = new Dictionary<Direction, Vector2>
             {
-                [GDirection.Right] = new Vector2(0, ghostType),
-                [GDirection.Left] = new Vector2(2, ghostType),
-                [GDirection.Up] = new Vector2(4, ghostType),
-                [GDirection.Down] = new Vector2(6, ghostType),
+                [Direction.Right] = new Vector2(0, ghostType),
+                [Direction.Left] = new Vector2(2, ghostType),
+                [Direction.Up] = new Vector2(4, ghostType),
+                [Direction.Down] = new Vector2(6, ghostType),
             };
 
         }
@@ -126,7 +133,7 @@ namespace MsPacMan
 
                 if (Pellet.powerPellet)
                 {
-                    this.Die();
+                    Die();
                 }
 
                 else
@@ -160,28 +167,39 @@ namespace MsPacMan
             }
             spriteBatch.End();
         }
-
+        /// <summary>
+        /// Functions that kills the ghost and respawns it
+        /// </summary>
         public void Die()
         {
+            //plays death sound
             eatghostSound.Play();
 
             enemyLives--;
 
+            //determines the order of the ghost
             int n = 4 - enemyLives;
 
+            //assigns the value of the ghost
             AssignGhostValue(n);
 
+            //REMOVES THE GHOSTS FROM THE LIST AND THE COMPONENTS
             game1.Ghosts.Remove(this);
 
             game1.Components.Remove(this);
 
-            position = targetPosition = origin;
+            //RESPAWNER
+            if(Time.TotalSeconds == 10f)
+            {
+                Respawn();
+            }
 
-            game1.Ghosts.Add(this);
-
-            game1.Components.Add(this);
         }
 
+        /// <summary>
+        /// Assigns the value of the ghost upon consumpton based on n
+        /// </summary>
+        /// <param name="n">the number of order on which the player has ate the ghost</param>
         public void AssignGhostValue(int n)
         {
             ghostValue = ghostValue * n;
@@ -189,6 +207,10 @@ namespace MsPacMan
             game1.Player.Score += ghostValue;
         }
 
+        /// <summary>
+        /// Assign the different ghost patterns to each one 
+        /// </summary>
+        /// <param name="ghostType">type of ghost, comes from the constructor</param>
         public void ChasePattern(int ghostType)
         {
             int ghosType = ghostType;
@@ -213,122 +235,63 @@ namespace MsPacMan
             }
         }
 
+        /// <summary>
+        /// Chase pattern for blinky (the agressive stalker of pacman)
+        /// </summary>
         public void ChaseAggressive()
         {
             //Blinky the red ghost is very aggressive in its approach while chasing Pac - Man and will follow Pac-Man once located
 
-            //Rectangle pRect = new Rectangle(game1.Player.position, new Point(Game1.outputTileSize));
+            float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
 
-            //Rectangle EnemyArea = new Rectangle(((position.ToVector2()) * Game1.outputTileSize).ToPoint(), new Point(Game1.outputTileSize));
+            if(dist > 1)
+            {
+                dist -= position.X;
+            }
+            if (position == targetPosition)
+            {
 
-            //#region code
-            ////if (position == targetPosition)
-            ////{
+                if (Math.Abs(patrolPosition) > patrolSize)
+                    direction *= 1;
 
-            ////    if (Math.Abs(patrolPosition) > patrolSize)
-            ////        direction *= 1;
+                // move horizontally or vertically one unit
+                targetPosition += orientation == Orientation.Horizontal
+                    ? new Point(0, direction)
+                    : new Point(direction, 0);
 
-            ////    // move horizontally or vertically one unit
-            ////    targetPosition += orientation == Orientation.Horizontal
-            ////        ? new Point(direction, 3)
-            ////        : new Point(0, direction);
+                if (game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                    game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
+                {
+                    // increment patrol Position
+                    patrolPosition += direction;
+                }
+                else
+                {
+                    targetPosition = position;
+                    direction = -direction;
+                }
 
-            ////    if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
-            ////        game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
-            ////        game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
-            ////    {
-            ////        // increment patrol Position
-            ////        patrolPosition++;
-            ////    }
-            ////    else
-            ////    {
-            ////        targetPosition = position;
+            }
+            else
+            {
+                Vector2 dir = (targetPosition - position).ToVector2();
+                dir.Normalize();
+                position += dir.ToPoint();
 
-            ////        if(position.X < game1.Player.position.X)
-            ////        {
-            ////            position.X += targetPosition.X;
-            ////        }
-
-            ////        if(position.Y < game1.Player.position.Y)
-            ////        {
-            ////            position.X += targetPosition.X;
-            ////        }
-            ////        if (position.X > game1.Player.position.X)
-            ////        {
-            ////            position.X -= targetPosition.X;
-            ////        }
-
-            ////        if (position.Y > game1.Player.position.Y)
-            ////        {
-            ////            position.X -= targetPosition.X;
-            ////        }
-
-            ////    }
-
-            ////}
-            ////else
-            ////{
-            ////    // Position is not the same, move the guy
-            ////    Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
-            ////    vec.Normalize();
-            ////    position = (position.ToVector2() + vec).ToPoint();
-            ////    // Incrementar frame
-            ////    if ((position.X + position.Y) % 4 == 0)
-            ////        frame++;
-            ////    if (frame > 1) frame = -1;
-
-            ////}
-            ////float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
-            //#endregion
-
-            //float dist = Vector2.Distance(position.ToVector2(), targetPosition.ToVector2());
-
-            //if (dist <= 1)
-            //{
-            //    List<GDirection> availableDirections = new List<GDirection>();
-
-            //    foreach (var dir in Surroundings)
-            //        if (game1.Board[targetPosition.X / (Game1.outputTileSize) + dir] == ' ')
-            //            availableDirections.Add(dir.Key);
-
-            //    // This shouldn't happen, but better safe than sorry
-            //    if (availableDirections.Count == 0) return;
-
-            //    availableDirections = availableDirections.OrderBy(dir =>
-            //    {
-            //        float distP1 = Vector2.Distance(targetPosition + (dir).ToVector2() * Game1.outputTileSize, game1.Player.position);
-
-            //    }).ToList();
-
-
-
-            //    // Where's the closest player?!?! I'M GOING FOR HIM!!!
-            //    direction = availableDirections[GDirection];
-
-
-            //    direction = Surroundings[availableDirections.Count - 1];
-
-
-            //    targetPosition = targetPosition + availableDirections[direction].Multiply(Game1.outputTileSize);
-            //}
-            //else
-            //{
-            //    // Position is not the same, move the guy
-            //    Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
-            //    vec.Normalize();
-            //    position = (position.ToVector2() + vec).ToPoint();
-            //    // Incrementar frame
-            //    if ((position.X + position.Y) % 4 == 0)
-            //        frame++;
-            //    if (frame > 1) frame = -1;
-
-            //}
+                if ((position.X + position.Y) % 4 == 0)
+                    frame++;
+                if (frame > 1) frame = -1;
+            }
 
         }
 
+        /// <summary>
+        /// Cyan Ghost Pattern
+        /// </summary>
         public void ChaseAmbush()
         {
             //Pinky the pink ghost will attempt to ambush Pac-Man by trying to get in front of him and cut him off
+
             if (position == targetPosition)
             {
 
@@ -340,8 +303,93 @@ namespace MsPacMan
                     ? new Point(direction, 0)
                     : new Point(0, direction);
 
-                if (game1.Board.board[targetPosition.X, targetPosition.Y] == '#' ||
-                    game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                if (game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                    game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
+                {
+                    // increment patrol Position
+                    patrolPosition++;
+                }
+                else
+                {
+                    targetPosition.X = 3;
+                    targetPosition.Y = 29;
+                    targetPosition = position;
+                    direction = -direction;
+                }
+
+            }
+            else
+            {
+                Vector2 dir = (targetPosition - position).ToVector2();
+                dir.Normalize();
+                position += dir.ToPoint();
+
+                if ((position.X + position.Y) % 4 == 0)
+                    frame++;
+                if (frame > 1) frame = -1;
+            }
+        }
+
+        /// <summary>
+        /// Blue Ghost Pattern
+        /// </summary>
+        public void ChasePatrol()
+        {
+            //Inky the cyan ghost will patrol an area and is not very predictable in this mode
+            if (position == targetPosition)
+            {
+
+                if (Math.Abs(patrolPosition) > patrolSize)
+                    direction *= 1;
+
+                // move horizontally or vertically one unit
+                targetPosition += orientation == Orientation.Horizontal
+                    ? new Point(0, direction)
+                    : new Point(direction, 0);
+
+                if (game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
+                    game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
+                {
+                    // increment patrol Position
+                    patrolPosition += direction;
+                }
+                else
+                {
+                    targetPosition = position;
+                    direction = -direction;
+                }
+
+            }
+            else
+            {
+                Vector2 dir = (targetPosition - position).ToVector2();
+                dir.Normalize();
+                position += dir.ToPoint();
+
+                if ((position.X + position.Y) % 4 == 0)
+                    frame++;
+                if (frame > 1) frame = -1;
+            }
+        }
+
+        /// <summary>
+        /// Orange Ghost Pattern 
+        /// </summary>
+        public void ChaseRandom()
+        {
+            //Clyde the orange ghost is moving in a random fashion and seems to stay out of the way of Pac-Man
+            if (position == targetPosition)
+            {
+
+                if (Math.Abs(patrolPosition) > patrolSize)
+                    direction *= 1;
+
+                // move horizontally or vertically one unit
+                targetPosition += orientation == Orientation.Horizontal
+                    ? new Point(direction, 0)
+                    : new Point(0, direction);
+
+                if (game1.Board.board[targetPosition.X, targetPosition.Y] == ' ' ||
                     game1.Board.board[targetPosition.X, targetPosition.Y] == '.')
                 {
                     // increment patrol Position
@@ -359,37 +407,22 @@ namespace MsPacMan
                 Vector2 dir = (targetPosition - position).ToVector2();
                 dir.Normalize();
                 position += dir.ToPoint();
-                // Position is not the same, move the guy
-                Vector2 vec = targetPosition.ToVector2() - position.ToVector2();
-                vec.Normalize();
-                position = (position.ToVector2() + vec).ToPoint();
-                // Incrementar frame
+
                 if ((position.X + position.Y) % 4 == 0)
                     frame++;
                 if (frame > 1) frame = -1;
             }
-
         }
-
-
-        public void ChasePatrol()
+        /// <summary>
+        /// Respawns the ghosts after frightned stage
+        /// </summary>
+        public void Respawn()
         {
-            //Inky the cyan ghost will patrol an area and is not very predictable in this mode
-        }
+           game1.Ghosts.Add(this);
 
-        public void ChaseRandom()
-        {
-            position = targetPosition;
+           game1.Components.Add(this);   
+           
 
-            //Clyde the orange ghost is moving in a random fashion and seems to stay out of the way of Pac-Man
-            //if (game1.Player.position.X == position.X)
-            //{
-            //    orientation = Orientation.Vertical;
-            //}
-            //else if (game1.Player.position.Y == position.Y)
-            //{
-            //    orientation = Orientation.Horizontal;
-            //}
         }
 
         #endregion

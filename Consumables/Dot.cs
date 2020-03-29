@@ -62,6 +62,7 @@ namespace MsPacMan
 
                 game1.Player.Score += dotValue;
 
+                //confirms if the player is meeting the score condition to win
                 game1.Player.ScoreCount();
 
             }

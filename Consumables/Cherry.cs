@@ -55,14 +55,17 @@ namespace MsPacMan
 
             Rectangle CherryArea = new Rectangle((position.ToVector2() * Game1.outputTileSize).ToPoint(), new Point(11));
 
+            //if the player intersects the cherry she gets removed
             if (CherryArea.Intersects(playerPosition))
             {
+                //plays fruit eating sound
                 eatFruitSound.Play();
 
                 game1.Cherries.Remove(this);
 
                 game1.Components.Remove(this);
-
+                
+                //adds to players score
                 game1.Player.Score += cherryValue;
             }
         }

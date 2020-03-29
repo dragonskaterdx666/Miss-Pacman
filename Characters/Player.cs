@@ -111,6 +111,7 @@ namespace MsPacMan
             if (Score > HighScore)
             {
                 HighScore = Score;
+                SetHighScore();
             }
 
             //DO THE TELEPORT
@@ -279,10 +280,6 @@ namespace MsPacMan
             if (lives <= 0)
             {
 
-                foreach (DrawableGameComponent gameComponent in game1.Components)
-                {
-                    gameComponent.Enabled = false;
-                }
             }
         }
 
@@ -371,43 +368,37 @@ namespace MsPacMan
             //new line to insert on the text file
             string line;
 
-            //opens the file to overwrite it
-            StreamWriter sw;
-
             int currentScore, highScore;
 
             //setting the variables to their current state
-            currentScore = this.Score;
+            currentScore = Score;
 
-            highScore = this.HighScore;
+            highScore = HighScore;
 
-            if (File.Exists(filePath))
-            {
-                sw = File.AppendText(filePath);
-            }
-            else
-            {
-                sw = File.CreateText(filePath);
-            }
-
+            line = highScore.ToString();
             //comparing to get the highest score
-            if (currentScore > highScore)
+            if (currentScore >= highScore)
             {
+
                 highScore = currentScore;
 
-                this.HighScore = highScore;
+                HighScore = highScore;
 
-                line = highScore.ToString() + ";";
+                var newHighScore = File.Create(filePath);
+                newHighScore.Close();
+                File.WriteAllText(filePath, line);
+                newHighScore.Close();
 
-                sw.WriteLine(line);
                 //closes the file opener
-                sw.Close();
+                
+                
             }
             else
             {
-                this.HighScore = highScore;
-            }
+                HighScore = highScore;
 
+            }
+            
         }
 
         public void Win()

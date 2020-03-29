@@ -122,6 +122,9 @@ namespace MsPacMan
 
         public List<Strawberry> Strawberries => strawberryList;
 
+        string file;
+
+        int n = 3;
         #endregion
 
         #region Methods 
@@ -136,8 +139,10 @@ namespace MsPacMan
         {
             base.Initialize();
 
-            Player.HighScore = File.ReadAllText(Player.filePath).ToList().Count;
+            file = File.ReadAllText(Player.filePath);
 
+            Player.HighScore = Int32.Parse(file);
+      
             beginning.Play();            
                      
         }

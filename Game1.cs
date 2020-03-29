@@ -461,42 +461,42 @@ namespace MsPacMan
 
                         Components.Add(l);
                     }
-                    else if (filePosition == '*')
-                    {
-                        randomPos = file[rndPosX][rndPosY];
-
-                        //to avoid appearing in assets
-                        if (randomPos == ' ')
+                        else if (filePosition == '*')
                         {
-                            //randomly assigns the cherry spot
-                            c = new Cherry(this, rndPosX, rndPosY);
+                            randomPos = file[rndPosX][rndPosY];
 
-                            //randomly assigns the upgrade spot
-                            u = new Upgrade(this, rndPosX2, rndPosY2);
+                            //to avoid appearing in assets
+                            if (randomPos == ' ')
+                            {
+                                //randomly assigns the cherry spot
+                                c = new Cherry(this, rndPosX, rndPosY);
 
-                            strawberry = new Strawberry(this, rndPosX2, rndPosY);
+                                //randomly assigns the upgrade spot
+                                u = new Upgrade(this, rndPosX2, rndPosY2);
+
+                                strawberry = new Strawberry(this, rndPosX2, rndPosY);
+                            }
+                            else
+                            {
+                                //randomly assigns the cherry spot
+                                c = new Cherry(this, x2, y2);
+
+                                //randomly assigns the upgrade spot
+                                u = new Upgrade(this, x3, y2);
+
+                                strawberry = new Strawberry(this, x2, y2);
+                            }
+
+                            if (p.Score != 10000)
+                            {
+                                d = new Dot(this, j, i);
+
+                                dotList.Add(d);
+
+                                Components.Add(d);
+                            }
+
                         }
-                        else
-                        {
-                            //randomly assigns the cherry spot
-                            c = new Cherry(this, x2, y2);
-
-                            //randomly assigns the upgrade spot
-                            u = new Upgrade(this, x3, y2);
-
-                            strawberry = new Strawberry(this, x2, y2);
-                        }
-
-                        if (p.Score != 10000)
-                        {
-                            d = new Dot(this, j, i);
-
-                            dotList.Add(d);
-
-                            Components.Add(d);
-                        }
-
-                    }
                     else if (filePosition == '£')
                     {
                         if ((p.Score >= 10000) && p.isPlayerAbleToGetNewLife == true)

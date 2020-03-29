@@ -111,7 +111,6 @@ namespace MsPacMan
             if (Score > HighScore)
             {
                 HighScore = Score;
-                SetHighScore();
             }
 
             //DO THE TELEPORT
@@ -243,6 +242,7 @@ namespace MsPacMan
             {
                 if (lives >= 0)
                 {
+
                     this.SetHighScore();
 
                     string winText = "YOU WIN";
@@ -402,8 +402,8 @@ namespace MsPacMan
         }
 
         public void Win()
-        {           
-
+        {
+            
         }
 
         #endregion

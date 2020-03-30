@@ -15,8 +15,6 @@ namespace MsPacMan
     {
         enum Direction { Up, Down, Right, Left }
 
-
-
         #region Variables
 
         private Texture2D texture;
@@ -34,8 +32,6 @@ namespace MsPacMan
         public Point position, targetPosition, origin;
 
         public bool allPointsCollected = false;
-
-        public string filePath = Environment.CurrentDirectory + "/highscore.txt";
 
         //boolean variables
 
@@ -123,7 +119,6 @@ namespace MsPacMan
             if (Score > HighScore)
             {
                 HighScore = Score;
-                SetHighScore();
             }
 
 
@@ -238,7 +233,7 @@ namespace MsPacMan
 
             if (lives <= 0)
             {
-                this.SetHighScore();
+                SetHighScore();
 
                 string gameOverText = "GAME OVER!";
 
@@ -255,7 +250,7 @@ namespace MsPacMan
             {
                 if (lives >= 0)
                 {
-                    this.SetHighScore();
+                    SetHighScore();
 
                     string winText = "YOU WIN";
 
@@ -390,6 +385,8 @@ namespace MsPacMan
         public void SetHighScore()
         {
             //new line to insert on the text file
+            string filePath = File.ReadAllText(game1.Content.RootDirectory + "/highscore.txt");
+
             string line;
 
             int currentScore, highScore;
@@ -412,6 +409,8 @@ namespace MsPacMan
                 newHighScore.Close();
 
                 File.WriteAllText(filePath, line);
+
+                Console.WriteLine($"{HighScore}");
 
                 newHighScore.Close();
             }

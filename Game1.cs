@@ -380,7 +380,9 @@ namespace MsPacMan
 
             Random randomY2 = new Random();
 
-            x2 = 6; x3 = 22;
+            //assigning variables
+
+            x2 = 7; x3 = 26;
 
             y2 = backUpRndY.Next(9, 24);
 
@@ -490,7 +492,7 @@ namespace MsPacMan
                     }
                     else if (filePosition == '*')
                     {
-                        randomPos = file[rndPosX][rndPosY];
+                        randomPos = file[rndPosX][rndPosY];      
 
                         //to avoid appearing in assets
                         if (randomPos == ' ')

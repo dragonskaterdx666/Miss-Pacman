@@ -139,9 +139,9 @@ namespace MsPacMan
         {
             base.Initialize();
 
-            string filePath = File.ReadAllText(Content.RootDirectory + "/highscore.txt");
+            file = File.ReadAllText(Player.filePath);
 
-            Player.HighScore = Int32.Parse(filePath);
+            Player.HighScore = Int32.Parse(file);
 
             beginning.Play();
 

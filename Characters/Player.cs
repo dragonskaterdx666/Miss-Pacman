@@ -33,6 +33,8 @@ namespace MsPacMan
 
         public bool allPointsCollected = false;
 
+        public string filePath = Environment.CurrentDirectory + "/highscore.txt";
+
         //boolean variables
 
         public bool isPlayerAbleToGetNewLife = false;
@@ -384,9 +386,8 @@ namespace MsPacMan
         /// </summary>
         public void SetHighScore()
         {
-            //new line to insert on the text file
-            string filePath = File.ReadAllText(game1.Content.RootDirectory + "/highscore.txt");
 
+            //new line to insert on the text file
             string line;
 
             int currentScore, highScore;
@@ -400,19 +401,19 @@ namespace MsPacMan
             //comparing to get the highest score
             if (currentScore >= highScore)
             {
+
                 highScore = currentScore;
 
                 HighScore = highScore;
 
                 var newHighScore = File.Create(filePath);
-
                 newHighScore.Close();
-
                 File.WriteAllText(filePath, line);
-
-                Console.WriteLine($"{HighScore}");
-
                 newHighScore.Close();
+
+                //closes the file opener
+
+
             }
             else
             {
